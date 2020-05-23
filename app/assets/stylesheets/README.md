@@ -1,7 +1,8 @@
-First of all make sure you've created a rails app
+First of all make sure you've created a rails app with the `--webpack` flag, like this
 
 ```bash
-rails new APP_NAME
+rails new APP_NAME --webpack
+# If you have, don't run the command again!
 ```
 
 ## Setup
@@ -77,7 +78,16 @@ Finally import bootstrap:
 // app/javascript/packs/application.js
 import 'bootstrap';
 ```
+And add this to `application.html.erb`
+```erb
+<!-- app/views/layouts/application.html.erb -->
 
+  <!-- [...] -->
+
+  <%= javascript_include_tag "application" %> <!-- from app/assets/javascripts/application.js -->
+  <%= javascript_pack_tag "application" %>    <!-- from app/javascript/packs/application.js -->
+</body>
+```
 ## Adding new `.scss` files
 
 Look at your main `application.scss` file to see how SCSS files are imported. There should **not** be a `*= require_tree .` line in the file.

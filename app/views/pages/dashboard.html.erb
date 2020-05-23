@@ -40,7 +40,7 @@
 
             <div class="card-dashboard-infos">
               <h2 class="card-title"><%= link_to booking_path(booking) do %><%= booking.venue&.name %><% end %></h2>
-              <p><%= booking.start.to_formatted_s(:short) %> - <%= booking.end.to_formatted_s(:short) %></p>
+              <p><%= booking.start_date.to_formatted_s(:short) %> - <%= booking.end_date.to_formatted_s(:short) %></p>
             </div>
 
             <div class="buttons">
@@ -114,8 +114,8 @@
                   <% venue.bookings.each do |booking| %>
                     <% booking.update_status %>
                     <tr>
-                      <td><%= booking.start.to_formatted_s(:short) %></td>
-                      <td><%= booking.end.to_formatted_s(:short) %></td>
+                      <td><%= booking.start_date.to_formatted_s(:short) %></td>
+                      <td><%= booking.end_date.to_formatted_s(:short) %></td>
                       <td><%= booking.price %>$</td>
                       <td><%= booking.status_nice %></td>
                     </tr>

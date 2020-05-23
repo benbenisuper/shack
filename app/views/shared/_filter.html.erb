@@ -1,0 +1,28 @@
+
+<div class="py-2" style="background-color: white">
+  <div class="container">
+    <form class="form-inline" action="/venues" method="get">
+
+      <div class="form-group mr-1">
+        <input type="text" class="form-control" placeholder='<%= @location %>' name="location" id="city">
+      </div>
+
+      <select id="inputState" class="form-control mr-1" name="Category">
+        <% Venue::CATEGORIES.each do |category| %>
+          <option><%= category %></option>
+        <% end %>
+      </select>
+
+      <select id="inputState" class="form-control mr-1" name="Type-of-event">
+        <% Venue::ACTIVITIES.each do |activity| %>
+          <option><%= activity %></option>
+        <% end %>
+      </select>
+
+      <div class="form-group mr-1">
+        <button type="submit" class="btn btn-primary">Filter</button>
+      </div>
+
+    </form>
+  </div>
+</div>

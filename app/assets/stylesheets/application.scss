@@ -11,3 +11,37 @@
 // Your CSS partials
 @import "components/index";
 @import "pages/index";
+
+@import "components/footer";
+@import "pages/venues";
+@import "pages/booking";
+
+body {
+  background: linear-gradient(-45deg, #A3C4BC, #A3C4BC, #E7EFC5, #EDA495);
+  background-size: 400% 400%;
+  animation: gradient 15s ease infinite;
+}
+
+@keyframes gradient {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+
+
+
+ /* Style the video: 100% width and height to cover the entire window */
+#myVideo {
+  position: fixed;
+  right: 0;
+  bottom: 0;
+  min-width: 100%;
+  min-height: 100%;
+}
