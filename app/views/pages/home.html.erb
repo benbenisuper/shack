@@ -1,2 +1,39 @@
-<h1>Pages#home</h1>
-<p>Find me in app/views/pages/home.html.erb</p>
+<div style="z-index: 5;">
+  <video autoplay muted loop id="myVideo">
+    <source src="https://res.cloudinary.com/mhoare/video/upload/v1582832033/video.mp4" type="video/mp4">
+  </video>
+</div>
+
+<div style="z-index: 10; position: absolute; left: 25%; top: 25%; right: 25%">
+    <h1 style="color: white"> Welcome to shake! Book your venue <strong>now</strong>!</h1>
+    <p style="color: white">The fast way to find and book a venue around the globe.</p>
+
+    <form class="form-inline d-block bg-white d-lg-flex justify-content-lg-between search-bar m-0 p-2"
+    action="/venues" method="get">
+      <div class="form-group flex-grow-1">
+        <input type="text" class="form-control w-100" placeholder="City" name="location" id="city">
+      </div>
+      <div class="d-xs-block d-sm-flex flex-sm-wrap justify-content-sm-between my-sm-2 my-lg-0">
+        <div class="form-group ml-lg-2">
+          <select id="inputState" class="form-control" name="Category">
+            <% Venue::CATEGORIES.each do |category| %>
+              <option><%= category %></option>
+            <% end %>
+          </select>
+        </div>
+        <div class="form-group ml-lg-2" >
+          <select id="inputState" class="form-control" name="Type-of-event">
+            <% Venue::ACTIVITIES.each do |type| %>
+              <option><%= type %></option>
+            <% end %>
+          </select>
+        </div>
+      </div>
+      <div class="form-group ml-2">
+        <button type="submit" class="btn btn-primary w-100">Submit</button>
+      </div>
+    </form>
+
+    <%= link_to "Add new venue", new_venue_path, class:"btn btn-primary", style:"position: fixed; bottom: 60px; right: 10px" %>
+
+</div>

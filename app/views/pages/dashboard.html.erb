@@ -1,0 +1,175 @@
+<div class="container">
+  <div class ="row justify-content-center mt-5">
+    <div class="col-12 col-lg-8">
+      <div class="shadow-sm p-1 bg-white rounded">
+
+
+  <div class="container my-4" style="display: flex; align-items: center">
+    <%= cl_image_tag current_user.user_avatar, class: "avatar-bordered dropdown-toggle", transformation: {width: 400, height: 400, gravity: :faces, crop: :fill} %>
+
+    <div class="ml-2" style="">
+      <h1 class="m-0 p-0">Hello <%= current_user.first_name %>!</h1>
+      <p  class="m-0 p-0">Below, you can see your current listing and bookings</p>
+    </div>
+  </div>
+
+<div class="container">
+
+  <ul class="nav nav-tabs" id="myTab" role="tablist">
+    <li class="nav-item">
+      <a class="nav-link active" id="bookings-tab" data-toggle="tab" href="#bookings" role="tab" aria-controls="bookings" aria-selected="true">Your Bookings</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" id="listings-tab" data-toggle="tab" href="#listings" role="tab" aria-controls="listings" aria-selected="false">Your Listings</a>
+    </li>
+  </ul>
+
+  <div class="tab-content" id="myTabContent">
+
+    <div class="tab-pane fade show active" id="bookings" role="tabpanel" aria-labelledby="bookings-tab">
+
+      <% if current_user.bookings == [] %>
+      <h4 class="mt-4" style="text-align: center">Looks empty here. Book something!</h4>
+      <% end %>
+
+      <% current_user.bookings.each do |booking|%>
+
+        <div class="card-dashboard mt-2">
+
+            <%= cl_image_tag booking.venue&.venue_image, class:"card-img-top" %>
+
+            <div class="card-dashboard-infos">
+              <h2 class="card-title"><%= link_to booking_path(booking) do %><%= booking.venue&.name %><% end %></h2>
+              <p><%= booking.start.to_formatted_s(:short) %> - <%= booking.end.to_formatted_s(:short) %></p>
+            </div>
+
+            <div class="buttons">
+              <%= link_to edit_booking_path(booking), {class: 'btn', 'data-toggle': 'popper','data-trigger': 'hover','data-content': 'Edit', 'data-placement': 'top' } do %>
+                <i class="far fa-edit"></i>
+              <% end %>
+              <%= link_to booking_path(booking), class: 'btn', method: :delete, data: { confirm: "Are you sure?" } do %>
+                <i class="far fa-trash-alt"></i>
+              <% end %>
+            </div>
+
+        </div>
+
+      <% end %>
+
+      <%= link_to "Book new venue", root_path, class:"btn mt-2", style:"width: 100%" %>
+
+    </div>
+
+
+    <div class="tab-pane fade" id="listings" role="tabpanel" aria-labelledby="listings-tab">
+
+      <% if current_user.venues == [] %>
+      <h4 class="mt-4" style="text-align: center">Looks empty here. Book something!</h4>
+      <% end %>
+
+      <% current_user.venues.each do |venue|%>
+        <div class="card-dashboard mt-2">
+
+          <%= cl_image_tag venue.venue_image, class:"card-img-top" %>
+          <div class="card-dashboard-infos">
+            <h2 class="card-title"><%= link_to venue_path(venue) do %><%= venue.name %><% end %></h2>
+            <p><%= venue.description %></p>
+          </div>
+          <div class="buttons">
+            <button type="button" class="btn" data-toggle="modal" data-target="#exampleModal<%= venue.id %>">
+              <i class="fas fa-info"></i>
+            </button>
+
+              <%= link_to edit_venue_path(venue), {class: 'btn', 'data-toggle': 'popper','data-trigger': 'hover','data-content': 'Edit', 'data-placement': 'top' } do %>
+                <i class="far fa-edit"></i>
+              <% end %>
+              <%= link_to venue_path(venue), class: 'btn', method: :delete, data: { confirm: "Are you sure?" } do %>
+                <i class="far fa-trash-alt"></i>
+              <% end %>
+
+            </div>
+
+        </div>
+
+        <div class="modal fade" id="exampleModal<%= venue.id %>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel<%= venue.id %>" aria-hidden="true">
+          <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel<%= venue.id %>"><%= link_to venue_path(venue) do %><%= venue.name %><% end %></h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                <h5 class="">Booking Overview</h5>
+
+                 <table style="width:100%">
+                  <tr style="color: grey">
+                    <th>Start</th>
+                    <th>End</th>
+                    <th>Price</th>
+                    <th>Status</th>
+                  </tr>
+
+                  <% venue.bookings.each do |booking| %>
+                    <% booking.update_status %>
+                    <tr>
+                      <td><%= booking.start.to_formatted_s(:short) %></td>
+                      <td><%= booking.end.to_formatted_s(:short) %></td>
+                      <td><%= booking.price %>$</td>
+                      <td><%= booking.status_nice %></td>
+                    </tr>
+                  <% end %>
+                </table>
+
+                <h5 class="mt-4">Reviews</h5>
+
+                <table style="width:100%">
+                  <tr style="color: grey">
+                    <th>Rating</th>
+                    <th>Guest</th>
+                    <th>Title</th>
+                    <th>Comment</th>
+                  </tr>
+
+                  <% venue.bookings.each do |booking| %>
+                    <tr>
+                      <% unless booking.review.nil? %>
+                        <td><%= ('<i class="fas fa-star"></i>' * booking.review.rating).html_safe %><%= ('<i class="far fa-star"></i>' * (5 - booking.review.rating)).html_safe %></td>
+                        <td><%= booking.review.user.first_name %></td>
+                        <td><%= booking.review.title %></td>
+                        <td><%= booking.review.comment %></td>
+                      <% end %>
+                    </tr>
+                  <% end %>
+                </table>
+
+                <h5 class="mt-4"></h5>
+                  <%= link_to edit_venue_path(venue), class: 'btn btn-primary' do %>
+                    Edit Venue
+                  <% end %>
+                  <%= link_to venue_path(venue), method: :delete, data: { confirm: "Are you sure?" }, class: 'btn btn-primary' do %>
+                    Delete Venue
+                  <% end %>
+
+              </div>
+            </div>
+          </div>
+        </div>
+
+      <% end %>
+
+      <%= link_to "Add new venue", new_venue_path, class:"btn mt-2", style:"width: 100%" %>
+
+    </div>
+  </div>
+</div>
+
+
+</div>
+</div>
+</div>
+</div>
+<br>
+<br>
+
