@@ -1,0 +1,11 @@
+<%= simple_form_for [@venue] do |f| %>
+  <%= f.input :name %>
+  <%= f.input :location, input_html: { id: 'location' }  %>
+  <%= f.input :category, collection: Venue::CATEGORIES %>
+  <%= f.input :activity, collection: Venue::ACTIVITIES %>
+  <%= f.input :capacity, as: :numeric %>
+  <%= f.input :price, as: :numeric %>
+  <%= f.input :description %>
+  <%= f.input :photos, as: :file, input_html: { multiple: true } %>
+  <%= f.submit "Submit", class: "btn btn-secondary" %>
+<% end %>

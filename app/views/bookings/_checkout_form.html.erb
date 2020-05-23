@@ -1,0 +1,19 @@
+<%= simple_form_for [@booking] do |f| %>
+  <%= f.input :start_date, as: :string, required: false, input_html: {class: "datepicker"} %>
+  <%= f.input :end_date, as: :string, required: false, input_html: {class: "datepicker"}  %>
+  <%= f.input :venue_id, :as => :hidden, :input_html => { value: @booking.venue.nil? ? 0 : @booking.venue.id } %>
+  <% if @booking.venue.nil? %>
+    <p class='text-left'>Price per day: <strong> Data is no longer available.</strong></p>
+    <p class='text-left'>Total price:  <strong> N/A </strong></p>
+  <% else %>
+    <p class='text-left'>Price per day: <strong><%= @booking.venue.price %> $US</strong></p>
+    <p class='text-left'>Total price:  <strong><%= @booking.venue.price * ((@booking.end_date.day() - @booking.start_date.day()).to_i + 1) %> $US</strong></p>
+  <% end %>
+  <!-- <p class='text-left'>Status:  <strong><%= @status_message %></strong></p> -->
+  <div class="d-flex justify-content-between">
+    <%= link_to booking_path(@booking), method: :delete, class: 'btn btn-warning mr-1' do %>
+          Cancel
+        <% end %>
+    <%= f.submit "Confirm", class:"btn btn-primary" %>
+  </div>
+<% end %>

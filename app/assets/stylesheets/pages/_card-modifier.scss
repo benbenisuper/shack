@@ -1,0 +1,14 @@
+.card-placeholder{
+  height: 200px;
+  width: 100%;
+  background-size: cover;
+  background-position: center;
+}
+
+.card{
+  transition-duration: 0.2s;
+  transition-property: transform;
+}
+.card:hover {
+  transform: scale(1.05);
+}
