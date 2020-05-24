@@ -8,8 +8,19 @@
 # require 'faker'
 
 
+puts("Destroying all Reviews")
+Review.delete_all
+puts("Destroying all Bookings")
+Booking.delete_all
+puts("Destroying all Reviews")
+Venue.delete_all
 puts("Destroying all Users")
 User.delete_all
+puts("Destroying all Admin Users")
+AdminUser.delete_all
+
 
 morgan = User.create!(email: "morgan@shack.com", password: "testtest", first_name: "Morgan", last_name: "X", phone:"0000")
 ben = User.create!(email: "ben@shack.com", password: "testtest", first_name: "Ben", last_name: "X", phone:"0000")
+
+AdminUser.create!(email: 'admin@example.com', password: 'password', password_confirmation: 'password') if Rails.env.development?
