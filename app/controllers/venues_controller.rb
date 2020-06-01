@@ -11,7 +11,7 @@ class VenuesController < ApplicationController
 
   def create
     @venue = Venue.new(venue_params)
-
+    @venue.perks = params.require(:venue)[:perks][1..-1].join(', ')
     authorize @venue
 
     @user = current_user
@@ -57,7 +57,7 @@ class VenuesController < ApplicationController
   def show
     @venue = Venue.find(params[:id])
     @booking = @venue.bookings.build
-
+    @perks = @venue.perks.split(", ")
     authorize @venue
     @bookings = Booking.where(venue_id: @venue.id.to_i)
     @reviews = []
@@ -91,10 +91,9 @@ class VenuesController < ApplicationController
   def update
     @venue = Venue.find(params[:id])
     authorize @venue
-
-    @venue.update(venue_params)
-
-    if @venue.save
+    @venue.perks = params.require(:venue)[:perks][1..-1].join(', ')
+    
+    if @venue.update(venue_params)
       redirect_to venue_path(@venue)
     else
       render :new

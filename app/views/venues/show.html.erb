@@ -20,10 +20,15 @@
         <h5 class="mt-4">Description</h5>
         <%= @venue.description %>
         <h5 class="mt-4">Additional information</h5>
-        <strong>Capactiy: </strong><%= @venue.capacity %><br>
-        <strong>Internet: </strong><i class="fas fa-wifi"></i><br>
-        <strong>Parking: </strong><i class="fas fa-car"></i><br>
-        <strong>Other: </strong><i class="fas fa-users"></i>
+        <strong>Capacity: </strong><%= @venue.capacity %><%= (@venue.capacity == "1" ? ' guest' : ' guests') %><br>
+        <div class="perks mt-3">
+          <% @perks.each do |perk| %>
+            <div class="d-flex perk-container">
+              <i class="fas fa-<%= Venue.perk_icon(perk) %> mr-3 my-auto"></i>
+              <strong><%= perk %></strong><br>
+            </div>
+          <% end %>
+        </div>
       </div>
 
 
