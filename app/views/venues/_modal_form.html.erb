@@ -1,0 +1,35 @@
+<div class="modal-dialog modal-dialog-centered" role="document">
+  <div class="modal-content">
+    <%= simple_form_for [@venue] do |f| %>
+    <div class="modal-body">
+      <div class="modal-header">
+        <h4 class="modal-title text-center mx-auto">Edit Venue</h4>
+      </div>
+      <div class="py-3">
+        <%= f.input :name %>
+        <%= f.input :location, input_html: { id: 'location' }  %>
+        <div class="d-flex justify-content-around">
+          <%= f.input :category, collection: Venue::CATEGORIES %>
+          <%= f.input :activity, collection: Venue::ACTIVITIES %>
+        </div>
+        <div class="d-flex justify-content-around">
+          <%= f.input :capacity, as: :numeric, input_html: { class: "mx-auto w-75" } %>
+          <%= f.input :price, as: :float, input_html: { class: "mx-auto w-75" } %>
+        </div>
+        <%= f.input :description %>
+        <%= f.input :perks, as: :check_boxes, 
+        collection: Venue::PERKS, 
+        checked: @venue.perks_array, 
+        collection_wrapper_tag: "perk-wrapper",
+        collection_wrapper_class: "perk-grid" %>
+        <%= f.input :photos, as: :file, input_html: { multiple: true } %>
+      </div>
+
+    </div>
+    <div class="modal-footer mx-auto d-flex justify-content-between">
+      <%= f.submit "Submit", class: "btn btn-primary" %>
+      <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+    </div>
+    <% end %>
+  </div>
+</div>
