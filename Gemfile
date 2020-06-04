@@ -6,7 +6,7 @@ gem 'devise'
 gem 'jbuilder', '~> 2.0'
 gem 'pg', '~> 0.21'
 gem 'puma'
-gem 'rails', '6.0.2.2'
+gem 'rails', '6.0.3.1'
 gem 'redis'
 
 gem 'autoprefixer-rails'
@@ -20,6 +20,9 @@ gem 'pundit'
 gem 'faker', :git => 'https://github.com/faker-ruby/faker.git', :branch => 'master'
 gem 'geocoder'
 gem 'activeadmin'
+gem "activesupport", ">= 6.0.3.1"
+gem "actionpack", ">= 6.0.3.1"
+gem "activestorage", ">= 6.0.3.1"
 
 group :development do
   gem 'web-console', '>= 3.3.0'

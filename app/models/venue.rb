@@ -1,7 +1,7 @@
 class Venue < ApplicationRecord
   CATEGORIES = ["All Categories", "Private House", "Outdoor", "Castle"]
   ACTIVITIES = ["All Activities", "Wedding", "Dinner", "Work"]
-  PERKS = ["Internet", "Parking", "Air Conditioning", "Heating", "Security", "Kitchen", "Catering"]
+  PERKS = ["Internet", "Parking", "Air Conditioning", "Heating", "Security", "Kitchen", "Catering", "Handycap Friendly"]
   geocoded_by :location
   belongs_to :user
   has_many :bookings, dependent: :nullify
@@ -70,4 +70,8 @@ class Venue < ApplicationRecord
       return string
   end
 
+  def perks_array
+    self.perks.nil? ? array = [] : array = self.perks.split(", ")
+    return array
+  end
 end

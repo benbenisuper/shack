@@ -1,4 +1,4 @@
-<div class="">
+  <div class="">
   <%= render "slides" %>
 </div>
 
@@ -16,7 +16,18 @@
       </div>
 
       <div class="col shadow p-3 bg-white rounded">
-        <h4 class="border-bottom">Venue Details</h4>
+        <div class="title-container border-bottom d-flex justify-content-between">
+          <h4 class="">Venue Details</h4>
+          <% if @venue.user == current_user %>
+            <div class="col-md-2">
+              <a href="#" class="btn btn-block mb-3" data-toggle="modal" data-target="#pagofacilModal"><i class="far fa-edit text-dark"> Edit</i></a>
+              <div class="modal hide fade" id="pagofacilModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <%= render('modal_form')%>
+              </div>
+            </div>
+          <% end %>
+        </div>
+        
         <h5 class="mt-4">Description</h5>
         <%= @venue.description %>
         <h5 class="mt-4">Additional information</h5>
@@ -55,10 +66,14 @@
 
     <div class="col-xs-12 col-lg-4">
       <div class="col shadow p-3 bg-white rounded sticky-div" >
-        <h4>Reserve now!</h4>
-        <p>Make your reservation today</p>
+        <% if @venue.user == current_user %>
+          <h4>Reserved Dates</h4>
+        <% else %>
+          <h4>Reserve now!</h4>
+          <p>Make your reservation today</p>
+        <% end %>
         <div class="d-flex justify-content-center">
-           <%= render "bookings/form" %>
+           <%= render "bookings/form", venue: @venue %>
         </div>
       </div>
     </div>

@@ -6,7 +6,7 @@
   <%= f.input :capacity, as: :numeric %>
   <%= f.input :price, as: :float %>
   <%= f.input :description %>
-  <%= f.input :perks, as: :check_boxes, collection: Venue::PERKS %>
+  <%= f.input :perks, as: :check_boxes, collection: Venue::PERKS, checked: @venue.perks_array %>
   <%= f.input :photos, as: :file, input_html: { multiple: true } %>
   <%= f.submit "Submit", class: "btn btn-secondary" %>
 <% end %>

@@ -5,8 +5,10 @@
     <%= simple_form_for [@booking] do |f| %>
     <%= f.input :start_date, as: :hidden, input_html: {id:"start", class: "datepicker"} %>
     <%= f.input :end_date, as: :hidden, input_html: {id:"end", class: "datepicker"} %>
-    <%= f.input :venue_id, as: :hidden, :input_html => { value: @booking.venue.nil? ? 0 : @booking.venue.id } %>
-    <%= f.submit "Start Booking", class: "btn btn-secondary", style: "width: 100%" %>
+    <%= f.input :venue_id, as: :hidden, input_html: { value: @booking.venue.nil? ? 0 : @booking.venue.id } %>
+    <% if @venue.user != current_user %>
+	    <%= f.submit "Start Booking", class: "btn btn-secondary", style: "width: 100%" %>
+    <% end %>
 
     <% end %>
   </div>
