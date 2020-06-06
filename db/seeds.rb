@@ -20,7 +20,8 @@ puts("Destroying all Admin Users")
 AdminUser.delete_all
 
 
-morgan = User.create!(email: "morgan@shack.com", password: "testtest", first_name: "Morgan", last_name: "X", phone:"0000")
-ben = User.create!(email: "ben@shack.com", password: "testtest", first_name: "Ben", last_name: "X", phone:"0000")
+morgan = User.create!(email: "morgan@shack.com", password: "testtest", first_name: "Morgan", last_name: "X", phone:"0000", role: :host)
+ben = User.create!(email: "ben@shack.com", password: "testtest", first_name: "Ben", last_name: "X", phone:"0000", role: :host)
+admin = User.create!(email: "admin@shack.com", password: "password", first_name: "admin", last_name: "user", phone:"999", role: :admin)
 
-AdminUser.create!(email: 'admin@example.com', password: 'password', password_confirmation: 'password') if Rails.env.development?
+AdminUser.create!(email: 'admin@shack.com', password: 'password', password_confirmation: 'password')
