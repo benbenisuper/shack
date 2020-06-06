@@ -1,18 +1,50 @@
 // Graphical variables
-@import "config/fonts";
-@import "config/colors";
-@import "config/bootstrap_variables";
+// @import "config/fonts";
+// @import "config/colors";
+// @import "config/bootstrap_variables";
+// @import "config/helpers";
 
-// External libraries
-@import "bootstrap/scss/bootstrap";
-@import "font-awesome-sprockets";
-@import "font-awesome";
+// // External libraries
+// @import "bootstrap/scss/bootstrap";
+// @import "font-awesome-sprockets";
+// @import "font-awesome";
 
-// Your CSS partials
+// // Your CSS partials
+// @import "pages/index";
+@import "shack";
+@import "flatpickr/dist/flatpickr";
 @import "components/index";
 @import "pages/index";
 
 @import "components/footer";
+
+/* Style the video: 100% width and height to cover the entire window */
+// #myVideo {
+//  width: 100%;
+//  position: absolute;
+//  bottom: -150px;
+// }
+
+// .video-container {
+//   top: 0px;
+//   position: absolute;
+//   overflow: hidden;
+//   width: 100%;
+//   height: 700px;
+// }
+
+#myVideo {
+  position: absolute;
+  bottom: -150px;
+}
+
+.video-container {
+  top: 0px;
+  position: absolute;
+  overflow: hidden;
+  width: 100%;
+  height: 700px;
+}
 
 
 body {
@@ -31,16 +63,4 @@ body {
   100% {
     background-position: 0% 50%;
   }
-}
-
-
-
-
- /* Style the video: 100% width and height to cover the entire window */
-#myVideo {
-  position: fixed;
-  right: 0;
-  bottom: 0;
-  min-width: 100%;
-  min-height: 100%;
 }

@@ -1,11 +1,11 @@
 <div class="container">
   <div class ="row justify-content-center mt-5">
     <div class="col-12 col-lg-8">
-      <div class="shadow-sm p-1 bg-white rounded">
+      <div class="shadow-sm p-1 bg-white rounded mt-5" style="max-height: 600px">
 
 
         <div class="container my-4" style="display: flex; align-items: center">
-          <%= cl_image_tag current_user.user_avatar, class: "avatar-bordered dropdown-toggle", transformation: {width: 400, height: 400, gravity: :faces, crop: :fill} %>
+          <%= cl_image_tag current_user.user_avatar, class: "avatar-bordered dropdown-toggle", transformation: {width: 200, height: 200, gravity: :faces, crop: :fill} %>
 
           <div class="ml-2" style="">
             <h1 class="m-0 p-0">Hello <%= current_user.first_name %>!</h1>

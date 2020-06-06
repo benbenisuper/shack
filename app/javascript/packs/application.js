@@ -3,6 +3,7 @@ require("@rails/activestorage").start()
 require("channels")
 
 import "bootstrap";
+import "@fortawesome/fontawesome-free/css/all.min.css"
 import $ from "jquery"
 import "popper.js"
 import "../plugins/flatpickr";
@@ -14,6 +15,7 @@ initMapbox();
 
 import { initAutocompleteLocation } from "../plugins/init_autocomplete";
 import { initAutocompleteCity } from "../plugins/init_autocomplete";
+import "../plugins/input-spinner";
 initAutocompleteLocation();
 initAutocompleteCity();
 
@@ -25,3 +27,5 @@ initAutocompleteCity();
   $('[data-toggle="modal"]').popover({
       delay: 0
   })
+
+

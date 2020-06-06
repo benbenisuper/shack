@@ -1,7 +1,7 @@
 <div class="modal-dialog modal-dialog-centered" role="document">
   <div class="modal-content">
     <%= simple_form_for [@venue] do |f| %>
-    <div class="modal-body">
+    <div class="modal-body px-5">
       <div class="modal-header">
         <h4 class="modal-title text-center mx-auto">Edit Venue</h4>
       </div>
@@ -26,7 +26,7 @@
       </div>
 
     </div>
-    <div class="modal-footer mx-auto d-flex justify-content-between">
+    <div class="modal-footer mx-auto d-flex justify-content-between px-5">
       <%= f.submit "Submit", class: "btn btn-primary" %>
       <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
     </div>

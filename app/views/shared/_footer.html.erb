@@ -1,11 +1,55 @@
-<div class="footer">
-  <div class="footer-links">
-    <a href="#"><i class="fab fa-instagram"></i></a>
-    <a href="#"><i class="fab fa-facebook"></i></a>
-    <a href="#"><i class="fab fa-twitter"></i></a>
-    <a href="#"><i class="fab fa-linkedin"></i></a>
+<footer class="position-relative" id="footer-main">
+  <div class="footer pt-lg-3">
+    <div class="container pt-4">
+      <% if !user_signed_in? || current_page?(root_path) %>
+      <div class="row">
+        <div class="col-md-4 mb-5 mb-lg-0">
+          <span class="logo">Shack<span class="text-primary">CH</span></span>
+          <ul class="nav mt-4">
+            <li class="nav-item"><a class="nav-link" href="#"
+                target="_blank"><i class="fab fa-instagram"></i></a></li>
+            <li class="nav-item"><a class="nav-link" href="#" target="_blank"><i
+                  class="fab fa-facebook"></i></a></li>
+          </ul>
+        </div>
+        <div class="col-md-2 col-6 col-sm-4 ml-lg-auto mb-5 mb-lg-0">
+          <% if user_signed_in? %>
+            <h6 class="heading mb-3">Account</h6>
+            <ul class="list-unstyled">
+              <li><a href="#">Profile</a></li>
+              <li><a href="#">Settings</a></li>
+              <li><a href="#">Notifications</a></li>
+            </ul>
+          <% end %>
+        </div>
+        <div class="col-md-2 col-6 col-sm-4 mb-5 mb-lg-0">
+          <h6 class="heading mb-3">Documentation</h6>
+          <ul class="list-unstyled">
+            <li><a href="#">How it works</a></li>
+            <li><a href="#">Frequently asked questions</a></li>
+          </ul>
+        </div>
+        <div class="col-md-2 col-6 col-sm-4 mb-5 mb-lg-0">
+          <h6 class="heading mb-3">Contact</h6>
+          <ul class="list-unstyled">
+            <li><a href="#">+54 911 6297-4940</a></li>
+            <li><a href="#">Av. 9 de Julio, Caba, Argentina</a></li>
+          </ul>
+        </div>
+      </div>
+      <% end %>
+      <hr class="divider divider-fade divider-dark my-4">
+      <div class="row align-items-center justify-content-md-between pb-4">
+        <div class="col-md-6">
+          <div class="copyright text-sm font-weight-bold text-center text-md-left">© 2020 Shack.</div>
+        </div>
+        <div class="col-md-6">
+          <ul class="nav justify-content-center justify-content-md-end mt-3 mt-md-0">
+            <li class="nav-item"><a class="nav-link" href="#">Terms and Conditions</a></li>
+            <li class="nav-item"><a class="nav-link" href="#">Privacy</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
   </div>
-  <div class="footer-copyright">
-    <i class="fas fa-globe-americas"></i> Shack 2020<i class="far fa-copyright"></i>
-  </div>
-</div>
+</footer>

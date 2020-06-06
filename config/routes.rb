@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  get 'users/show'
   devise_for :admin_users, ActiveAdmin::Devise.config
   ActiveAdmin.routes(self)
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
@@ -13,10 +14,14 @@ Rails.application.routes.draw do
     # end
   root to: 'pages#home', as: 'root'
 
-  devise_for :users
+  devise_for :users, :path_prefix => 'd', controllers: {
+        sessions: 'users/sessions',
+        registrations: 'users/registrations'
+  }
+  resources :users, only: [:show]
 
   resources :venues
-  resources :bookings do
+  resources :bookings do 
     resources :reviews, only: %i[new create]
   end
 

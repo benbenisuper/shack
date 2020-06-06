@@ -1,0 +1,26 @@
+.popup {
+	display: none;
+	width: 500px;
+	height: 300px;
+	position: absolute;
+	padding: 30px;
+	top: 0px;
+	left: calc(50vw - 250px);
+	background-color: white;
+	text-align: center;
+	border-radius: 8px;
+	box-shadow: 0 0 20px rgba(0, 0, 0, .3);
+	
+	&.active {
+		display: flex;
+		flex-direction: column;
+		justify-content: space-between;
+	}
+
+	button {
+		width: 100px;
+		margin: 0 auto;
+	}
+
+}
+

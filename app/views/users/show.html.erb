@@ -1,0 +1,35 @@
+<h1><%= @user.full_name %></h1>	
+<ul class="nav nav-tabs mb-3">
+  <li><a class="nav-link" data-toggle="tab" href="#profile">Perfil</a></li>
+  <li><a class="nav-link" data-toggle="tab" href="#licenses">Licencias</a></li>
+  <li><a class="nav-link" data-toggle="tab" href="#rents">Alquileres</a></li>
+</ul>
+
+<div class="tab-content">
+  <div id="profile" class="tab-pane fade in active show">
+    <h3>Profile</h3>
+    <div class="row">
+    	<div class="col-xl-3">
+    		<div class="card card-fluid picture" style="height: auto;">
+    			<%= cl_image_tag current_user.user_avatar, height: 600, width: 600, crop: :fill, gravity: :faces, class: "avatar dropdown-toggle", id: "navbarDropdown", data: { toggle: "dropdown" }, 'aria-haspopup': true, 'aria-expanded': false, style: "height: auto; width: 100%;" %>
+    		</div>    		
+    	</div>
+    	<div class="col-xl-9">
+    		<div class="card card-fluid content p-4">
+    			<div class="d-flex justify-content-between"><h4>ID: 35077238</h4></div>
+    			<div class="d-flex justify-content-between"><h4>Nationality: Argentinian</h4></div>
+    			<div class="d-flex justify-content-between"><h4>Phone: +5491162974940</h4></div>
+    			<div class="d-flex justify-content-between"><h4>Email: <%= @user.email %></h4></div>
+    		</div>
+    	</div>
+    </div>
+  </div>
+  <div id="licenses" class="tab-pane fade">
+    <h3>Licencias</h3>
+  </div>
+  <div id="rents" class="tab-pane fade">
+    <h3>Alquileres</h3>
+  </div>
+</div>
+
+

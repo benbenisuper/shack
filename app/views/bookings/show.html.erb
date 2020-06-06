@@ -12,18 +12,26 @@
       </div>
 
       <div class="col shadow p-3 bg-white rounded">
-        <h4 class="border-bottom">Venue Details</h4>
+        <div class="title-container border-bottom d-flex justify-content-between">
+          <h4 class="">Venue Details</h4>
+        </div>
+        
         <h5 class="mt-4">Description</h5>
         <%= @booking.venue.description %>
         <h5 class="mt-4">Additional information</h5>
-        <strong>Capactiy: </strong><%= @booking.venue.capacity %><br>
-        <strong>Internet: </strong><i class="fas fa-wifi"></i><br>
-        <strong>Parking: </strong><i class="fas fa-car"></i><br>
-        <strong>Other: </strong><i class="fas fa-users"></i>
+        <strong>Capacity: </strong><%= @booking.venue.capacity %><%= (@booking.venue.capacity == "1" ? ' guest' : ' guests') %><br>
+        <div class="perks mt-3">
+          <% @perks.each do |perk| %>
+            <div class="d-flex perk-container">
+              <i class="fas fa-<%= Venue.perk_icon(perk) %> mr-3 my-auto"></i>
+              <strong><%= perk %></strong><br>
+            </div>
+          <% end %>
+        </div>
       </div>
 
       <div class="shadow mb-3 rounded">
-        <%= render "venues/map" %>
+        <%= render "venues/show_map" %>
       </div>
 
       <div class="col shadow p-3 mb-4 bg-white rounded sticky-div">

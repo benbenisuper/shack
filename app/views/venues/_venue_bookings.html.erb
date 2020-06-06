@@ -1,0 +1,34 @@
+<div class="col shadow p-3 bg-white rounded">
+  <div class="title-container border-bottom d-flex justify-content-between">
+    <h4 class="">Bookings</h4>
+
+    <table class="table table-cards align-items-center">
+      <thead>
+        <tr>
+          <th>Guest</th>
+          <th>Start</th>
+          <th>End</th>
+          <th scope="col">Actions</th>
+          <th></th>
+          <th></th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <% @venue.bookings.each do |booking| %>
+        <tr class="hover-shadow-lg hover-translate-y-n3">
+          <td>
+            <%= user_path(booking.user) %>
+          </td>
+          <td><%= booking.start_date %></td>
+          <td><%= booking.end_date %></td>
+          <td class="w-10">
+            
+          </td>
+        </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+  
+</div>

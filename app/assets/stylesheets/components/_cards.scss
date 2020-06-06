@@ -45,11 +45,11 @@
   }
 
   .btn {
-    color: $color-primary;
+    color: $blue;
     transition: 0.2s ease;
 
     &:hover {
-      color: $color-secondary
+      color: $gray-300
     }
 
   }

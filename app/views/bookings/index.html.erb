@@ -1,0 +1,100 @@
+<div class="">
+  <%= render "venues/slides" %>
+</div>
+
+<div class="container">
+
+  <h1 class="mt-3" style="font-weight: 900"><%= @venue.name %></h1>
+  <p><%= @venue.location %></p>
+
+  <div class="row">
+
+    <div class="col-xs-12 col-lg-8">
+
+      <div class="shadow mb-3 rounded">
+        <%= render "show_map" %>
+      </div>
+
+      <div class="col shadow p-3 bg-white rounded">
+        <div class="title-container border-bottom d-flex justify-content-between">
+          <h4 class="">Bookings</h4>
+
+          <table class="table table-cards align-items-center">
+            <thead>
+              <tr>
+                <th>Guest</th>
+                <th>Start</th>
+                <th>End</th>
+                <th scope="col">Actions</th>
+                <th></th>
+                <th></th>
+              </tr>
+            </thead>
+
+            <tbody>
+              <% @venue.bookings.each do |booking| %>
+              <tr class="hover-shadow-lg hover-translate-y-n3">
+                <td>
+                  <%= link_to user_path(booking.user) do %>
+                  <%= booking.user.full_name %>
+                  <% end %>
+                </td>
+                <td><%= booking.start_date %></td>
+                <td><%= booking.end_date %></td>
+                <td class="w-10">
+                  <%= link_to booking_path(booking) do %>
+                  <%= show_svg("icons/external.svg") %>
+                  View Details
+                  <% end %>
+                </td>
+              </tr>
+              <% end %>
+            </tbody>
+          </table>
+        </div>
+        
+      </div>
+
+
+      <div class="col shadow p-3 mt-3 bg-white rounded">
+        <h4 class="border-bottom">Reviews</h4>
+
+        <% if @venue.reviews.empty? %>
+        There are no ratings for this venue, yet
+        <% else %>
+        <% @venue.reviews.each do |review| %>
+        <% unless review.nil? %>
+        <div class="review_card">
+          <div style="display: flex; justify-content: space-between">
+            <h4><%= review.title %></h4>
+            <h4><%= ('<i class="fas fa-star"></i>' * review.rating).html_safe %><%= ('<i class="far fa-star"></i>' * (5 - review.rating)).html_safe %></h4>
+          </div>
+          <p><%= review.comment %></p>
+        </div>
+        <% end %>
+        <% end  %>
+        <% end %>
+      </div>
+    </div>
+
+    <div class="col-xs-12 col-lg-4">
+      <div class="col shadow p-3 bg-white rounded sticky-div" >
+        <% if @venue.user == current_user %>
+        <h4>Reserved Dates</h4>
+        <% else %>
+        <h4>Reserve now!</h4>
+        <p>Make your reservation today</p>
+        <% end %>
+        <div class="d-flex justify-content-center">
+         <%= render "bookings/form", venue: @venue %>
+       </div>
+     </div>
+   </div>
+
+ </div>
+</div>
+<br>
+<br>
+<br>
+
+

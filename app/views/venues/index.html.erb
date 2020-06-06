@@ -1,25 +1,31 @@
   <div
-    id="map"
-    style="width: 100%;
-    height: 300px;"
-    data-markers="<%= @markers.to_json %>"
-    data-mapbox-api-key="<%= ENV['MAPBOX_API_KEY'] %>"
+  id="map"
+  style="width: 100%;
+  height: 300px;
+  position: absolute;
+  top: 85.19px;
+  left: 0;"
+  data-markers="<%= @markers.to_json %>"
+  data-mapbox-api-key="<%= ENV['MAPBOX_API_KEY'] %>"
   ></div>
+  <div class="buffer" style="height: 350px;"></div>
+  <div id="filter-container">
+    <%= render "shared/filter" %>
+    
+  </div>
 
-  <%= render "shared/filter" %>
+  <div class="container mt-8">
 
-<div class="container mt-4">
-
-<div class="row">
-  <% @venues.each do |venue| %>
-    <%= link_to venue_path(venue), class: "col-12 col-sm-6 col-lg-4 text-decoration-none px-lg-4 px-xg-5 mt-2" do %>
+    <div class="row">
+      <% @venues.each do |venue| %>
+      <%= link_to venue_path(venue), class: "col-12 col-sm-6 col-lg-4 text-decoration-none px-lg-4 px-xg-5 mt-2" do %>
       <div class="card shadow-sm mb-5 bg-white rounded">
         <div class="card-category card-placeholder" style="background-image: url('<%= cl_image_path venue.venue_image %>')"></div>
         <div class="card-body" style="height: 200px; overflow: hidden">
-        <div style="color: white; position: absolute; top: 10px; left: 10px;">
-          <i class="fas fa-star mr-1"></i>
-          <%= venue.average_rating %>
-        </div>
+          <div style="color: white; position: absolute; top: 10px; left: 10px;">
+            <i class="fas fa-star mr-1"></i>
+            <%= venue.average_rating %>
+          </div>
           <h5 class="card-title"><%= venue.name %></h5>
           <p class="card-text" style="color: black;"><%= venue.description %></p>
         </div>
@@ -27,13 +33,13 @@
           <small class="text-muted"> <%= venue.category %> <%= venue.location %>  <i class="fas fa-map-marker-alt"></i></small>
         </div>
       </div>
-    <% end %>
-  <% end %>
-  <div class="container text-white">
-    <% if @venues == [] %>
-      <h2>Sorry! We couldn't find a venue matching your criteria</h2>
-      <p>Check out another city / category / activity!</p>
-    <% end %>
+      <% end %>
+      <% end %>
+      <div class="container text-white">
+        <% if @venues == [] %>
+        <h2>Sorry! We couldn't find a venue matching your criteria</h2>
+        <p>Check out another city / category / activity!</p>
+        <% end %>
+      </div>
+    </div>
   </div>
-</div>
-</div>

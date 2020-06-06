@@ -1,17 +1,12 @@
-.navbar-lewagon {
+.navbar-shack {
   justify-content: space-between;
-  background: white;
-
-  .show {
-  margin: 0px 0px 0px;
-
-}
+  background: transparent;
 }
 
-.navbar-lewagon .navbar-collapse {
+.navbar-shack .navbar-collapse {
   flex-grow: 0;
 }
 
-.navbar-lewagon .navbar-brand img {
-  width: 40px;
+.navbar-shack .navbar-brand img {
+  height: 60px;
 }

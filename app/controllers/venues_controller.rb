@@ -71,6 +71,10 @@ class VenuesController < ApplicationController
         infoWindow: render_to_string(partial: "info_window", locals: { venue: @booking.venue })
       }
     ]
+    respond_to do |format|
+      format.js
+      format.html { render :show }
+    end
   end
 
   def destroy

@@ -26,6 +26,7 @@ class BookingsController < ApplicationController
 
   def show
     @booking = Booking.find(params[:id])
+    @perks = @booking.venue.perks.split(", ")
     authorize @booking
     @booking.price = @booking.venue.price * ((@booking.end_date.day() - @booking.start_date.day()).to_i + 1)
     if @booking.is_commented?

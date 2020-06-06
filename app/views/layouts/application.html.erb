@@ -12,11 +12,20 @@
 
 </head>
 <body>
-  <%= render "shared/navbar"  %>
-  <%= yield %>
-  <%= render "shared/footer" %>
+  <div class="d-flex flex-column min-vh-100 overflow-hidden">
+    <%= render 'shared/navbar' %>
+    <%= render 'shared/flashes' %>
 
-  <%= render 'shared/flashes' %>
+    <main class="flex-grow-1">
+      <%= content_for?(:banner) ? yield(:banner) : "" %>
+
+      <div class="container pt-3">
+        <%= yield %>
+      </div>
+    </main>
+
+    <%= render 'shared/footer' %>
+  </div>
 
   <%= javascript_pack_tag 'application' %>
 </body>
