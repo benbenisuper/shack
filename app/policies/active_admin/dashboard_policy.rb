@@ -1,4 +1,4 @@
-class DashboardPolicy < ApplicationPolicy
+class ActiveAdmin::DashboardPolicy < ApplicationPolicy
 	class Scope < Scope
 		def resolve
 			scope.all
