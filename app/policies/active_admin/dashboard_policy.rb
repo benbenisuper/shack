@@ -1,8 +1,12 @@
-class ReviewPolicy < ApplicationPolicy
+class DashboardPolicy < ApplicationPolicy
 	class Scope < Scope
 		def resolve
-			scope
+			scope.all
 		end
+	end
+	
+	def dashboard?
+		true
 	end
 
 	def index?
@@ -10,11 +14,11 @@ class ReviewPolicy < ApplicationPolicy
 	end
 
 	def show?
-		true
+		user.admin? || user.manager?
 	end
 
 	def create?
-		true
+		user.admin? || user.manager?
 	end
 
 	def new?

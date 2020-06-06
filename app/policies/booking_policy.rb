@@ -1,24 +1,35 @@
 class BookingPolicy < ApplicationPolicy
   class Scope < Scope
     def resolve
-      scope.all
+      scope
     end
   end
 
-  def create?
-    return true
+  def index?
+    user.admin? || user.manager? || record.venue.user == user
   end
 
   def show?
-    return true
+    user.admin? || user.manager? || record.user == user || record.venue.user == user
+  end
+
+  def create?
+    true
+  end
+
+  def new?
+    create?
   end
 
   def update?
-    record.user == user
+    user.admin? || user.manager? || record.user == user
+  end
+
+  def edit?
+    update?
   end
 
   def destroy?
-    record.user == user
+    user.admin? || user.manager? || record.user == user
   end
-
 end
