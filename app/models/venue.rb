@@ -74,4 +74,10 @@ class Venue < ApplicationRecord
     self.perks.nil? ? array = [] : array = self.perks.split(", ")
     return array
   end
+
+  def is_in_mapbox(bounds)
+    lng = self.longitude > bounds[:sw_lng] && self.longitude < bounds[:ne_lng]
+    lat = self.latitude > bounds[:sw_lat] && self.latitude < bounds[:ne_lat]
+    return lng && lat
+  end
 end

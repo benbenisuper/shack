@@ -18,9 +18,17 @@ Rails.application.routes.draw do
         sessions: 'users/sessions',
         registrations: 'users/registrations'
   }
+  # API for fetching venues from front-end!
+  namespace :api, defaults: { format: :json } do
+    namespace :v1 do
+      resources :venues, only: [ :index, :show ]
+    end
+  end
+
   resources :users, only: [:show]
 
   resources :venues
+
   resources :bookings do 
     resources :reviews, only: %i[new create]
   end
