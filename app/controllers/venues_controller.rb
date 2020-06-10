@@ -26,24 +26,23 @@ class VenuesController < ApplicationController
 
   def index
     @location = params["location"]
-
     @location = "City" if @location == "" || @location == nil
-    @category = params["Category"]
-    @activity = params["Type-of-event"]
+    @category = params["/venues"].nil? ? "All Categories" : params["/venues"]["category"]
+    @activity = params["/venues"].nil? ? "All Activities" : params["/venues"]["activity"]
+    @filter = { location: @location, category: @category, activity: @activity }.to_json
+    # if (@location == "City") && (@category == nil || @category == "All Categories") && (@activity == nil || @activity == "All Activities")
+    #   @venues = policy_scope(Venue).order(created_at: :desc)
+    # else
+    #   if @location == "City"
+    #     @venues = policy_scope(Venue).order(created_at: :desc).where(category: @category, activity: @activity)
+    #   else
+    #     @venues = policy_scope(Venue).order(created_at: :desc).where(category: @category, activity: @activity)
 
-    if (@location == "City") && (params[:category] == nil || params[:category] == "All Categories") && (params[:activity] == nil || params[:activity] == "All Activities")
-      @venues = policy_scope(Venue).order(created_at: :desc)
-    else
-      if @location == "City"
-        @venues = policy_scope(Venue).order(created_at: :desc).where(["category = ? and activity = ?", @category, @activity])
-      else
-        @venues = policy_scope(Venue).order(created_at: :desc).where(["category = ? and activity = ?", @category, @activity])
-
-        @venues = @venues.where(["location like ?", "%#{@location}%"])
-      end
-    end
-
-    @venues_geocoded= @venues.geocoded #returns flats with coordinates
+    #     @venues = @venues.where(["location like ?", "%#{@location}%"])
+    #   end
+    # end
+    @venues = policy_scope(Venue)
+    @venues_geocoded = @venues.geocoded #returns flats with coordinates
 
     @markers = @venues_geocoded.map do |venue|
       {

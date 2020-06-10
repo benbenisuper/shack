@@ -18,31 +18,59 @@
 
           <h1 style="color: white"> Welcome to Shack! Book your venue <strong>now</strong>!</h1>
           <p style="color: white; font-weight: bold; font-size: 20px;">The fast way to find and book a venue around the globe.</p>
-          <form class="form-inline d-block bg-white d-lg-flex justify-content-lg-between search-bar m-0 p-2"
+          <%= simple_form_for venues_path, url: venues_path, method: :get, html: { class: "form-inline d-block bg-white rounded-lg d-lg-flex justify-content-lg-between search-bar m-0 p-2" } do |f| %>
+            <div class="form-group flex-grow-1">
+              <input type="text" class="form-control w-100" placeholder="City" name="location" id="city">
+            </div>
+            <div class="d-xs-block d-sm-flex flex-sm-wrap justify-content-sm-between my-sm-2 my-lg-0">
+              <div class="form-group ml-lg-2">
+                <%= f.input :category, 
+                collection: Venue::CATEGORIES, 
+                id: "inputState", 
+                class: "form-control", 
+                label: false,
+                include_blank: false
+                %>
+              </div>
+              <div class="form-group ml-lg-2" >
+                <%= f.input :activity, 
+                collection: Venue::ACTIVITIES, 
+                id: "inputState", 
+                class: "form-control", 
+                label: false,
+                include_blank: false %>
+              </div>
+            </div>
+            <div class="form-group ml-2">
+              <%= f.submit "Submit", class: "btn btn-primary w-100" %>
+            </div>
+          <% end %>
+
+          <!-- <form class="form-inline d-block bg-white rounded-lg d-lg-flex justify-content-lg-between search-bar m-0 p-2"
           action="/venues" method="get">
-          <div class="form-group flex-grow-1">
-            <input type="text" class="form-control w-100" placeholder="City" name="location" id="city">
-          </div>
-          <div class="d-xs-block d-sm-flex flex-sm-wrap justify-content-sm-between my-sm-2 my-lg-0">
-            <div class="form-group ml-lg-2">
-              <select id="inputState" class="form-control" name="Category">
-                <% Venue::CATEGORIES.each do |category| %>
-                <option><%= category %></option>
-                <% end %>
-              </select>
+            <div class="form-group flex-grow-1">
+              <input type="text" class="form-control w-100" placeholder="City" name="location" id="city">
             </div>
-            <div class="form-group ml-lg-2" >
-              <select id="inputState" class="form-control" name="Type-of-event">
-                <% Venue::ACTIVITIES.each do |type| %>
-                <option><%= type %></option>
-                <% end %>
-              </select>
+            <div class="d-xs-block d-sm-flex flex-sm-wrap justify-content-sm-between my-sm-2 my-lg-0">
+              <div class="form-group ml-lg-2">
+                <select class="form-control" name="category">
+                  <%# Venue::CATEGORIES.each do |category| %>
+                  <option><%#= category %></option>
+                  <%# end %>
+                </select>
+              </div>
+              <div class="form-group ml-lg-2" >
+                <select class="form-control" name="activity">
+                  <%# Venue::ACTIVITIES.each do |type| %>
+                  <option><%#= type %></option>
+                  <%# end %>
+                </select>
+              </div>
             </div>
-          </div>
-          <div class="form-group ml-2">
-            <button type="submit" class="btn btn-primary w-100">Submit</button>
-          </div>
-        </form>
+            <div class="form-group ml-2">
+              <button type="submit" class="btn btn-primary w-100">Submit</button>
+            </div>
+        </form> -->
       </div>
 
       <div class="col-4 col-md-6 col-lg-6 mb-3 mb-md-0 d-none d-md-flex">
