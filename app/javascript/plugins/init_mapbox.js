@@ -66,7 +66,7 @@ const initMapbox = () => {
         const venueList = document.getElementById('venue-list')
         const bounds = map.getBounds()
         // console.log(`4- ${Date.now()}`)
-        const url = `http://localhost:3000/api/v1/venues?ne_lat=${bounds["_ne"]["lat"]}&ne_lng=${bounds["_ne"]["lng"]}&sw_lat=${bounds["_sw"]["lat"]}&sw_lng=${bounds["_sw"]["lng"]}&category=${filter["category"]}&activity=${filter["activity"]}`
+        const url = `/api/v1/venues?ne_lat=${bounds["_ne"]["lat"]}&ne_lng=${bounds["_ne"]["lng"]}&sw_lat=${bounds["_sw"]["lat"]}&sw_lng=${bounds["_sw"]["lng"]}&category=${filter["category"]}&activity=${filter["activity"]}`
         fetch(url)
           .then(response => response.json())
           .then((data) => {
