@@ -14,7 +14,7 @@
 	font-weight: $avatar-font-weight;
 	height: $avatar-width;
 	width: $avatar-width;
-	@include border-radius($avatar-border-radius);
+	@include border-radius(50%);
 
 	img {
 		width: 100%;

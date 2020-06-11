@@ -15,8 +15,12 @@ class Api::V1::VenuesController < Api::V1::BaseController
       activity: params[:activity],
       bounds: @bounds
     }
-    @venues = policy_scope(Venue).select do |venue| 
-      venue.is_in_mapbox(@bounds) && (venue.category == @category || @category == "All Categories") && (venue.activity == @activity || @activity == "All Activities")
+    if @category.nil? && @activity.nil?
+      @venues = policy_scope(Venue)
+    else
+      @venues = policy_scope(Venue).select do |venue| 
+        venue.is_in_mapbox(@bounds) && (venue.category == @category || @category == "All Categories") && (venue.activity == @activity || @activity == "All Activities")
+      end
     end
     # @venues = policy_scope(Venue)
   end
