@@ -23,6 +23,7 @@ gem 'activeadmin'
 gem "activesupport", ">= 6.0.3.1"
 gem "actionpack", ">= 6.0.3.1"
 gem "activestorage", ">= 6.0.3.1"
+gem "money-rails"
 
 group :development do
   gem 'web-console', '>= 3.3.0'

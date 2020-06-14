@@ -11,7 +11,7 @@
     <div class="row">
     	<div class="col-xl-3">
     		<div class="card card-fluid picture" style="height: auto;">
-    			<%= cl_image_tag current_user.user_avatar, height: 600, width: 600, crop: :fill, gravity: :faces, class: "avatar dropdown-toggle", id: "navbarDropdown", data: { toggle: "dropdown" }, 'aria-haspopup': true, 'aria-expanded': false, style: "height: auto; width: 100%;" %>
+    			<%= cl_image_tag @user.user_avatar, height: 600, width: 600, crop: :fill, gravity: :faces, class: "", style: "height: auto; width: 100%;" %>
     		</div>    		
     	</div>
     	<div class="col-xl-9">

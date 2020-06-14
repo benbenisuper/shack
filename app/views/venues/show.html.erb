@@ -14,10 +14,6 @@
       <div class="shadow mb-3 rounded">
         <%= render "show_map" %>
       </div>
-      
-      <% if !@venue.bookings.first.id.nil? %>
-        <div id="venue-bookings"><%= user_path(@venue.bookings.first.user) %></div>
-      <% end %>
 
       <div class="col shadow p-3 bg-white rounded">
         <div class="title-container border-bottom d-flex justify-content-between">
@@ -47,6 +43,9 @@
           <% end %>
         </div>
       </div>
+      <% if current_user == @venue.user %>
+        <div id="venue-bookings"><%= render("venue_bookings", venue: @venue) %></div>
+      <% end %>
 
 
       <div class="col shadow p-3 mt-3 bg-white rounded">
@@ -84,11 +83,6 @@
            <%= render "bookings/form", venue: @venue %>
           </div>
         </div>
-        <% if @venue.user == current_user %>
-          <div class="col p-3 d-flex justify-content-center" >
-          <%= link_to "View venue bookings", venue_path(@venue), remote: true, class: "btn btn-primary mx-auto" %>
-          </div>
-        <% end %>
       </div>
     </div>
 

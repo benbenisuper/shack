@@ -7,8 +7,10 @@ class Booking < ApplicationRecord
   validates :start_date, presence: true
   validates :end_date, presence: true
 
+  enum status: [:pending, :cancelled, :approved, :ongoing, :finished, :deleted]
+
   def is_completed?
-    (Date.today + 3) > self.end_date
+    (Date.today - 3) > self.end_date
   end
 
   def is_commented?
@@ -29,15 +31,8 @@ class Booking < ApplicationRecord
     return text
   end
 
-  def status_nice
-    return "Payment pending" if self.status == "1"
-    return "Confirmed" if self.status == "2"
-    return "Finished" if self.status == "3"
-    return "PROBLEM"
-  end
-
   def update_status
-    self.status = "3" if is_completed?
+    self.status = "finished" if is_completed?
     self.save
   end
 end

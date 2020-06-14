@@ -66,8 +66,8 @@ ActiveRecord::Schema.define(version: 2020_06_09_135928) do
     t.bigint "user_id", null: false
     t.datetime "start_date"
     t.datetime "end_date"
-    t.string "status"
-    t.bigint "venue_id", null: false
+    t.integer "status", default: 0
+    t.bigint "venue_id"
     t.float "price"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false

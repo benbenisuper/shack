@@ -25,3 +25,36 @@ ben = User.create!(email: "ben@shack.com", password: "testtest", first_name: "Be
 admin = User.create!(email: "admin@shack.com", password: "password", first_name: "admin", last_name: "user", phone:"999", role: :admin)
 
 AdminUser.create!(email: 'admin@shack.com', password: 'password', password_confirmation: 'password')
+
+
+puts("Creating Venues")
+
+venue_1 = Venue.create!(name: "Whateva",
+ location: "Pedro Palacios 582, Neuquén, Neuquén, Argentina",
+ user: morgan,
+ category: "Outdoor",
+ description: "Dinner with la flia",
+ capacity: 6,
+ activity: "Wedding",
+ price: 5666,
+ perks: "Internet, Parking, Air Conditioning, Heating, Security, Kitchen, Catering, Handycap Friendly")
+
+venue_2 = Venue.create!(name: "Dinner with Ben",
+ location: "Lausanne, Vaud, Switzerland",
+ user: ben,
+ category: "Castle",
+ description: "Dinner plans",
+ capacity: 10,
+ activity: "Dinner",
+ price: 500,
+ perks: "Internet, Parking, Air Conditioning, Security, Kitchen, Catering, Handycap Friendly")
+
+
+puts("Creating Bookings")
+
+booking_1 = Booking.create!(user: ben,
+  start_date: DateTime.parse("Tue, 16 Jun 2020 00:00:00 UTC +00:00"),
+  end_date: DateTime.parse("Wed, 17 Jun 2020 00:00:00 UTC +00:00"),
+  venue: venue_1)
+booking_1.price = booking_1.venue.price * ((booking_1.end_date.day() - booking_1.start_date.day()).to_i + 1)
+booking_1.save

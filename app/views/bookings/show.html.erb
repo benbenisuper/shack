@@ -7,7 +7,7 @@
 
     <div class="col-xs-12 col-lg-7">
 
-      <div class="">
+      <div class="mb-3 rounded">
         <%= render "slides" %>
       </div>
 
@@ -30,7 +30,7 @@
         </div>
       </div>
 
-      <div class="shadow mb-3 rounded">
+      <div class="shadow mb-3 rounded mt-3 rounded">
         <%= render "venues/show_map" %>
       </div>
 
@@ -56,7 +56,7 @@
 
     <div class="col-xs-12 col-lg-5">
       <div class="col shadow p-3 bg-white rounded sticky-div">
-        <h2 class='border-bottom mb-3'>Booking Confirmation</h2>
+        <h2 class='border-bottom mb-3'><%= current_user == @booking.venue.user ? "Booking Information" : "Booking Confirmation" %></h2>
         <div class="d-flex justify-content-between mb-3 mt-3">
           <p class="text-left">Venue:</p>
           <% if @booking.venue.nil? %>
@@ -76,17 +76,15 @@
 
         <div class="d-flex justify-content-between mb-3">
           <p class="text-left">Status:</p>
-          <p><strong><%= @booking.status_nice %></strong></p>
+          <p><strong><%= @booking.status %></strong></p>
         </div>
-
-        <% @booking.update_status %>
 
         <div class="d-flex justify-content-between mb-3">
           <p>Price per day:</p>
           <% if @booking.venue.nil? %>
           <p>Price per day: <strong>No longer available.</strong></p>
           <% else %>
-          <p><strong><%= @booking.venue.price.to_i %> $US / day</strong></p>
+          <p><strong><%= @booking.venue.price.to_i %> CHF / day</strong></p>
           <% end %>
         </div>
         <div class="d-flex justify-content-between mb-3">
@@ -95,7 +93,7 @@
         </div>
         <div class="d-flex justify-content-between mb-3">
           <p>Total price:</p>
-          <p><strong><%= @booking.price.to_i %> $US</strong></p>
+          <p><strong><%= @booking.price.to_i %> CHF</strong></p>
         </div>
         <div class="d-flex justify-content-center mb-3">
           <%= link_to "Go to your dashboard",dashboard_path, class:"btn btn-primary" %>

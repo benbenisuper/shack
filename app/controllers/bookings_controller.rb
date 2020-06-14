@@ -10,7 +10,7 @@ class BookingsController < ApplicationController
   def create
     @booking = Booking.new(booking_params)
     authorize @booking
-    @booking.status = 1
+    @booking.status = "pending"
     @user = current_user
     @booking.user = @user
     if @booking.price.nil?
@@ -78,7 +78,7 @@ class BookingsController < ApplicationController
   private
 
   def booking_params
-    params.require(:booking).permit(:start_date, :end_date, :venue_id)
+    params.require(:booking).permit(:user, :start_date, :end_date, :venue_id)
   end
 
 end
