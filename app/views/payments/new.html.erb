@@ -1,0 +1,40 @@
+<div class="buffer" style="height: 100px"></div>
+<div class="container">
+  <div class ="row justify-content-center mt-5">
+    <div class="col-12 col-lg-8">
+      <div class="shadow-sm p-5 bg-white rounded">
+        <% unless @booking.venue.photos.first.nil? %>
+        <div class="col-md-3"><%= image_tag @booking.venue.photos.first, width: '100%' %></div>
+        <% end %>
+        <div class="col">
+          <h1>Checkout summary</h1>
+          <p>Booking of <strong><%= @booking.venue.name %></strong></p>
+          <p>From: <strong class="mr-4"><%= @booking.start_date.to_datetime.strftime("%B %d, %Y") %></strong>To: <strong><%= @booking.end_date.to_datetime.strftime("%B %d, %Y") %></strong></p>
+          <% if @booking.venue.nil? %>
+            <p class='text-left'>Price per day: <strong> Data is no longer available.</strong></p>
+            <p class='text-left'>Total price:  <strong> N/A </strong></p>
+          <% else %>
+            <p class='text-left'>Price per day: <strong><%= humanized_money_with_symbol @booking.venue.price %></strong></p>
+            <p class='text-left'>Total price:  <strong><%= humanized_money_with_symbol @booking.amount %></strong></p>
+          <% end %>
+          <div class="d-flex justify-content-between">
+            <%= link_to booking_path(@booking), class: 'btn btn-warning mr-1' do %>
+            Cancel
+            <% end %>
+            <button id="pay" class="btn btn-primary">Pay</button>
+          </div>
+          <script src="https://js.stripe.com/v3/"></script>
+          <script>
+            const paymentButton = document.getElementById('pay');
+            paymentButton.addEventListener('click', () => {
+              const stripe = Stripe('<%= ENV['STRIPE_PUBLISHABLE_KEY'] %>');
+              stripe.redirectToCheckout({
+                sessionId: '<%= @booking.checkout_session_id %>'
+              });
+            });
+          </script>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

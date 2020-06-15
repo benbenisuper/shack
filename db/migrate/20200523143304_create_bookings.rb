@@ -6,7 +6,6 @@ class CreateBookings < ActiveRecord::Migration[6.0]
       t.datetime :end_date
       t.integer :status, default: 0
       t.references :venue, foreign_key: true
-      t.float :price
 
       t.timestamps
     end
