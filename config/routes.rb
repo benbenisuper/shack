@@ -14,6 +14,8 @@ Rails.application.routes.draw do
     # end
   root to: 'pages#home', as: 'root'
 
+  mount StripeEvent::Engine, at: '/stripe-webhooks'
+
   devise_for :users, :path_prefix => 'd', controllers: {
         sessions: 'users/sessions',
         registrations: 'users/registrations'
@@ -31,6 +33,7 @@ Rails.application.routes.draw do
 
   resources :bookings do 
     resources :reviews, only: %i[new create]
+    resources :payments, only: :new
   end
 
   resources :membership

@@ -7,6 +7,7 @@ class Venue < ApplicationRecord
   has_many :bookings, dependent: :nullify
   has_many :reviews, through: :bookings
   has_many_attached :photos
+  monetize :price_cents
 
   validates :name, presence: :true
   validates :category, presence: :true

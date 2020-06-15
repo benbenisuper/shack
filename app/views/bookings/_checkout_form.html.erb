@@ -6,8 +6,8 @@
     <p class='text-left'>Price per day: <strong> Data is no longer available.</strong></p>
     <p class='text-left'>Total price:  <strong> N/A </strong></p>
   <% else %>
-    <p class='text-left'>Price per day: <strong><%= @booking.venue.price %> $US</strong></p>
-    <p class='text-left'>Total price:  <strong><%= @booking.venue.price * ((@booking.end_date.day() - @booking.start_date.day()).to_i + 1) %> $US</strong></p>
+    <p class='text-left'>Price per day: <strong><%= @booking.venue.price %> CHF</strong></p>
+    <p class='text-left'>Total price:  <strong><%= @booking.venue.price * ((@booking.end_date.day() - @booking.start_date.day()).to_i + 1) %> CHF</strong></p>
   <% end %>
   <!-- <p class='text-left'>Status:  <strong><%= @status_message %></strong></p> -->
   <div class="d-flex justify-content-between">

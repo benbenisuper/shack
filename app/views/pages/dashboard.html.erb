@@ -1,6 +1,5 @@
-<div class="container">
   <div class ="row justify-content-center mt-5">
-    <div class="col-12 col-lg-8">
+    <div class="col-12">
       <div class="shadow-sm p-1 bg-white rounded mt-5" style="max-height: 600px">
 
 
@@ -68,7 +67,7 @@
               <% end %>
 
               <% current_user.venues.each do |venue|%>
-              <div class="card-dashboard mt-2">
+              <div class="card-dashboard mt-3 rounded">
 
                 <%= cl_image_tag venue.venue_image, class:"card-img-top" %>
                 <div class="card-dashboard-infos">
@@ -76,14 +75,13 @@
                   <p><%= venue.description %></p>
                 </div>
                 <div class="buttons">
-                  <button type="button" class="btn" data-toggle="modal" data-target="#exampleModal<%= venue.id %>">
-                    <i class="fas fa-info"></i>
-                  </button>
-
-                  <%= link_to edit_venue_path(venue), {class: 'btn', 'data-toggle': 'popper','data-trigger': 'hover','data-content': 'Edit', 'data-placement': 'top' } do %>
+                  <%= link_to venue_path(venue), class: 'btn', data: { toggle: "popper", trigger: "hover", content: "Info", placement: "top" } do %>
+                  <i class="fas fa-info"></i>
+                  <% end %>
+                  <%= link_to edit_venue_path(venue), class: 'btn', data: { confirm: "Are you sure?", toggle: "popper", trigger: "hover", content: "Edit", placement: "top" } do %>
                   <i class="far fa-edit"></i>
                   <% end %>
-                  <%= link_to venue_path(venue), class: 'btn', method: :delete, data: { confirm: "Are you sure?" } do %>
+                  <%= link_to venue_path(venue), class: 'btn', method: :delete, data: { confirm: "Are you sure?", toggle: "popper", trigger: "hover", content: "Delete", placement: "top" } do %>
                   <i class="far fa-trash-alt"></i>
                   <% end %>
 
@@ -112,12 +110,11 @@
                         </tr>
 
                         <% venue.bookings.each do |booking| %>
-                        <% booking.update_status %>
                         <tr>
                           <td><%= booking.start_date.to_formatted_s(:short) %></td>
                           <td><%= booking.end_date.to_formatted_s(:short) %></td>
-                          <td><%= booking.price %>$</td>
-                          <td><%= booking.status_nice %></td>
+                          <td><%= booking.amount %>$</td>
+                          <td><%= booking.status %></td>
                         </tr>
                         <% end %>
                       </table>
@@ -169,7 +166,6 @@
       </div>
     </div>
   </div>
-</div>
 <br>
 <br>
 

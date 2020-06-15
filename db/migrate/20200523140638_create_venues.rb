@@ -8,7 +8,6 @@ class CreateVenues < ActiveRecord::Migration[6.0]
       t.text :description
       t.integer :capacity
       t.string :activity
-      t.float :price
       t.float :latitude
       t.float :longitude
 
