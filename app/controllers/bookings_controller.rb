@@ -8,26 +8,27 @@ class BookingsController < ApplicationController
   end
 
   def create
-    @venue = Venue.find(params[:booking][:venue_id])
+    venue = Venue.find(params[:booking][:venue_id])
     start_date = params[:booking][:start_date]
     end_date = params[:booking][:end_date]
-    amount = @venue.price * ((end_date.to_date - start_date.to_date).to_i + 1)
-    @booking  = Booking.create!(venue: @venue, amount: amount, start_date: start_date, end_date: end_date, venue_sku: @venue.sku, status: 'pending', user: current_user)
-    authorize @booking
+    amount = venue.price * ((end_date.to_date - start_date.to_date).to_i + 1)
+    booking  = Booking.create!(venue: venue, amount: amount, start_date: start_date, end_date: end_date, venue_sku: venue.sku, status: 'pending', user: current_user)
+    authorize booking
     session = Stripe::Checkout::Session.create(
       payment_method_types: ['card'],
       line_items: [{
-        name: @venue.sku,
-        amount: @booking.amount_cents,
+        name: venue.sku,
+        images: ["https://res.cloudinary.com/mhoare/image/upload/v1592206506/spq2r5aqlni4mdfm6v8pwewg1iil.jpg"],
+        amount: booking.amount_cents,
         currency: 'chf',
         quantity: 1
       }],
-      success_url: booking_url(@booking),
-      cancel_url: booking_url(@booking)
+      success_url: booking_url(booking),
+      cancel_url: booking_url(booking)
       )
 
-    @booking.update(checkout_session_id: session.id)
-    redirect_to new_booking_payment_path(@booking)
+    booking.update(checkout_session_id: session.id)
+    redirect_to new_booking_payment_path(booking)
 
 
 
