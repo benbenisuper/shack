@@ -1,6 +1,6 @@
   <div class ="row justify-content-center mt-5">
     <div class="col-12">
-      <div class="shadow-sm p-1 bg-white rounded mt-5" style="max-height: 600px">
+      <div class="shadow-sm p-1 bg-white rounded mt-5" style="max-height: content;">
 
 
         <div class="container my-4" style="display: flex; align-items: center">
@@ -25,15 +25,15 @@
 
           <div class="tab-content" id="myTabContent">
 
-            <div class="tab-pane fade show active" id="bookings" role="tabpanel" aria-labelledby="bookings-tab">
+            <div class="tab-pane fade show active" style="height: content;" id="bookings" role="tabpanel" aria-labelledby="bookings-tab">
 
               <% if current_user.bookings == [] %>
               <h4 class="mt-4" style="text-align: center">Looks empty here. Book something!</h4>
               <% end %>
-
+              <div class="card-container">
               <% current_user.bookings.each do |booking|%>
 
-              <div class="card-dashboard mt-2">
+              <div class="card-dashboard mt-3 rounded w-90">
 
                 <%= cl_image_tag booking.venue&.venue_image, class:"card-img-top" %>
 
@@ -54,6 +54,7 @@
               </div>
 
               <% end %>
+              </div>
 
               <%= link_to "Book new venue", root_path, class:"btn mt-2", style:"width: 100%" %>
 
@@ -67,29 +68,29 @@
               <% end %>
 
               <% current_user.venues.each do |venue|%>
-              <div class="card-dashboard mt-3 rounded">
+                <div class="card-dashboard mt-3 rounded">
 
-                <%= cl_image_tag venue.venue_image, class:"card-img-top" %>
-                <div class="card-dashboard-infos">
-                  <h2 class="card-title"><%= link_to venue_path(venue) do %><%= venue.name %><% end %></h2>
-                  <p><%= venue.description %></p>
+                  <%= cl_image_tag venue.venue_image, class:"card-img-top" %>
+                  <div class="card-dashboard-infos">
+                    <h2 class="card-title"><%= link_to venue_path(venue) do %><%= venue.name %><% end %></h2>
+                    <p><%= venue.description %></p>
+                  </div>
+                  <div class="buttons">
+                    <%= link_to venue_path(venue), class: 'btn', data: { toggle: "popper", trigger: "hover", content: "Info", placement: "top" } do %>
+                    <i class="fas fa-info"></i>
+                    <% end %>
+                    <%= link_to edit_venue_path(venue), class: 'btn', data: { confirm: "Are you sure?", toggle: "popper", trigger: "hover", content: "Edit", placement: "top" } do %>
+                    <i class="far fa-edit"></i>
+                    <% end %>
+                    <%= link_to venue_path(venue), class: 'btn', method: :delete, data: { confirm: "Are you sure?", toggle: "popper", trigger: "hover", content: "Delete", placement: "top" } do %>
+                    <i class="far fa-trash-alt"></i>
+                    <% end %>
+
+                  </div>
+
                 </div>
-                <div class="buttons">
-                  <%= link_to venue_path(venue), class: 'btn', data: { toggle: "popper", trigger: "hover", content: "Info", placement: "top" } do %>
-                  <i class="fas fa-info"></i>
-                  <% end %>
-                  <%= link_to edit_venue_path(venue), class: 'btn', data: { confirm: "Are you sure?", toggle: "popper", trigger: "hover", content: "Edit", placement: "top" } do %>
-                  <i class="far fa-edit"></i>
-                  <% end %>
-                  <%= link_to venue_path(venue), class: 'btn', method: :delete, data: { confirm: "Are you sure?", toggle: "popper", trigger: "hover", content: "Delete", placement: "top" } do %>
-                  <i class="far fa-trash-alt"></i>
-                  <% end %>
 
-                </div>
-
-              </div>
-
-              <div class="modal fade" id="exampleModal<%= venue.id %>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel<%= venue.id %>" aria-hidden="true">
+              <!-- <div class="modal fade" id="exampleModal<%= venue.id %>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel<%= venue.id %>" aria-hidden="true">
                 <div class="modal-dialog modal-lg" role="document">
                   <div class="modal-content">
                     <div class="modal-header">
@@ -152,7 +153,7 @@
                     </div>
                   </div>
                 </div>
-              </div>
+              </div> -->
 
               <% end %>
 
