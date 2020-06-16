@@ -73,8 +73,14 @@
 
 .card {
   &.overview-card {
+  transition-duration: 0.2s;
+  transition-property: transform;
   height: 180px;
   width: 180px;
   margin: 0;
+  }
+
+  &.overview-card:hover {
+    transform: scale(1.05);
   }
 }
