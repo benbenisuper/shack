@@ -81,4 +81,41 @@ class Venue < ApplicationRecord
     lat = self.latitude > bounds[:sw_lat] && self.latitude < bounds[:ne_lat]
     return lng && lat
   end
+
+  def upcoming_checkin_date
+    answer = ''
+    bookings = self.bookings.where(status: "approved")
+    if bookings.empty?
+      answer = {string: 'none', date: 'none', booking: 'none'}
+    else
+      answer = {string: bookings.order(start_date: :asc).first.start_date.strftime("%B %d, %Y at %H:%M"),
+      date: bookings.order(start_date: :asc).first.start_date,
+      booking: bookings.order(start_date: :asc).first }
+    end
+    return answer
+  end
+
+  def upcoming_checkout_date
+    answer = ''
+    bookings = self.bookings.where(status: "ongoing")
+    if bookings.empty?
+      answer = {string: 'none', date: 'none', booking: 'none'}
+    else
+      answer = {string: bookings.order(end_date: :asc).first.end_date.strftime("%B %d, %Y at %H:%M"),
+      date: bookings.order(end_date: :asc).first.end_date,
+      booking: bookings.order(end_date: :asc).first }
+    end
+    return answer
+  end
+
+  def number_of_approved_bookings
+    answer = ''
+    if self.bookings.where(status: "approved").empty?
+      answer = 'none'
+    else
+      answer = self.bookings.where(status: "approved").count
+    end
+    return answer
+  end
+
 end
