@@ -15,19 +15,19 @@
         <% if user_signed_in? %>
           <% if controller_name == "venues" && action_name == "show" %>
 
-            <li class="nav-item active">
-              <% if policy(@venue).edit? %>
-              <%= link_to "Edit venue", edit_venue_path, class: "nav-link" %>
-              <% end %>
+            <!-- <li class="nav-item active">
+              <%# if policy(@venue).edit? %>
+              <%#= link_to "Edit venue", edit_venue_path, class: "nav-link" %>
+              <%# end %>
 
-            </li>
+            </li> -->
 
             <li class="nav-item active">
               <% if policy(@venue).destroy? %>
-              <%= link_to "Delete venue", venue_path(@venue), method: :delete, class: "nav-link" %>
+              <%= link_to "Delete venue", venue_path(@venue), method: :delete, class: "nav-link", data: { confirm: "Are you sure?" } %>
               <% end %>
-
             </li>
+
           <% end %>
           <li class="nav-item active">
             <%= link_to "Home", root_path, class: "nav-link" %>

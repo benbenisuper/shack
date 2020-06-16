@@ -33,7 +33,11 @@
         <h5 class="mt-4">Description</h5>
         <%= @venue.description %>
         <h5 class="mt-4">Additional information</h5>
-        <strong>Capacity: </strong><%= @venue.capacity %><%= (@venue.capacity == "1" ? ' guest' : ' guests') %><br>
+        <div class="d-flex justify-content-start">
+          <div><strong>Capacity: </strong><%= @venue.capacity %><%= (@venue.capacity == "1" ? ' guest' : ' guests') %></div>
+          <div class="ml-5"><strong>Price / day: </strong><%= humanized_money_with_symbol(@venue.price) %></div>
+        </div>
+        <h5 class="mt-4">Perks</h5>
         <div class="perks mt-3">
           <% @perks.each do |perk| %>
             <div class="d-flex perk-container">

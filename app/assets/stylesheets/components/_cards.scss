@@ -64,3 +64,17 @@
   overflow-y: scroll;
   overflow-x: hidden;
 }
+
+.card-img-left {
+  border-top-left-radius: calc(0.75rem - 1px);
+  border-bottom-left-radius: calc(0.75rem - 1px);
+  width: 120px;
+}
+
+.card {
+  &.overview-card {
+  height: 180px;
+  width: 180px;
+  margin: 0;
+  }
+}

@@ -21,4 +21,44 @@ class User < ApplicationRecord
   def full_name
     return "#{first_name.capitalize} #{last_name.capitalize}"
   end
+
+  def next_checkin
+    answer = ''
+    venue_dates = []
+    self.venues.each do |venue|
+      unless venue.upcoming_checkin_date[:string] == 'none'
+        venue_dates << venue.upcoming_checkin_date
+      end
+    end
+    unless venue_dates.empty?
+      bookings = venue_dates.sort_by{ |booking| booking[:date] }
+      answer = { date: bookings.first[:date], 
+                 string: bookings.first[:date].strftime("%B %d, %Y at %H:%M"),
+                 url: "/bookings/#{bookings.first[:booking].id}"
+               }
+    else
+      answer = { date: 'none', string: 'none', url: '/dashboard' }
+    end
+    return answer
+  end
+
+  def next_checkout
+    answer = ''
+    venue_dates = []
+    self.venues.each do |venue|
+      unless venue.upcoming_checkout_date[:string] == 'none'
+        venue_dates << venue.upcoming_checkout_date
+      end
+    end
+    unless venue_dates.empty?
+      bookings = venue_dates.sort_by{ |booking| booking[:date] }
+      answer = { date: bookings.first[:date], 
+                 string: bookings.first[:date].strftime("%B %d, %Y at %H:%M"),
+                 url: "/bookings/#{bookings.first[:booking].id}"
+               }
+    else
+      answer = { date: 'none', string: 'none', url: '/dashboard' }
+    end
+    return answer
+  end
 end
