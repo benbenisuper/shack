@@ -74,13 +74,13 @@ const initMapbox = () => {
             venueList.innerHTML = '';
             // console.log(`6- ${Date.now()}`)
             data["venues"].forEach((venue) => {
-              const tag = cl.imageTag(venue["venue_image"], { width: 320, crop: "pad"});
+              const tag = cl.imageTag(venue["venue_image"], { crop: "pad", class: "venue-card-image"});
               const venueCard = `<a href="/venues/${venue["id"]}" class="col-12 col-sm-6 col-lg-4 text-decoration-none px-lg-4 px-xg-5 mt-2">
-                                  <div class="card shadow-sm mb-5 bg-white rounded">
-                                    <div class="card-category card-placeholder">
+                                  <div class="card shadow-sm mb-5 bg-white rounded venue-card">
+                                    <div class="card-category card-placeholder venue-card-image-container rounded-top d-flex justify-content-center">
                                       ${tag.toHtml()}
                                     </div>
-                                    <div class="card-body" style="height: 200px; overflow: hidden">
+                                    <div class="card-body" style="height: 150px; overflow: hidden">
                                       <div style="color: white; position: absolute; top: 10px; left: 10px;">
                                         <i class="fas fa-star mr-1"></i>
                                         <p>${venue["average_rating"]}</p>
@@ -88,7 +88,7 @@ const initMapbox = () => {
                                       <h5 class="card-title">${venue["name"]}</h5>
                                       <p class="card-text" style="color: black;">${venue["description"]}</p>
                                     </div>
-                                    <div class="card-footer" style="height: 100px; overflow: hidden">
+                                    <div class="card-footer" style="height: 80px; overflow: hidden">
                                       <small class="text-muted"> ${venue["category"]} ${venue["location"]}  <i class="fas fa-map-marker-alt"></i></small>
                                     </div>
                                   </div></a>`
@@ -98,7 +98,7 @@ const initMapbox = () => {
         ); 
       }
       // console.log(`7- ${Date.now()}`)
-      setTimeout(apiSearch, 500)
+      setTimeout(apiSearch, 2000)
 
 
 
