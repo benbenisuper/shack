@@ -16,6 +16,7 @@ class VenuesController < ApplicationController
 
     @user = current_user
     @venue.user = @user
+    @venue.sku = @venue.name
 
     if @venue.save
       redirect_to dashboard_path
