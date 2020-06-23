@@ -2,9 +2,9 @@
 <div class="container">
   <div class ="row justify-content-center mt-5">
     <div class="col-12 col-lg-8">
-      <div class="shadow-sm p-5 bg-white rounded">
+      <div class="shadow-sm p-5 bg-white rounded mb-5">
         <% unless @booking.venue.photos.first.nil? %>
-        <div class="col-md-3"><%= image_tag @booking.venue.photos.first, width: '100%' %></div>
+        	<%= render "/bookings/slides" %>
         <% end %>
         <div class="col">
           <h1>Checkout summary</h1>

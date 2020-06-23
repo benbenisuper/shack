@@ -81,7 +81,7 @@ const initMapbox = () => {
                                       ${tag.toHtml()}
                                     </div>
                                     <div class="card-body" style="height: 150px; overflow: hidden">
-                                      <div style="color: white; position: absolute; top: 10px; left: 10px;">
+                                      <div style="color: yellow; text-shadow: 0px 0px 5px rgba(0,0,0,0.2); position: absolute; top: 183px; left: 10px;">
                                         <i class="fas fa-star mr-1"></i>
                                         <p>${venue["average_rating"]}</p>
                                       </div>

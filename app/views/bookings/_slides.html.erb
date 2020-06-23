@@ -13,7 +13,7 @@
  <% if @booking.venue.photos.attached? %>
     <% @booking.venue.photos.each do |photos| %>
     <div class="carousel-item" data-interval="2000">
-      <%= cl_image_tag photos.key, class:"d-block w-100"%>
+      <%= cl_image_tag photos.key, class:"d-block w-100 rounded"%>
     </div>
     <% end %>
   <% end %>
