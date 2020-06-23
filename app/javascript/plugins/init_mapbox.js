@@ -54,7 +54,7 @@ const initMapbox = () => {
           const match = response.body;
           // console.log(`2- ${Date.now()}`)
           map.setCenter([match.features[0].center[0],match.features[0].center[1]])
-          map.setZoom(10)
+          map.setZoom(12)
         });
       // console.log(`3- ${Date.now()}`)
 
@@ -120,17 +120,21 @@ const initMapbox = () => {
           .send()
           .then(response => {
             const match = response.body;
-            map.setZoom(10)
+            map.setZoom(12)
             map.panTo([match.features[0].center[0],match.features[0].center[1]])
           });
           setTimeout(apiSearch, 500)
         }
       }
 
+      map.on('drag', function(e) {
+        setTimeout(apiSearch, 2000)
+      })
+
 
     } else {
       map.setCenter({ "lng": markers[0].lng, "lat": markers[0].lat })
-      map.setZoom(10)
+      map.setZoom(12)
     }
   }
 
