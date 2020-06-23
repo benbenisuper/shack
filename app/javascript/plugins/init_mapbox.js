@@ -80,10 +80,10 @@ const initMapbox = () => {
                                     <div class="card-category card-placeholder venue-card-image-container rounded-top d-flex justify-content-center">
                                       ${tag.toHtml()}
                                     </div>
-                                    <div class="card-body" style="height: 150px; overflow: hidden">
-                                      <div style="color: yellow; text-shadow: 0px 0px 5px rgba(0,0,0,0.2); position: absolute; top: 183px; left: 10px;">
+                                    <div class="card-body p-3" style="height: 200px; overflow: hidden">
+                                      <div class="venue-card-rating">
                                         <i class="fas fa-star mr-1"></i>
-                                        <p>${venue["average_rating"]}</p>
+                                        <p style="color: black;">${venue["average_rating"]} (${venue["reviews"].length})</p>
                                       </div>
                                       <h5 class="card-title">${venue["name"]}</h5>
                                       <p class="card-text" style="color: black;">${venue["description"]}</p>
