@@ -1,4 +1,4 @@
-  <div class ="row justify-content-center mt-5">
+a  <div class ="row justify-content-center mt-5">
     <div class="col-12">
       <div class="shadow-sm p-1 bg-white rounded mt-5" style="max-height: content;">
 
@@ -54,8 +54,10 @@
 
                   <tbody>
                     <% current_user.bookings.each do |booking| %>
-                    <tr class="hover-shadow-lg hover-translate-y-n3">
-                      <td class="p-0" style="width: 120px; border-radius: 5px 0 0 5px;"><%= cl_image_tag booking.venue&.venue_image, class: "card-img-left" %></td>
+                    <tr class="hover-shadow-lg hover-translate-y-n3 dashboard-card">
+                      <td class="p-0 rounded-left image-container-y" style="">
+                        <%= cl_image_tag booking.venue&.venue_image, class: "rounded-left image-centered-y" %>
+                      </td>
                       <td><%= booking.venue.location %></td>
                       <td><%= booking.status %></td>
                       <td><%= booking.start_date.strftime("%B %d, %Y") %></td>
@@ -127,8 +129,10 @@
 
                   <tbody>
                     <% @venues.each do |venue| %>
-                    <tr class="hover-shadow-lg hover-translate-y-n3">
-                      <td class="p-0" style="width: 120px; border-radius: 5px 0 0 5px;"><%= cl_image_tag venue&.venue_image, class: "card-img-left" %></td>
+                    <tr class="hover-shadow-lg hover-translate-y-n3 dashboard-card">
+                      <td class="p-0 rounded-left image-container-y" style="">
+                        <%= cl_image_tag venue&.venue_image, class: "rounded-left image-centered-y" %>
+                      </td>
                       <td><%= venue.name %></td>
                       <td><%= venue.number_of_approved_bookings %></td>
                       <td><%= venue.upcoming_checkin_date[:string] %></td>

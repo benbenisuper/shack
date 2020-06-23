@@ -18,7 +18,7 @@ class BookingsController < ApplicationController
       payment_method_types: ['card'],
       line_items: [{
         name: venue.sku,
-        images: ["https://res.cloudinary.com/mhoare/image/upload/v1592206506/spq2r5aqlni4mdfm6v8pwewg1iil.jpg"],
+        images: venue.photos.map{ |photo| photo.service_url },
         amount: booking.amount_cents,
         currency: 'chf',
         quantity: 1

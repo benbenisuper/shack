@@ -1,6 +1,6 @@
 class Venue < ApplicationRecord
-  CATEGORIES = ["All Categories", "Private House", "Outdoor", "Castle"]
-  ACTIVITIES = ["All Activities", "Wedding", "Dinner", "Work"]
+  CATEGORIES = ["All Categories", "Private House", "Restaurant", "Bar", "Theatre", "Outdoor", "Castle", "Workshop"]
+  ACTIVITIES = ["All Activities", "Wedding", "Dinner", "Work Meeting", "Show", "Music", "Art Display", "Workshop"]
   PERKS = ["Internet", "Parking", "Air Conditioning", "Heating", "Security", "Kitchen", "Catering", "Handycap Friendly"]
   geocoded_by :location
   belongs_to :user
