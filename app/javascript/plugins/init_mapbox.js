@@ -127,8 +127,12 @@ const initMapbox = () => {
         }
       }
 
-      map.on('drag', function(e) {
-        setTimeout(apiSearch, 2000)
+      map.on('dragend', function(e) {
+        setTimeout(apiSearch, 1000)
+      })
+
+      map.on('zoomend', function(e) {
+        setTimeout(apiSearch, 1000)
       })
 
 
