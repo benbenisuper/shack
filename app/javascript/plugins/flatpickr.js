@@ -5,6 +5,7 @@ import rangePlugin from "flatpickr/dist/plugins/rangePlugin"
 
 
 const calendarElement = document.getElementById('venue-booking-dates')
+
 if (calendarElement) {
 
   const disable_dates = JSON.parse(calendarElement.dataset.unavailable);
@@ -19,16 +20,12 @@ if (calendarElement) {
 
 
     altInput: false,
-    plugins: [new rangePlugin({ input: "#end"})]
-
-
-
+    plugins: [new rangePlugin({ input: "#end"})],
+    onChange: function(){
+       const bookingsStartBtn = document.getElementById('booking-start-btn')
+       if (bookingsStartBtn) {
+			bookingsStartBtn.disabled = false
+       }
+    }
   })
-
-
-
-
-
-
-
 }
