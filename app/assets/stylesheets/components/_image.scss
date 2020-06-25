@@ -1,21 +1,3 @@
-.image-container-y {
-    writing-mode: vertical-rl;
-    text-orientation: upright;
-    text-align: center;
-    overflow: hidden;
-    width: 120px;
-    height: 120px;
-}
-
-.image-centered-y {
-	position: relative;
-    bottom: 100%;
-    margin-bottom: -200%;
-    min-height: 120px;
-    width: 120px;
-    text-align: center;
-}
-
 .image-container-x {
     text-align: center;
     overflow: hidden;
@@ -28,7 +10,7 @@
 }
 
 
-.image-container-y2 {
+.image-container-y {
     position: relative;
     width: 250px;
     height: 100px;
@@ -36,7 +18,7 @@
     text-align: center;
 }
 
-.image-centered-y2 {
+.image-centered-y {
     position: absolute;
     top: 50%;
     left: 50%;
