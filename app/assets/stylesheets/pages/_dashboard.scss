@@ -6,3 +6,15 @@
 .dashboard-card:hover {
 	transform: scale(1.02);
 }
+
+.dashboard-avatar {
+	position: absolute;
+	left: -60px;
+	top: -130px;
+}
+
+.overview-container {
+	position: absolute;
+	top: -200px;
+	right: 60px;
+}
