@@ -26,3 +26,21 @@
 	left: 100%;
 	margin-left: -200%;
 }
+
+
+.image-container-y2 {
+    position: relative;
+    width: 250px;
+    height: 100px;
+    overflow: hidden;
+    text-align: center;
+}
+
+.image-centered-y2 {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-right: -50%;
+    transform: translate(-50%, -50%);
+    width: 100%;
+}
