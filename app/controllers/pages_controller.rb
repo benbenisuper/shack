@@ -12,6 +12,4 @@ class PagesController < ApplicationController
     @next_checkout = current_user.next_checkout
   end
 
-  def privacy_policy
-  end
 end
