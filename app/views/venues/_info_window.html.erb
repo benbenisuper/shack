@@ -1,2 +1,7 @@
-<h2><%= venue.name %></h2>
-<p><%= venue.location %></p>
+<div class="d-flex flex-column">
+<div class="rounded">
+	<%= render "info_window_slides", venue: venue %>
+</div>
+<span class="h6 p-3 mb-0"><%= venue.name %></span>
+<span class="h7 p-3" style="white-space: normal"><%= venue.location %></span>
+</div>

@@ -53,8 +53,9 @@ const initMapbox = () => {
         .then(response => {
           const match = response.body;
           // console.log(`2- ${Date.now()}`)
-          map.setCenter([match.features[0].center[0],match.features[0].center[1]])
+          console.log(match)
           map.setZoom(12)
+          map.setCenter([match.features[0].center[0], match.features[0].center[1]])
         });
       // console.log(`3- ${Date.now()}`)
 
@@ -75,23 +76,31 @@ const initMapbox = () => {
             // console.log(`6- ${Date.now()}`)
             data["venues"].forEach((venue) => {
               const tag = cl.imageTag(venue["venue_image"], { crop: "pad", class: "venue-card-image"});
-              const venueCard = `<a href="/venues/${venue["id"]}" class="col-12 col-sm-6 col-lg-4 text-decoration-none px-lg-4 px-xg-5 mt-2">
-                                  <div class="card shadow-sm mb-5 bg-white rounded venue-card">
-                                    <div class="card-category card-placeholder venue-card-image-container rounded-top d-flex justify-content-center">
+              const venueCard = `<a href="/venues/${venue["id"]}" class="row shadow-sm bg-white rounded venue-card">
+                                    <div class="col-12 col-lg-4 card-category card-placeholder venue-card-image-container rounded-left d-flex justify-content-center">
                                       ${tag.toHtml()}
                                     </div>
-                                    <div class="card-body p-3" style="height: 200px; overflow: hidden">
-                                      <div class="venue-card-rating">
-                                        <i class="fas fa-star mr-1"></i>
-                                        <p style="color: black;">${venue["average_rating"]} (${venue["reviews"].length})</p>
+                                    <div class="col-12 col-lg-8 venue-card-content">
+                                      <div class="row venue-card-body p-3" style="height: 180px; overflow: hidden">
+                                        <h6 class="card-title mb-1">${venue["name"]}</h6>
+                                        <h7 class="card-text" style="color: black;">${venue["description"]}</h7>
                                       </div>
-                                      <h5 class="card-title">${venue["name"]}</h5>
-                                      <p class="card-text" style="color: black;">${venue["description"]}</p>
+                                      <div class="row venue-card-footer rounded" style="height: 100px; overflow: hidden">
+                                        <small class="col-9 text-muted"> 
+                                          ${venue["category"]} ${venue["location"]}
+                                          <i class="fas fa-map-marker-alt"></i>
+                                        </small>
+                                        <div class="col-3 d-flex justify-content-center align-items-center">
+                                          <div class="venue-card-rating">
+                                            <i class="fas fa-star mr-1"></i>
+                                            <p style="color: black;">${venue["average_rating"]} (${venue["reviews"].length})</p>
+                                          </div>
+                                        </div>
+                                      </div>
                                     </div>
-                                    <div class="card-footer" style="height: 80px; overflow: hidden">
-                                      <small class="text-muted"> ${venue["category"]} ${venue["location"]}  <i class="fas fa-map-marker-alt"></i></small>
-                                    </div>
-                                  </div></a>`
+                                </a>
+                                <hr class="divider divider-fade" />`
+
               venueList.insertAdjacentHTML("beforeend", venueCard)
             })
           }
@@ -137,8 +146,8 @@ const initMapbox = () => {
 
 
     } else {
-      map.setCenter({ "lng": markers[0].lng, "lat": markers[0].lat })
       map.setZoom(12)
+      map.setCenter({ "lng": markers[0].lng, "lat": markers[0].lat })
     }
   }
 

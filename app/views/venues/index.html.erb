@@ -1,36 +1,43 @@
-  <div
-  id="map"
-  style="width: 100%;
-  height: 300px;
-  position: absolute;
-  top: 85.19px;
-  left: 0;"
-  data-page="index"
-  data-markers="<%= @markers.to_json %>"
-  data-mapbox-api-key="<%= ENV['MAPBOX_API_KEY'] %>"
-  data-filter="<%= @filter %>"
-  ></div>
-
-
-
-  <div class="buffer" style="height: 350px;"></div>
-
-
-
-  <div id="filter-container">
-    <%= render "shared/filter" %>
-  </div>
-
-  <div id="filter-container">
-    <span id="ne"></span>
-    <span id="sw"></span>
-    <span id="zoom"></span>
-  </div>
+  <div class="buffer" style="height: 0px;"></div>
   
-  <div class="container mt-8">
-    <div class="row" id="venue-list">
-      
+  <div class="row">
+
+    <div class="col-lg-6 pr-0">
+      <div id="filter-container">
+        <%= render "shared/filter" %>
+      </div>
+<!-- 
+      <div id="filter-container">
+        <span id="ne"></span>
+        <span id="sw"></span>
+        <span id="zoom"></span>
+      </div> -->
+      <div class="">
+        <div id="venue-list"></div>
+      </div>
     </div>
+
+    <div class="col-lg-6 w-100" style="height: calc(100vh - 85.19px);">
+      <div
+      id="map"
+      style="width: 100%;
+      height: 100%;
+      position: absolute;
+      top: 0;
+      left: 0;"
+      data-page="index"
+      data-markers="<%= @markers.to_json %>"
+      data-mapbox-api-key="<%= ENV['MAPBOX_API_KEY'] %>"
+      data-filter="<%= @filter %>"
+      ></div>
+    </div>
+
   </div>
+
+
+
+
+
+
 
 

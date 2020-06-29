@@ -1,12 +1,12 @@
-a  <div class ="row justify-content-center mt-5">
+<div class ="row justify-content-center">
     <div class="col-12">
-      <div class="shadow-sm p-1 bg-white rounded mt-7" style="max-height: content;">
+      <div class="shadow-sm p-1 bg-white rounded mt-8" style="max-height: content;">
 
 
         <div class="row my-4" style="display: flex; align-items: center">
           <div class="col-12 col-lg-1">
             <div class="container pr-0 d-flex justify-content-center">
-              <%= cl_image_tag current_user.user_avatar, class: "avatar-bordered dropdown-toggle rounded dashboard-avatar", transformation: {width: 150, height: 150, gravity: :faces, crop: :fill} %>
+              <%= cl_image_tag current_user.user_avatar, class: "avatar-bordered dropdown-toggle rounded dashboard-avatar bg-white", transformation: {width: 150, height: 150, gravity: :faces, crop: :fill} %>
             </div>
           </div>
           <div class="col-12 col-lg-11">
