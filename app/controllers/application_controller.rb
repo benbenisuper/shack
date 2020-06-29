@@ -1,7 +1,6 @@
 class ApplicationController < ActionController::Base
-	before_action :authenticate_user!
-
 	include Pundit
+	before_action :authenticate_user!
 	protect_from_forgery with: :exception
 
 	# Pundit: white-list approach.
@@ -10,7 +9,6 @@ class ApplicationController < ActionController::Base
 
 	rescue_from Pundit::NotAuthorizedError, with: :user_not_authorized
 
-	private
 
 	def authenticate_admin!
 		redirect_to new_user_session_path unless current_user.admin?
@@ -25,11 +23,9 @@ class ApplicationController < ActionController::Base
 		redirect_to root_path
 	end
 
+	private
+
 	def skip_pundit?
 		devise_controller? || params[:controller] =~ /(^(rails_)?admin)|(^pages$)/
 	end
-
-	protected
-
-
 end

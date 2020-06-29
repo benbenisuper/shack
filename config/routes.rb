@@ -34,5 +34,4 @@ Rails.application.routes.draw do
   resources :membership
 
   get 'dashboard', to: 'pages#dashboard', as: 'dashboard'
-  get 'privacy_policy', to: 'pages#privacy_policy', as: 'privacy_policy'
 end

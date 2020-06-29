@@ -1,10 +1,10 @@
 class User < ApplicationRecord
-  require 'open-uri'
+  # require 'open-uri'
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
   :recoverable, :rememberable, :validatable,
-  :omniauthable, omniauth_providers: %i[facebook google twitter]
+  :omniauthable, omniauth_providers: %i[facebook]
   has_many :bookings, dependent: :nullify
   has_many :reviews
   has_many :venues
