@@ -28,10 +28,16 @@ object-fit: cover;
 }
 
 #filter-container {
-	position: absolute;
-	top: 385.19px;
+	position: relative;
+	top: 0px;
 	width: 100%;
 	left: 0;
+}
+
+#venue-list {
+	padding: 20px;
+	overflow-y: scroll;
+	height: calc(100vh - 167.19px);
 }
 
 

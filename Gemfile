@@ -25,6 +25,8 @@ gem "activestorage", ">= 6.0.3.1"
 gem "money-rails"
 gem "stripe"
 gem 'stripe_event'
+gem 'omniauth'
+gem 'omniauth-facebook'
 
 group :development do
   gem 'web-console', '>= 3.3.0'

@@ -16,12 +16,16 @@
     <%= render 'shared/navbar' %>
     <%= render 'shared/flashes' %>
 
-    <main class="flex-grow-1">
+    <main class="flex-grow-1" style="margin-top: 85.19px;">
       <%= content_for?(:banner) ? yield(:banner) : "" %>
-
-      <div class="container pt-3">
+      <% if controller_name == "venues" %>
+      <%= yield %>
+      <% else %>
+      <div class="container">
         <%= yield %>
       </div>
+      <% end %>
+      
     </main>
 
     <%= render 'shared/footer' %>
