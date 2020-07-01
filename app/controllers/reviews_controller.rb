@@ -13,7 +13,7 @@ class ReviewsController < ApplicationController
 		authorize @review
     @review.booking = @booking
 		@review.user = current_user
-    if @booking.user = current_user
+    if @booking.user == current_user
       @review.reviewable = @booking
     else
       @review.reviewable = @booking.user

@@ -80,7 +80,7 @@ const initMapbox = () => {
                 if (venue["venue_images"].length > 0) {
                   result = `<img src=${venue['venue_images'][venue["venue_images"].length - 1]} alt="" class="d-block w-100 venue-carousel-image" />`
                 } else {
-                  result = `<img class="card-img-top" style="height: 200px;" src="https://images.unsplash.com/photo-1519226612673-73c0234437ef?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60" alt="Card image cap">`                       
+                  result = `<img class="d-block w-100 venue-carousel-image" style="height: 230px;" src="https://images.unsplash.com/photo-1519226612673-73c0234437ef?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60" alt="Card image cap">`                       
                 }
                 return result           
               }
@@ -124,8 +124,8 @@ const initMapbox = () => {
                                         </small>
                                         <div class="col-3 d-flex justify-content-center align-items-center">
                                           <div class="venue-card-rating">
-                                            <i class="fas fa-star mr-1"></i>
-                                            <p style="color: black;">${venue["average_rating"]} (${venue["reviews"].length})</p>
+                                            <div class="d-flex"><i class="fas fa-star mr-1 my-auto"></i><p style="color: black;">${venue["average_rating"]}</p></div>
+                                            <p style="color: black;">(${venue["reviews"].length})</p>
                                           </div>
                                         </div>
                                       </div>

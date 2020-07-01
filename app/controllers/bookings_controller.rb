@@ -66,10 +66,14 @@ class BookingsController < ApplicationController
     @perks = @booking.venue.perks.split(", ")
     authorize @booking
     @booking.amount = @booking.venue.price * ((@booking.end_date.day() - @booking.start_date.day()).to_i + 1)
-    if @booking.is_commented?
-      @review = Review.find_by(booking_id: @booking.id.to_i)
+    if current_user == @booking.user
+      if @booking.is_commented?
+        @review = Review.find_by(booking_id: @booking.id.to_i, reviewable_type: "Booking")
+      end
     else
-      @review = Review.new
+      if @booking.user_is_commented?
+        @review = Review.find_by(booking_id: @booking.id.to_i, reviewable_type: "User")
+      end
     end
     # @reviews = Review.where(booking_id: @booking.id.to_i)
     @status_message = @booking.status.to_i == 1 ? 'Payment Pending' : 'Confirmed'
