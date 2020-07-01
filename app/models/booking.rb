@@ -3,7 +3,7 @@ class Booking < ApplicationRecord
   belongs_to :venue
   monetize :amount_cents
 
-  has_one :review, as: :reviewable
+  has_many :reviews, as: :reviewable
 
   validates :start_date, presence: true
   validates :end_date, presence: true
@@ -18,12 +18,24 @@ class Booking < ApplicationRecord
     !Review.find_by(booking_id: self.id).nil?
   end
 
+  def user_is_commented?
+    !Review.find_by(booking_id: self.id, reviewable_type: "User", reviewable_id: self.user.id).nil?
+  end
+
   def can_comment?
     is_completed? && !is_commented?
   end
 
+  def host_can_comment?
+    is_completed? && !user_is_commented?
+  end
+
   def show_comment?
     is_completed? && is_commented?
+  end
+
+  def host_show_comment?
+    is_completed? && user_is_commented?
   end
 
   def days

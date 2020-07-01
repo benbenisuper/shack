@@ -35,11 +35,12 @@
       </div>
 
       <div class="col shadow p-3 mb-4 bg-white rounded sticky-div">
-          <% if @booking.can_comment? %>
+        <% if current_user == @booking.venue.user %>
+          <% if @booking.host_can_comment? %>
             <h2 class=''><%= current_user == @booking.venue.user ? "Review the guest" : "Review the venue" %></h2>
             <%= render 'review_form' %>
-          <% elsif @booking.show_comment? %>
-            <h2 class='border-bottom'>Review</h2>
+          <% elsif @booking.host_show_comment? %>
+            <h2 class='border-bottom'>Your Review</h2>
 
             <div style="display: flex; justify-content: space-between">
               <h4><%= @review.title %></h4>
@@ -48,9 +49,25 @@
 
             <p><%= @review.comment %></p>
           <% else %>
-          <h3 class='text-center text-muted'>Can't Review Yet</h3>
+            <h3 class='text-center text-muted'>Can't Review Yet</h3>
+          <% end %>
+        <% else %>
+          <% if @booking.can_comment? %>
+            <h2 class=''><%= current_user == @booking.venue.user ? "Review the guest" : "Review the venue" %></h2>
+            <%= render 'review_form' %>
+          <% elsif @booking.show_comment? %>
+            <h2 class='border-bottom'>Your Review</h2>
+
+            <div style="display: flex; justify-content: space-between">
+              <h4><%= @review.title %></h4>
+              <h4 class=""><%= ('<i class="fas fa-star"></i>' * @review.rating).html_safe %><%= ('<i class="far fa-star"></i>' * (5 - @review.rating)).html_safe %></h4>
+            </div>
+
+            <p><%= @review.comment %></p>
+          <% else %>
+            <h3 class='text-center text-muted'>Can't Review Yet</h3>
+          <% end %>
         <% end %>
-        
       </div>
 
     </div>
@@ -61,11 +78,32 @@
         <div class="d-flex justify-content-between mb-3 mt-3">
           <p class="text-left">Venue:</p>
           <% if @booking.venue.nil? %>
-          <p>Venue: <strong>This venue is no longer available.</strong></p>
+            <p>Venue: <strong>This venue is no longer available.</strong></p>
           <% else %>
-          <p><strong><%= link_to "#{@booking.venue.name}", venue_path(@booking.venue) %></strong></p>
+            <p><strong><%= link_to "#{@booking.venue.name}", venue_path(@booking.venue) %></strong></p>
           <% end %>
         </div>
+
+        <% if current_user == @booking.user %>
+          <div class="d-flex justify-content-between mb-3 mt-3">
+            <p class="text-left">Host:</p>
+            <% if @booking.venue.user.nil? %>
+              <p><strong>N/A</strong></p>
+            <% else %>
+              <p><strong><%= link_to "#{@booking.venue.user.full_name}", user_path(@booking.venue.user) %></strong></p>
+            <% end %>
+          </div>
+        <% else %>
+          <div class="d-flex justify-content-between mb-3 mt-3">
+            <p class="text-left">User:</p>
+            <% if @booking.user.nil? %>
+              <p><strong>N/A</strong></p>
+            <% else %>
+              <p><strong><%= link_to "#{@booking.user.full_name}", user_path(@booking.user) %></strong></p>
+            <% end %>
+          </div>
+        <% end %>
+        
         <div class="d-flex justify-content-between mb-3">
           <p>Start Date and Time:</p>
           <p><strong><%= @booking.start_date.strftime("%B %d, %Y at %H:%M") %></strong></p>
