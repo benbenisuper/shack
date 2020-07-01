@@ -35,21 +35,22 @@
       </div>
 
       <div class="col shadow p-3 mb-4 bg-white rounded sticky-div">
-        <% if @booking.can_comment? %>
-          <h2 class=''>Review</h2>
-          <%= render 'review_form' %>
-        <% elsif @booking.show_comment? %>
-          <h2 class='border-bottom'>Review</h2>
+          <% if @booking.can_comment? %>
+            <h2 class=''><%= current_user == @booking.venue.user ? "Review the guest" : "Review the venue" %></h2>
+            <%= render 'review_form' %>
+          <% elsif @booking.show_comment? %>
+            <h2 class='border-bottom'>Review</h2>
 
-          <div style="display: flex; justify-content: space-between">
-            <h4><%= @review.title %></h4>
-            <h4 class=""><%= ('<i class="fas fa-star"></i>' * @review.rating).html_safe %><%= ('<i class="far fa-star"></i>' * (5 - @review.rating)).html_safe %></h4>
-          </div>
+            <div style="display: flex; justify-content: space-between">
+              <h4><%= @review.title %></h4>
+              <h4 class=""><%= ('<i class="fas fa-star"></i>' * @review.rating).html_safe %><%= ('<i class="far fa-star"></i>' * (5 - @review.rating)).html_safe %></h4>
+            </div>
 
-          <p><%= @review.comment %></p>
-        <% else %>
+            <p><%= @review.comment %></p>
+          <% else %>
           <h3 class='text-center text-muted'>Can't Review Yet</h3>
         <% end %>
+        
       </div>
 
     </div>

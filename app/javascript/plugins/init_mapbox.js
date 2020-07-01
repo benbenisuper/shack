@@ -75,12 +75,44 @@ const initMapbox = () => {
             venueList.innerHTML = '';
             // console.log(`6- ${Date.now()}`)
             data["venues"].forEach((venue) => {
-              const tag = cl.imageTag(venue["venue_image"], { crop: "pad", class: "venue-card-image"});
-              const venueCard = `<a href="/venues/${venue["id"]}" class="row shadow-sm bg-white rounded venue-card">
-                                    <div class="col-12 col-lg-4 card-category card-placeholder venue-card-image-container rounded-left d-flex justify-content-center">
-                                      ${tag.toHtml()}
+              const customImageTag = (venue) => {
+                let result = ''
+                if (venue["venue_images"].length > 0) {
+                  result = `<img src=${venue['venue_images'][venue["venue_images"].length - 1]} alt="" class="d-block w-100 venue-carousel-image" />`
+                } else {
+                  result = `<img class="card-img-top" style="height: 200px;" src="https://images.unsplash.com/photo-1519226612673-73c0234437ef?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60" alt="Card image cap">`                       
+                }
+                return result           
+              }
+              const imageList = (venue) => {
+                let result = ''
+                venue["venue_images"].forEach((photo) => {
+                  result = result + `\n <div class="carousel-item" data-interval="2000">
+                  <img src="${photo}" class="d-block w-100 venue-carousel-image" />
+                  </div>`})
+                return result
+              }
+              const venueCard = `
+                                  <div class="row shadow-sm bg-white rounded venue-card">
+                                    <div class="col-12 col-lg-4 p-0 rounded-left overflow-hidden">  
+                                      <div id="carouselExampleFade-${venue["id"]}" class="carousel slide carousel-fade rounded" data-ride="carousel">
+                                        <div class="carousel-inner">
+                                          <div class="carousel-item active" data-interval="10000">
+                                            ${ customImageTag(venue) }
+                                          </div>
+                                          ${ imageList(venue) }
+                                        </div>
+                                        <a class="carousel-control-prev" href="#carouselExampleFade-${venue["id"]}" role="button" data-slide="prev">
+                                          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                          <span class="sr-only">Previous</span>
+                                        </a>
+                                        <a class="carousel-control-next" href="#carouselExampleFade-${venue["id"]}" role="button" data-slide="next">
+                                          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                          <span class="sr-only">Next</span>
+                                        </a>
+                                      </div>
                                     </div>
-                                    <div class="col-12 col-lg-8 venue-card-content">
+                                    <a href="/venues/${venue["id"]}" class="col-12 col-lg-8 venue-card-content">
                                       <div class="row venue-card-body p-3" style="height: 180px; overflow: hidden">
                                         <h6 class="card-title mb-1">${venue["name"]}</h6>
                                         <h7 class="card-text" style="color: black;">${venue["description"]}</h7>
@@ -97,8 +129,8 @@ const initMapbox = () => {
                                           </div>
                                         </div>
                                       </div>
-                                    </div>
-                                </a>
+                                    </a>
+                                  </div>
                                 <hr class="divider divider-fade" />`
 
               venueList.insertAdjacentHTML("beforeend", venueCard)

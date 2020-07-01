@@ -1,6 +1,7 @@
 class Review < ApplicationRecord
   belongs_to :user
   belongs_to :booking
+  belongs_to :reviewable, polymorphic: true
 
   validates :title, presence: true
   validates :comment, presence: true

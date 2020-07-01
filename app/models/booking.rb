@@ -3,7 +3,7 @@ class Booking < ApplicationRecord
   belongs_to :venue
   monetize :amount_cents
 
-  has_one :review
+  has_one :review, as: :reviewable
 
   validates :start_date, presence: true
   validates :end_date, presence: true
