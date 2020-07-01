@@ -26,8 +26,8 @@ Rails.application.routes.draw do
 
   resources :venues
 
+  resources :reviews, only: %i[new create]
   resources :bookings do 
-    resources :reviews, only: %i[new create]
     resources :payments, only: :new
   end
 

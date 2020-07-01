@@ -7,6 +7,7 @@ class User < ApplicationRecord
   :omniauthable, omniauth_providers: %i[facebook]
   has_many :bookings, dependent: :nullify
   has_many :reviews
+  has_many :reviews, as: :reviewable
   has_many :venues
 
   has_one_attached :avatar
