@@ -8,7 +8,7 @@ Rails.application.routes.draw do
 
   mount StripeEvent::Engine, at: '/stripe-webhooks'
 
-  devise_for :users, :path_prefix => 'd', controllers: {
+  devise_for :users, controllers: {
     sessions: 'users/sessions',
     registrations: 'users/registrations',
     omniauth_callbacks: 'users/omniauth_callbacks'
