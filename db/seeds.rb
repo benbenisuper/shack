@@ -20,11 +20,11 @@ puts("Destroying all Admin Users")
 AdminUser.delete_all
 
 
-morgan = User.create!(email: "morgan@shack.com", password: "testtest", first_name: "Morgan", last_name: "X", phone:"0000", role: :host)
-ben = User.create!(email: "ben@shack.com", password: "testtest", first_name: "Ben", last_name: "X", phone:"0000", role: :host)
-admin = User.create!(email: "admin@shack.com", password: "password", first_name: "admin", last_name: "user", phone:"999", role: :admin)
+morgan = User.create!(email: "morgan@keyspot.com", password: "testtest", first_name: "Morgan", last_name: "X", phone:"0000", role: :host)
+ben = User.create!(email: "ben@keyspot.com", password: "testtest", first_name: "Ben", last_name: "X", phone:"0000", role: :host)
+admin = User.create!(email: "admin@keyspot.com", password: "password", first_name: "admin", last_name: "user", phone:"999", role: :admin)
 
-AdminUser.create!(email: 'admin@shack.com', password: 'password', password_confirmation: 'password')
+AdminUser.create!(email: 'admin@keyspot.com', password: 'password', password_confirmation: 'password')
 
 
 puts("Creating Venues")
