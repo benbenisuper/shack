@@ -117,12 +117,12 @@ const initMapbox = () => {
                                         <h6 class="card-title mb-1">${venue["name"]}</h6>
                                         <h7 class="card-text" style="color: black;">${venue["description"]}</h7>
                                       </div>
-                                      <div class="row venue-card-footer rounded" style="height: 100px; overflow: hidden">
-                                        <small class="col-9 text-muted"> 
+                                      <div class="row venue-card-footer rounded" style="height: 100px; overflow: hidden; padding-bottom: 15px;">
+                                        <small class="col-9 text-muted" style="align-self: flex-end"> 
                                           ${venue["category"]} ${venue["location"]}
                                           <i class="fas fa-map-marker-alt"></i>
                                         </small>
-                                        <div class="col-3 d-flex justify-content-center align-items-center">
+                                        <div class="col-3 d-flex justify-content-center align-items-end">
                                           <div class="venue-card-rating">
                                             <div class="d-flex"><i class="fas fa-star mr-1 my-auto"></i><p style="color: black;">${venue["average_rating"]}</p></div>
                                             <p style="color: black;">(${venue["reviews"].length})</p>
