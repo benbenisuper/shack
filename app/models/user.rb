@@ -1,5 +1,3 @@
-require 'cloudinary'
-
 class User < ApplicationRecord
   # require 'open-uri'
   # Include default devise modules. Others available are:
