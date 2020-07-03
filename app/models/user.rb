@@ -1,10 +1,12 @@
+require 'cloudinary'
+
 class User < ApplicationRecord
   # require 'open-uri'
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
   :recoverable, :rememberable, :validatable,
-  :omniauthable, omniauth_providers: %i[facebook]
+  :omniauthable, omniauth_providers: [:facebook]
   has_many :bookings, dependent: :nullify
   has_many :reviews
   has_many :reviews, as: :reviewable
@@ -12,28 +14,35 @@ class User < ApplicationRecord
 
   has_one_attached :avatar
   enum role: { guest: 0, host: 1, manager: 2, admin: 3 }
-  
-  def self.from_omniauth(auth)
-    where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
-      user.email = auth.info.email
-      user.password = Devise.friendly_token[0, 20]
-      user.first_name = auth.info.name.split(' ')[0]  # assuming the user model has a name
-      user.last_name = auth.info.name.split(' ')[1]   # assuming the user model has a name
-      user.full_name = auth.info.name
 
-      # downloaded_image = open(auth.info.image)
-      # user.avatar.attach(downloaded_image) # assuming the user model has an image
-      # If you are using confirmableand the provider(s) you use validate emails, 
-      # uncomment the line below to skip the confirmation emails.
-      # user.skip_confirmation!
+  def self.find_for_facebook_oauth(auth)
+    user_params = auth.slice("provider", "uid")
+    user_params.merge! auth.info.slice("email")
+    user_params[:first_name] = auth.info.name.split(' ')[0]
+    user_params[:last_name] = auth.info.name.split(' ')[1]
+    user_params[:facebook_picture_url] = auth.info.image
+    user_params[:token] = auth.credentials.token
+    user_params[:token_expiry] = Time.at(auth.credentials.expires_at)
+    user_params = user_params.to_h
+
+    user = User.find_by(provider: auth.provider, uid: auth.uid)
+    user ||= User.find_by(email: auth.info.email) # User did a regular sign up in the past.
+    if user
+      user.update(user_params)
+    else
+      user = User.new(user_params)
+      user.password = Devise.friendly_token[0,20]  # Fake password for validation
+      user.save
     end
-  end
 
-  def self.new_with_session(params, session)
-    super.tap do |user|
-      if data = session["devise.facebook_data"] && session["devise.facebook_data"]["extra"]["raw_info"]
-        user.email = data["email"] if user.email.blank?
-      end
+    return user
+  end
+  
+  def avatar_url
+    if self.avatar.attached?
+      self.avatar.service_url
+    else
+      "https://res.cloudinary.com/mhoare/image/upload/c_fill,g_faces,h_300,w_300/avatar"
     end
   end
 
