@@ -6,7 +6,21 @@
   <%= f.input :capacity, as: :numeric %>
   <%= f.input :price, as: :float %>
   <%= f.input :description %>
-  <%= f.input :perks, as: :check_boxes, collection: Venue::PERKS, checked: @venue.perks_array %>
+  <%#= f.input :perks, as: :check_boxes, 
+        collection: Venue::PERKS, 
+        checked: @venue.perks_array, 
+        collection_wrapper_tag: "perk-wrapper",
+        collection_wrapper_class: "perk-grid" %>
+  <input type="hidden" name="venue[perks][]" autocomplete="off" value="">
+  <div class="btn-group btn-group-toggle perk-grid" data-toggle="buttons">
+    <% Venue::PERKS.each do |perk| %>
+      <label class="btn btn-secondary active rounded">
+          <input type="checkbox" name="venue[perks][]" id="<%= perk %>" autocomplete="off" value="<%= perk %>">
+          <i class="fas fa-<%= Venue.perk_icon(perk) %> mr-3 my-auto"></i>
+          <strong><%= perk %></strong><br>
+      </label>
+    <% end %>
+  </div>
   <%= f.input :photos, as: :file, input_html: { multiple: true } %>
   <%= f.submit "Submit", class: "btn btn-secondary" %>
 <% end %>
