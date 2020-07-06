@@ -4,14 +4,14 @@
 
 
         <div class="row my-4" style="display: flex; align-items: center">
-          <div class="col-12 col-lg-1">
+          <div class="col-4 col-xs-4 col-sm-4 col-md-4 col-lg-2 col-xl-1">
             <div class="container pr-0 d-flex justify-content-center">
               <%= cl_image_tag current_user.user_avatar, class: "avatar-bordered dropdown-toggle rounded dashboard-avatar bg-white", transformation: {width: 150, height: 150, gravity: :faces, crop: :fill} %>
             </div>
           </div>
-          <div class="col-12 col-lg-11">
+          <div class="col-8 col-xs-8 col-sm-8 col-md-8 col-lg-10 col-xl-11">
             <div class="container pl-0" style="">
-              <h1 class="m-0 p-0">Hello <%= current_user.first_name %>!</h1>
+              <h1 class="m-0 p-0 dashboard-greet">Hello <%= current_user.first_name %>!</h1>
               
             </div>
           </div>

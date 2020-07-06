@@ -1,7 +1,14 @@
 <div class="d-flex flex-column">
-<div class="rounded">
-	<%= render "info_window_slides", venue: venue %>
-</div>
-<span class="h6 p-3 mb-0"><%= venue.name %></span>
-<span class="h7 p-3" style="white-space: normal"><%= venue.location %></span>
+	<div class="rounded">
+		<%= render "info_window_slides", venue: venue %>
+	</div>
+	<div class="row pt-2" >
+		<div class="col-8">
+			<span class="h8 pl-3 mb-0"><%= venue.name %></span>
+		</div>
+		<div class="col-4 d-flex justify-content-end">
+			<strong class=""><%= humanized_money_with_symbol(venue.price) %>  / day</strong>
+		</div>
+	</div>
+	<span class="h7 p-3" style="white-space: normal"><%= venue.location %></span>
 </div>

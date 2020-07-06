@@ -114,8 +114,13 @@ const initMapbox = () => {
                                     </div>
                                     <a href="/venues/${venue["id"]}" class="col-12 col-lg-8 venue-card-content">
                                       <div class="row venue-card-body p-3" style="height: 180px; overflow: hidden">
-                                        <h6 class="card-title mb-1">${venue["name"]}</h6>
-                                        <h7 class="card-text" style="color: black;">${venue["description"]}</h7>
+                                        <div class="col-8">
+                                          <h6 class="card-title mb-1">${venue["name"]}</h6>
+                                          <h7 class="card-text" style="color: black;">${venue["description"]}</h7>
+                                        </div>
+                                        <div class="col-4 d-flex justify-content-end">
+                                          <strong class="venue-card-price">CHF ${venue["price_cents"]/100} / day</strong>
+                                        </div>
                                       </div>
                                       <div class="row venue-card-footer rounded" style="height: 100px; overflow: hidden; padding-bottom: 15px;">
                                         <small class="col-9 text-muted" style="align-self: flex-end"> 
