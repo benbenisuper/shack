@@ -6,7 +6,11 @@
         <div class="row my-4" style="display: flex; align-items: center">
           <div class="col-4 col-xs-4 col-sm-4 col-md-4 col-lg-2 col-xl-1">
             <div class="container pr-0 d-flex justify-content-center">
+              <% unless current_user.avatar.attached? %>
+              <%= image_tag current_user.facebook_picture_url, class: "avatar-bordered dropdown-toggle rounded dashboard-avatar bg-white", transformation: {width: 150, height: 150, gravity: :faces, crop: :fill} %>
+              <% else %>
               <%= cl_image_tag current_user.user_avatar, class: "avatar-bordered dropdown-toggle rounded dashboard-avatar bg-white", transformation: {width: 150, height: 150, gravity: :faces, crop: :fill} %>
+              <% end %>
             </div>
           </div>
           <div class="col-8 col-xs-8 col-sm-8 col-md-8 col-lg-10 col-xl-11">
