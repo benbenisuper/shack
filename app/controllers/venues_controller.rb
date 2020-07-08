@@ -95,7 +95,7 @@ class VenuesController < ApplicationController
   def update
     @venue = Venue.find(params[:id])
     authorize @venue
-    @venue.perks = params.require(:venue)[:perks][0..-1].join(', ')
+    @venue.perks = params.require(:venue)[:perks][1..-1].join(', ')
     @venue.venue_spec.update(venue_spec_params)
     
     if @venue.update(venue_params)

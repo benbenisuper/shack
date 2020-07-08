@@ -34,12 +34,12 @@
         <%= @venue.description %>
         <h5 class="mt-4">Additional information</h5>
         <div class="perks">
-          <div class="d-flex"><div class="perk-svg mr-2 py-auto"><%= show_svg('icons/group.svg') %></div><strong class="mr-2">Capacity: </strong><%= @venue.capacity %><%= (@venue.capacity == "1" ? ' guest' : ' guests') %></div>
-          <div class="d-flex"><div class="perk-svg mr-2 py-auto"><%= show_svg('icons/blueprint.svg') %></div><strong class="mr-2">Spaces: </strong><%= @venue.venue_spec.spaces %></div>
-          <div class="d-flex"><div class="perk-svg mr-2 py-auto"><%= show_svg('icons/measure.svg') %></div><strong class="mr-2">Total Area: </strong><%= @venue.venue_spec.total_area %> m2</div>
-          <div class="d-flex"><div class="perk-svg mr-2 py-auto"><%= show_svg('icons/bathtub.svg') %></div><strong class="mr-2">Bathrooms: </strong><%= @venue.venue_spec.bathrooms %></div>
-          <div class="d-flex"><div class="perk-svg mr-2 py-auto"><%= show_svg('icons/garage.svg') %></div><strong class="mr-2">Garage Spaces: </strong><%= @venue.venue_spec.garage_spaces %></div>
-          <div class="d-flex"><div class="perk-svg mr-2 py-auto"><%= show_svg('icons/coin.svg') %></div><strong class="mr-2">Price / day: </strong><%= humanized_money_with_symbol(@venue.price) %></div>
+          <div class="d-flex"><div class="perk-svg mr-2 py-auto"><%= cl_image_tag "group" %></div><strong class="mr-2">Capacity: </strong><%= @venue.capacity %><%= (@venue.capacity == "1" ? ' guest' : ' guests') %></div>
+          <div class="d-flex"><div class="perk-svg mr-2 py-auto"><%= cl_image_tag "blueprint" %></div><strong class="mr-2">Spaces: </strong><%= @venue.venue_spec.spaces %></div>
+          <div class="d-flex"><div class="perk-svg mr-2 py-auto"><%= cl_image_tag "measure" %></div><strong class="mr-2">Total Area: </strong><%= @venue.venue_spec.total_area %> m2</div>
+          <div class="d-flex"><div class="perk-svg mr-2 py-auto"><%= cl_image_tag "bathtub" %></div><strong class="mr-2">Bathrooms: </strong><%= @venue.venue_spec.bathrooms %></div>
+          <div class="d-flex"><div class="perk-svg mr-2 py-auto"><%= cl_image_tag "garage" %></div><strong class="mr-2">Garage Spaces: </strong><%= @venue.venue_spec.garage_spaces %></div>
+          <div class="d-flex"><div class="perk-svg mr-2 py-auto"><%= cl_image_tag "coin" %></div><strong class="mr-2">Price / day: </strong><%= humanized_money_with_symbol(@venue.price) %></div>
         </div>
         <h5 class="mt-4">Perks</h5>
         <div class="perks mt-3">
@@ -78,7 +78,7 @@
     </div>
 
     <div class="col-xs-12 col-lg-4">
-      <div class="col shadow p-3 bg-white rounded sticky-div" >
+      <div class="col shadow p-3 bg-white rounded sticky-div">
         <div class="wrapper">
 
           <% if @venue.user == current_user %>

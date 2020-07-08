@@ -6,7 +6,7 @@
       <% if venue.photos.attached? %>
       <%= cl_image_tag venue.photos.last.key, class:"d-block w-100"%>
       <% else %>
-      <img class="card-img-top" src="https://images.unsplash.com/photo-1519226612673-73c0234437ef?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60" alt="Card image cap">
+      <img class="card-img" style="border-radius: 0px !important;" src="https://images.unsplash.com/photo-1519226612673-73c0234437ef?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60" alt="Card image cap">
       <% end %>
     </div>
 
