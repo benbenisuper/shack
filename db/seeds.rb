@@ -12,7 +12,9 @@ puts("Destroying all Reviews")
 Review.delete_all
 puts("Destroying all Bookings")
 Booking.delete_all
-puts("Destroying all Reviews")
+puts("Destroying all Venue Specs")
+VenueSpec.delete_all
+puts("Destroying all Venues")
 Venue.delete_all
 puts("Destroying all Users")
 User.delete_all
@@ -38,7 +40,8 @@ venue_1 = Venue.create!(name: "Whateva",
  capacity: 6,
  activity: "Wedding",
  price: 30,
- perks: "Internet, Parking, Air Conditioning, Heating, Security, Kitchen, Catering, Handycap Friendly")
+ perks: "Internet, Parking, Air Conditioning, Heating, Security, Kitchen, Catering, Handicap Friendly")
+venue_1_spec = VenueSpec.create!(venue: venue_1, spaces: 4, garage_spaces: 4, bathrooms: 4, total_area: 4)
 
 venue_2 = Venue.create!(name: "Dinner with Ben",
  sku: "Dinner with Ben",
@@ -49,7 +52,8 @@ venue_2 = Venue.create!(name: "Dinner with Ben",
  capacity: 10,
  activity: "Dinner",
  price: 50,
- perks: "Internet, Parking, Air Conditioning, Security, Kitchen, Catering, Handycap Friendly")
+ perks: "Internet, Parking, Air Conditioning, Security, Kitchen, Catering, Handicap Friendly")
+venue_2_spec = VenueSpec.create!(venue: venue_2, spaces: 4, garage_spaces: 4, bathrooms: 4, total_area: 4)
 
 
 puts("Creating Bookings")
@@ -60,3 +64,10 @@ booking_1 = Booking.create!(user: ben,
   venue: venue_1)
 booking_1.amount = booking_1.venue.price * ((booking_1.end_date.day() - booking_1.start_date.day()).to_i + 1)
 booking_1.save
+
+
+## ADD SPEC MODEL TO ALL VENUES!
+
+# Venue.all.each do |venue|
+# 	spec = VenueSpec.create!(venue: venue) unless venue.venue_spec
+# end

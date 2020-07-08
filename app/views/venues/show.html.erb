@@ -33,15 +33,19 @@
         <h5 class="mt-4">Description</h5>
         <%= @venue.description %>
         <h5 class="mt-4">Additional information</h5>
-        <div class="d-flex justify-content-start">
-          <div><strong>Capacity: </strong><%= @venue.capacity %><%= (@venue.capacity == "1" ? ' guest' : ' guests') %></div>
-          <div class="ml-5"><strong>Price / day: </strong><%= humanized_money_with_symbol(@venue.price) %></div>
+        <div class="perks">
+          <div class="d-flex"><div class="perk-svg mr-2 py-auto"><%= show_svg('icons/group.svg') %></div><strong class="mr-2">Capacity: </strong><%= @venue.capacity %><%= (@venue.capacity == "1" ? ' guest' : ' guests') %></div>
+          <div class="d-flex"><div class="perk-svg mr-2 py-auto"><%= show_svg('icons/blueprint.svg') %></div><strong class="mr-2">Spaces: </strong><%= @venue.venue_spec.spaces %></div>
+          <div class="d-flex"><div class="perk-svg mr-2 py-auto"><%= show_svg('icons/measure.svg') %></div><strong class="mr-2">Total Area: </strong><%= @venue.venue_spec.total_area %> m2</div>
+          <div class="d-flex"><div class="perk-svg mr-2 py-auto"><%= show_svg('icons/bathtub.svg') %></div><strong class="mr-2">Bathrooms: </strong><%= @venue.venue_spec.bathrooms %></div>
+          <div class="d-flex"><div class="perk-svg mr-2 py-auto"><%= show_svg('icons/garage.svg') %></div><strong class="mr-2">Garage Spaces: </strong><%= @venue.venue_spec.garage_spaces %></div>
+          <div class="d-flex"><div class="perk-svg mr-2 py-auto"><%= show_svg('icons/coin.svg') %></div><strong class="mr-2">Price / day: </strong><%= humanized_money_with_symbol(@venue.price) %></div>
         </div>
         <h5 class="mt-4">Perks</h5>
         <div class="perks mt-3">
           <% @perks.each do |perk| %>
             <div class="d-flex perk-container">
-              <i class="fas fa-<%= Venue.perk_icon(perk) %> mr-3 my-auto"></i>
+              <i class="<%= Venue.perk_icon(perk) %> mr-3 my-auto" style="font-size: 21px;"></i>
               <strong><%= perk %></strong><br>
             </div>
           <% end %>

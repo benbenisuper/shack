@@ -5,14 +5,18 @@ class VenuesController < ApplicationController
 
   def new
     @venue = Venue.new
+    @venue_spec = VenueSpec.new(venue: @venue)
+    @venue.build_venue_spec
 
     authorize @venue
   end
 
   def create
     @venue = Venue.new(venue_params)
-    @venue.perks = params.require(:venue)[:perks][1..-1].join(', ')
+    @venue.perks = params.require(:venue)[:perks][0..-1].join(', ')
     authorize @venue
+
+    @venue.build_venue_spec(venue_spec_params)
 
     @user = current_user
     @venue.user = @user
@@ -91,7 +95,8 @@ class VenuesController < ApplicationController
   def update
     @venue = Venue.find(params[:id])
     authorize @venue
-    @venue.perks = params.require(:venue)[:perks][1..-1].join(', ')
+    @venue.perks = params.require(:venue)[:perks][0..-1].join(', ')
+    @venue.venue_spec.update(venue_spec_params)
     
     if @venue.update(venue_params)
       redirect_to venue_path(@venue)
@@ -103,7 +108,12 @@ class VenuesController < ApplicationController
   private
 
   def venue_params
-    params.require(:venue).permit(:name, :location, :category, :description, :capacity, :price, :activity, photos: [])
+    params.require(:venue).permit(:name, :location, :category, :description, :capacity, :perks, :price, :activity, photos: [], 
+          venue_spec_attributes: [:spaces, :garage_spaces, :bathrooms, :total_area])
+  end
+
+  def venue_spec_params
+    params.require(:venue).require(:venue_spec_attributes).permit(:spaces, :garage_spaces, :bathrooms, :total_area)
   end
 
 end
