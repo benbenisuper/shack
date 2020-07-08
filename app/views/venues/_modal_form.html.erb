@@ -22,13 +22,23 @@
         checked: @venue.perks_array, 
         collection_wrapper_tag: "perk-wrapper",
         collection_wrapper_class: "perk-grid" %>
+        <%= f.fields_for :venue_spec do |h| %>
+        <div class="d-flex justify-content-around">
+         <%= h.input :spaces, as: :numeric, class: "h5 my-3 d-block w-100 mr-4" %>
+         <%= h.input :total_area, as: :numeric, class: "h5 my-3 d-block w-100 ml-2"  %>
+       </div>
+       <div class="d-flex justify-content-around">
+         <%= h.input :bathrooms, as: :numeric, class: "h5 my-3 d-block w-100 mr-2"  %>
+         <%= h.input :garage_spaces, as: :numeric, class: "h5 my-3 d-block w-100 ml-2" %>
+       </div>
+       <% end %>
         <%= f.input :photos, as: :file, input_html: { multiple: true } %>
-      </div>
+     </div>
 
     </div>
     <div class="modal-footer mx-auto d-flex justify-content-between px-5">
+      <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
       <%= f.submit "Submit", class: "btn btn-primary" %>
-      <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
     </div>
     <% end %>
   </div>

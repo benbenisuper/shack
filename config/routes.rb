@@ -24,7 +24,9 @@ Rails.application.routes.draw do
 
   resources :users, only: [:show]
 
-  resources :venues
+  resources :venues do
+    resources :venue_specs, only: [:create]
+  end
 
   resources :reviews, only: %i[new create]
   resources :bookings do 

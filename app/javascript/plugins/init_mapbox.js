@@ -75,6 +75,7 @@ const initMapbox = () => {
             venueList.innerHTML = '';
             // console.log(`6- ${Date.now()}`)
             data["venues"].forEach((venue) => {
+
               const customImageTag = (venue) => {
                 let result = ''
                 if (venue["venue_images"].length > 0) {
@@ -92,6 +93,11 @@ const initMapbox = () => {
                   </div>`})
                 return result
               }
+              const garage_svg_url = `https://res.cloudinary.com/mhoare/image/upload/v1594179931/garage.svg`
+              const bathtub_svg_url = `https://res.cloudinary.com/mhoare/image/upload/v1594178169/bathtub.svg`
+              const capacity_svg_url = `https://res.cloudinary.com/mhoare/image/upload/v1594178167/group.svg`
+              const spaces_svg_url = `https://res.cloudinary.com/mhoare/image/upload/v1594178167/blueprint.svg`
+              const total_area_svg_url = `https://res.cloudinary.com/mhoare/image/upload/v1594178167/measure.svg`
               const venueCard = `
                                   <div class="row shadow-sm bg-white rounded venue-card">
                                     <div class="col-12 col-lg-4 p-0 rounded-left overflow-hidden">  
@@ -113,8 +119,8 @@ const initMapbox = () => {
                                       </div>
                                     </div>
                                     <a href="/venues/${venue["id"]}" class="col-12 col-lg-8 venue-card-content">
-                                      <div class="row venue-card-body p-3" style="height: 180px; overflow: hidden">
-                                        <div class="col-8">
+                                      <div class="row venue-card-body p-2" style="height: 140px; overflow: hidden">
+                                        <div class="col-8 p-0">
                                           <h6 class="card-title mb-1">${venue["name"]}</h6>
                                           <h7 class="card-text" style="color: black;">${venue["description"]}</h7>
                                         </div>
@@ -122,7 +128,41 @@ const initMapbox = () => {
                                           <strong class="venue-card-price">CHF ${venue["price_cents"]/100} / day</strong>
                                         </div>
                                       </div>
-                                      <div class="row venue-card-footer rounded" style="height: 100px; overflow: hidden; padding-bottom: 15px;">
+                                      <div class="row venue-card-body px-2" style="height: 40px; overflow: hidden">
+                                          <div class="col-12 d-flex justify-content-around p-0">
+                                              <div class="d-flex border-right pr-2">
+                                                <div class="perk-svg mr-2 py-auto" id="group-svg">
+                                                  <img src="${capacity_svg_url}" alt="" />
+                                                </div>
+                                                <span class="font-weight-bolder text-dark py-auto">${venue["capacity"]} p</span>
+                                              </div>
+                                              <div class="d-flex border-right pr-2">
+                                                <div class="perk-svg mr-2 py-auto" id="blueprint-svg">
+                                                  <img src="${spaces_svg_url}" alt="" />
+                                                </div>
+                                                  <span class="font-weight-bolder text-dark py-auto">${venue["venue_spec"]["spaces"]}</span>
+                                              </div>
+                                              <div class="d-flex border-right pr-2">
+                                                <div class="perk-svg mr-2 py-auto" id="measure-svg">
+                                                <img src="${total_area_svg_url}" alt="" />
+                                                </div>
+                                                  <span class="font-weight-bolder text-dark py-auto">${venue["venue_spec"]["total_area"]} m2</span>
+                                              </div>
+                                              <div class="d-flex border-right pr-2">
+                                                <div class="perk-svg mr-2 py-auto" id="bathtub-svg">
+                                                <img src="${bathtub_svg_url}" alt="" />
+                                                </div>
+                                                  <span class="font-weight-bolder text-dark py-auto">${venue["venue_spec"]["bathrooms"]}</span>
+                                              </div>
+                                              <div class="d-flex">
+                                                <div class="perk-svg mr-2 py-auto" id="garage-svg">
+                                                <img src="${garage_svg_url}" alt="" />
+                                                </div>
+                                                  <span class="font-weight-bolder text-dark py-auto">${venue["venue_spec"]["garage_spaces"]}</span>
+                                              </div>
+                                          </div>
+                                      </div>
+                                      <div class="row venue-card-footer rounded" style="height: 80px; overflow: hidden; padding-bottom: 15px;">
                                         <small class="col-9 text-muted" style="align-self: flex-end"> 
                                           ${venue["category"]} ${venue["location"]}
                                           <i class="fas fa-map-marker-alt"></i>

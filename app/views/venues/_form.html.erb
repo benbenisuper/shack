@@ -1,26 +1,59 @@
 <%= simple_form_for [@venue] do |f| %>
-  <%= f.input :name %>
-  <%= f.input :location, input_html: { id: 'location' }  %>
-  <%= f.input :category, collection: Venue::CATEGORIES %>
-  <%= f.input :activity, collection: Venue::ACTIVITIES %>
-  <%= f.input :capacity, as: :numeric %>
-  <%= f.input :price, as: :float %>
-  <%= f.input :description %>
+  <span class="h5 my-3 d-block">
+    <%= f.input :name %>
+  </span>
+  <span class="h5 my-3 d-block">
+    <%= f.input :location, input_html: { id: 'location' }  %>
+  </span>
+  <div class="d-flex justify-content-around">
+  <span class="h5 my-3 d-block w-50 mr-2">
+    <%= f.input :category, collection: Venue::CATEGORIES %>
+  </span>
+  <span class="h5 my-3 d-block w-50 ml-2">
+    <%= f.input :activity, collection: Venue::ACTIVITIES %>
+  </span>
+  </div>
+  <div class="d-flex justify-content-around">
+  <span class="h5 my-3 d-block w-50 mr-2">
+    <%= f.input :capacity, as: :numeric %>
+  </span>
+  <span class="h5 my-3 d-block w-50 ml-2">
+    <%= f.input :price, as: :float %>
+  </span>
+  </div>
+  <span class="h5 my-3 d-block">
+    <%= f.input :description %>
+  </span>
   <%#= f.input :perks, as: :check_boxes, 
         collection: Venue::PERKS, 
         checked: @venue.perks_array, 
         collection_wrapper_tag: "perk-wrapper",
         collection_wrapper_class: "perk-grid" %>
-  <input type="hidden" name="venue[perks][]" autocomplete="off" value="">
-  <div class="btn-group btn-group-toggle perk-grid" data-toggle="buttons">
+  <span class="h5 my-3 d-block">Perks</span>
+  <div class="btn-group btn-group-toggle perk-grid mb-3" data-toggle="buttons">
     <% Venue::PERKS.each do |perk| %>
-      <label class="btn btn-secondary active rounded">
+      <label class="btn btn-secondary active rounded d-flex justify-content-center align-items-center">
           <input type="checkbox" name="venue[perks][]" id="<%= perk %>" autocomplete="off" value="<%= perk %>">
-          <i class="fas fa-<%= Venue.perk_icon(perk) %> mr-3 my-auto"></i>
-          <strong><%= perk %></strong><br>
+          <i class="<%= Venue.perk_icon(perk) %> mr-3 my-auto" style="font-size: 21px;"></i>
+          <strong class="text-start"><%= perk %></strong><br>
       </label>
     <% end %>
   </div>
-  <%= f.input :photos, as: :file, input_html: { multiple: true } %>
-  <%= f.submit "Submit", class: "btn btn-secondary" %>
+  <%= f.fields_for :venue_spec do |h| %>
+    <div class="d-flex justify-content-around">
+       <%= h.input :spaces, as: :numeric, class: "h5 my-3 d-block w-100 mr-2" %>
+       <%= h.input :total_area, as: :numeric, class: "h5 my-3 d-block w-100 ml-2"  %>
+    </div>
+    <div class="d-flex justify-content-around">
+       <%= h.input :bathrooms, as: :numeric, class: "h5 my-3 d-block w-100 mr-2"  %>
+       <%= h.input :garage_spaces, as: :numeric, class: "h5 my-3 d-block w-100 ml-2" %>
+    </div>
+  <% end %>
+  <span class="h5 my-3 d-block">
+    <%= f.input :photos, as: :file, input_html: { multiple: true } %>
+  </span>
+  <div class="d-flex justify-content-between mt-5">
+    <%= link_to 'Cancel', 'javascript:history.back()', class: "btn btn-danger" %>
+    <%= f.submit "Submit", class: "btn btn-primary" %>
+  </div>
 <% end %>

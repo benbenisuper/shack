@@ -1,9 +1,11 @@
 class Venue < ApplicationRecord
   CATEGORIES = ["All Categories", "Private House", "Restaurant", "Bar", "Theatre", "Outdoor", "Castle", "Workshop"]
   ACTIVITIES = ["All Activities", "Wedding", "Dinner", "Work Meeting", "Show", "Music", "Art Display", "Workshop"]
-  PERKS = ["Internet", "Parking", "Air Conditioning", "Heating", "Security", "Kitchen", "Catering", "Handycap Friendly"]
+  PERKS = ["Internet", "Parking", "Air Conditioning", "Heating", "Security", "Kitchen", "Catering", "Handicap Friendly"]
   geocoded_by :location
   belongs_to :user
+  has_one :venue_spec, :dependent => :destroy
+  accepts_nested_attributes_for :venue_spec
   has_many :bookings, dependent: :nullify
   has_many :reviews, through: :bookings
   has_many_attached :photos
@@ -52,21 +54,23 @@ class Venue < ApplicationRecord
   def self.perk_icon(perk)
     case perk
       when "Internet"
-        string = 'wifi'
+        string = 'fas fa-wifi'
       when "Parking"
-        string = 'parking'
+        string = 'fas fa-parking'
       when "Air Conditioning"
-        string = 'wind'
+        string = 'fas fa-wind'
       when "Heating"
-        string = 'fire'
+        string = 'fas fa-fire'
       when "Security"
-        string = 'user-shield'
+        string = 'fas fa-user-shield'
       when "Kitchen"
-        string = 'utensils'
+        string = 'fas fa-utensils'
       when "Catering"
-        string = 'cheese'
+        string = 'fas fa-cheese'
+      when "Handicap Friendly"
+        string = 'fab fa-accessible-icon'
       else
-        string = 'question'
+        string = 'fas fa-question'
       end
       return string
   end

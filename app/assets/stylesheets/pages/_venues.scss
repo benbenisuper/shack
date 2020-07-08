@@ -20,6 +20,41 @@ object-fit: cover;
 	grid-gap: 10px;
 }
 
+.modal-perks {
+	display: grid;
+	grid-template-rows: repeat(auto-fill);
+	grid-template-columns: repeat( auto-fit, minmax(150px, 1fr) );
+	grid-gap: 10px;
+}
+
+.perk-svg {
+	width: 30px;
+	height: 30px;
+
+	svg {
+		max-width: 100%;
+		max-height: 100%;
+	}
+
+	img {
+		max-width: 100%;
+		max-height: 100%;
+	}
+}
+
+.venue_venue_spec_spaces {
+	margin-right: 10px;
+}
+.venue_venue_spec_bathrooms {
+	margin-right: 10px;
+}
+.venue_venue_spec_total_area {
+	margin-left: 10px;
+}
+.venue_venue_spec_garage_spaces {
+	margin-left: 10px;
+}
+
 .perk-grid {
 	display: grid;
 	grid-template-rows: repeat(auto-fill);
