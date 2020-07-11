@@ -8,6 +8,7 @@ class User < ApplicationRecord
   has_many :bookings, dependent: :nullify
   has_many :reviews
   has_many :reviews, as: :reviewable
+  has_many :messages, dependent: :destroy
   has_many :venues
 
   has_one_attached :avatar

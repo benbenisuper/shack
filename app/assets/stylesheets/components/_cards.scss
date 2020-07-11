@@ -78,10 +78,19 @@
     height: 180px;
     width: 210px;
     margin: 0;
+
+    .icon-shape {
+      transition-duration: 0.2s;
+      transition-property: transform;
+    }
   }
 
   &.overview-card:hover {
     transform: scale(1.05);
+
+    .icon-shape {
+      transform: scale(1.2);
+    }
   }
 }
 

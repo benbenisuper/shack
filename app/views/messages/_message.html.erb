@@ -1,0 +1,13 @@
+<div class="message <%= user_is_messages_author ? "right" : "" %>">
+	<div id="timestamp" class="my-auto mx-3"><strong><%= message.created_at.strftime("%B %d at %H:%M") %></strong></div>
+  	<% unless message.user.avatar.attached? %>
+	  <% if message.user.facebook_picture_url %>
+	    <%= image_tag message.user.facebook_picture_url, height: 300, width: 300, crop: :fill, gravity: :faces, class: "avatar dropdown-toggle" %>
+	  <% else %>
+	    <%= cl_image_tag "avatar", height: 300, width: 300, crop: :fill, gravity: :faces, class: "avatar dropdown-toggle" %>
+	  <% end %>
+	<% else %>
+	  <%= cl_image_tag message.user.user_avatar, height: 300, width: 300, crop: :fill, gravity: :faces, class: "avatar dropdown-toggle" %>
+	<% end %>
+  	<div class="message-content" style="overflow-wrap: anywhere;"><%= message.content %></div>
+</div>

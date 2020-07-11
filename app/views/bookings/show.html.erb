@@ -22,10 +22,10 @@
         <strong>Capacity: </strong><%= @booking.venue.capacity %><%= (@booking.venue.capacity == "1" ? ' guest' : ' guests') %><br>
         <div class="perks mt-3">
           <% @perks.each do |perk| %>
-            <div class="d-flex perk-container">
-              <i class="fas fa-<%= Venue.perk_icon(perk) %> mr-3 my-auto"></i>
-              <strong><%= perk %></strong><br>
-            </div>
+          <div class="d-flex perk-container">
+            <i class="fas fa-<%= Venue.perk_icon(perk) %> mr-3 my-auto"></i>
+            <strong><%= perk %></strong><br>
+          </div>
           <% end %>
         </div>
       </div>
@@ -36,37 +36,37 @@
 
       <div class="col shadow p-3 mb-4 bg-white rounded sticky-div">
         <% if current_user == @booking.venue.user %>
-          <% if @booking.host_can_comment? %>
-            <h2 class=''><%= current_user == @booking.venue.user ? "Review the guest" : "Review the venue" %></h2>
-            <%= render 'review_form' %>
-          <% elsif @booking.host_show_comment? %>
-            <h2 class='border-bottom'>Your Review</h2>
+        <% if @booking.host_can_comment? %>
+        <h2 class=''><%= current_user == @booking.venue.user ? "Review the guest" : "Review the venue" %></h2>
+        <%= render 'review_form' %>
+        <% elsif @booking.host_show_comment? %>
+        <h2 class='border-bottom'>Your Review</h2>
 
-            <div style="display: flex; justify-content: space-between">
-              <h4><%= @review.title %></h4>
-              <h4 class=""><%= ('<i class="fas fa-star"></i>' * @review.rating).html_safe %><%= ('<i class="far fa-star"></i>' * (5 - @review.rating)).html_safe %></h4>
-            </div>
+        <div style="display: flex; justify-content: space-between">
+          <h4><%= @review.title %></h4>
+          <h4 class=""><%= ('<i class="fas fa-star"></i>' * @review.rating).html_safe %><%= ('<i class="far fa-star"></i>' * (5 - @review.rating)).html_safe %></h4>
+        </div>
 
-            <p><%= @review.comment %></p>
-          <% else %>
-            <h3 class='text-center text-muted'>Can't Review Yet</h3>
-          <% end %>
+        <p><%= @review.comment %></p>
         <% else %>
-          <% if @booking.can_comment? %>
-            <h2 class=''><%= current_user == @booking.venue.user ? "Review the guest" : "Review the venue" %></h2>
-            <%= render 'review_form' %>
-          <% elsif @booking.show_comment? %>
-            <h2 class='border-bottom'>Your Review</h2>
+        <h3 class='text-center text-muted'>Can't Review Yet</h3>
+        <% end %>
+        <% else %>
+        <% if @booking.can_comment? %>
+        <h2 class=''><%= current_user == @booking.venue.user ? "Review the guest" : "Review the venue" %></h2>
+        <%= render 'review_form' %>
+        <% elsif @booking.show_comment? %>
+        <h2 class='border-bottom'>Your Review</h2>
 
-            <div style="display: flex; justify-content: space-between">
-              <h4><%= @review.title %></h4>
-              <h4 class=""><%= ('<i class="fas fa-star"></i>' * @review.rating).html_safe %><%= ('<i class="far fa-star"></i>' * (5 - @review.rating)).html_safe %></h4>
-            </div>
+        <div style="display: flex; justify-content: space-between">
+          <h4><%= @review.title %></h4>
+          <h4 class=""><%= ('<i class="fas fa-star"></i>' * @review.rating).html_safe %><%= ('<i class="far fa-star"></i>' * (5 - @review.rating)).html_safe %></h4>
+        </div>
 
-            <p><%= @review.comment %></p>
-          <% else %>
-            <h3 class='text-center text-muted'>Can't Review Yet</h3>
-          <% end %>
+        <p><%= @review.comment %></p>
+        <% else %>
+        <h3 class='text-center text-muted'>Can't Review Yet</h3>
+        <% end %>
         <% end %>
       </div>
 
@@ -78,30 +78,30 @@
         <div class="d-flex justify-content-between mb-3 mt-3">
           <p class="text-left">Venue:</p>
           <% if @booking.venue.nil? %>
-            <p>Venue: <strong>This venue is no longer available.</strong></p>
+          <p>Venue: <strong>This venue is no longer available.</strong></p>
           <% else %>
-            <p><strong><%= link_to "#{@booking.venue.name}", venue_path(@booking.venue) %></strong></p>
+          <p><strong><%= link_to "#{@booking.venue.name}", venue_path(@booking.venue) %></strong></p>
           <% end %>
         </div>
 
         <% if current_user == @booking.user %>
-          <div class="d-flex justify-content-between mb-3 mt-3">
-            <p class="text-left">Host:</p>
-            <% if @booking.venue.user.nil? %>
-              <p><strong>N/A</strong></p>
-            <% else %>
-              <p><strong><%= link_to "#{@booking.venue.user.full_name}", user_path(@booking.venue.user) %></strong></p>
-            <% end %>
-          </div>
+        <div class="d-flex justify-content-between mb-3 mt-3">
+          <p class="text-left">Host:</p>
+          <% if @booking.venue.user.nil? %>
+          <p><strong>N/A</strong></p>
+          <% else %>
+          <p><strong><%= link_to "#{@booking.venue.user.full_name}", user_path(@booking.venue.user) %></strong></p>
+          <% end %>
+        </div>
         <% else %>
-          <div class="d-flex justify-content-between mb-3 mt-3">
-            <p class="text-left">User:</p>
-            <% if @booking.user.nil? %>
-              <p><strong>N/A</strong></p>
-            <% else %>
-              <p><strong><%= link_to "#{@booking.user.full_name}", user_path(@booking.user) %></strong></p>
-            <% end %>
-          </div>
+        <div class="d-flex justify-content-between mb-3 mt-3">
+          <p class="text-left">User:</p>
+          <% if @booking.user.nil? %>
+          <p><strong>N/A</strong></p>
+          <% else %>
+          <p><strong><%= link_to "#{@booking.user.full_name}", user_path(@booking.user) %></strong></p>
+          <% end %>
+        </div>
         <% end %>
         
         <div class="d-flex justify-content-between mb-3">
@@ -135,9 +135,9 @@
           <p><strong><%= humanized_money_with_symbol(@booking.amount) %></strong></p>
         </div>
         <% if @booking.status == "pending" && @booking.venue.user != current_user %>
-          <div class="d-flex justify-content-center mb-3">
-            <%= link_to "Pay your reservation", new_booking_payment_path(@booking), class:"btn btn-primary" %>
-          </div>          
+        <div class="d-flex justify-content-center mb-3">
+          <%= link_to "Pay your reservation", new_booking_payment_path(@booking), class:"btn btn-primary" %>
+        </div>
         <% end %>
       </div>
     </div>
@@ -145,3 +145,31 @@
 </div>
 <br>
 <br>
+<div id="chatbox" class="fixed-bottom-right rounded-top">
+  <div class="row chatbox-header justify-content-between align-items-center m-0" id="chat-toggle">
+    <div class="col-2"><i class="fas fa-comments"></i></div>
+    <div class="col-8 h6 m-0 text-center">
+      <% if current_user == @booking.user %>
+        Chat with <%= @booking.venue.user.full_name %>
+        <% else %>
+        Chat with <%= @booking.user.full_name %>
+      <% end %>
+    </div>
+    <div class="col-2" id="chatbox-status"><i class="fas fa-chevron-circle-up"></i></div>
+  </div>
+  <div class="d-flex flex-column" id="chat-content">
+    <div class="messages flex-grow-1" data-id="<%= @chat_box.id %>" data-user-id="<%= current_user.id %>">
+      <% @chat_box.messages.each do |message| %>
+      <%= render "messages/message", message: message, user_is_messages_author: message.user == current_user %>
+      <% end %>
+    </div>
+    <div class="m-0" id="create-message">
+      <%= simple_form_for [ @chat_box, Message.new ], remote: true, html: { autocomplete: "off" } do |f| %>
+        <div class="d-flex">
+          <%= f.input :content, as: :text, label: false %>
+          <%= f.submit "submit", class: "btn btn-secondary ml-2", id: "submit-btn" %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>

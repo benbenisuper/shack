@@ -4,6 +4,7 @@ class Booking < ApplicationRecord
   monetize :amount_cents
 
   has_many :reviews, as: :reviewable
+  has_one :chat_box
 
   validates :start_date, presence: true
   validates :end_date, presence: true
