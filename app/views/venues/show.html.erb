@@ -17,7 +17,7 @@
 
       <div class="col shadow p-3 bg-white rounded">
         <div class="title-container border-bottom d-flex justify-content-between">
-          <h4 class="">Venue Details</h4>
+          <h4 class="text-align-center">Venue Details</h4>
           <% if @venue.user == current_user %>
             <div class="col-md-2">
               <a href="#" class="btn btn-block mb-3" data-toggle="modal" data-target="#pagofacilModal">
@@ -30,7 +30,10 @@
           <% end %>
         </div>
         
-        <h5 class="mt-4">Description</h5>
+        <div class="d-flex justify-content-between">
+          <h5 class="mt-4">Description</h5>
+          <div class="d-flex mt-4"><div class="perk-svg mr-2 py-auto"><%= cl_image_tag "coin" %></div><strong class="mr-2">Price: </strong><span class="font-weight-bolder"><%= humanized_money_with_symbol(@venue.price) %> / day</span></div>
+        </div>
         <%= @venue.description %>
         <h5 class="mt-4">Additional information</h5>
         <div class="perks">
@@ -39,7 +42,7 @@
           <div class="d-flex"><div class="perk-svg mr-2 py-auto"><%= cl_image_tag "measure" %></div><strong class="mr-2">Total Area: </strong><%= @venue.venue_spec.total_area %> m2</div>
           <div class="d-flex"><div class="perk-svg mr-2 py-auto"><%= cl_image_tag "bathtub" %></div><strong class="mr-2">Bathrooms: </strong><%= @venue.venue_spec.bathrooms %></div>
           <div class="d-flex"><div class="perk-svg mr-2 py-auto"><%= cl_image_tag "garage" %></div><strong class="mr-2">Garage Spaces: </strong><%= @venue.venue_spec.garage_spaces %></div>
-          <div class="d-flex"><div class="perk-svg mr-2 py-auto"><%= cl_image_tag "coin" %></div><strong class="mr-2">Price / day: </strong><%= humanized_money_with_symbol(@venue.price) %></div>
+          
         </div>
         <h5 class="mt-4">Perks</h5>
         <div class="perks mt-3">

@@ -33,7 +33,13 @@ Rails.application.routes.draw do
     resources :payments, only: :new
   end
 
+  resources :chat_box, only: :show do
+    resources :messages, only: [:create]
+  end
+
   resources :membership
 
   get 'dashboard', to: 'pages#dashboard', as: 'dashboard'
+
+  mount ActionCable.server => "/cable"
 end

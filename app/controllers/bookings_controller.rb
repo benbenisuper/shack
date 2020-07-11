@@ -66,6 +66,9 @@ class BookingsController < ApplicationController
     @perks = @booking.venue.perks.split(", ")
     authorize @booking
     @booking.amount = @booking.venue.price * ((@booking.end_date.day() - @booking.start_date.day()).to_i + 1)
+    @chat_box = @booking.chat_box
+    authorize @chat_box
+    session[:previous_request_url] = session[:current_request_url]
     if current_user == @booking.user
       if @booking.is_commented?
         @review = Review.find_by(booking_id: @booking.id.to_i, reviewable_type: "Booking")
