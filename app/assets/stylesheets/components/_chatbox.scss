@@ -17,6 +17,7 @@
 }
 
 #chatbox {
+  z-index: 2000;
   height: content;
   background-color: #FFF;
   box-shadow: 0 0 1.25rem rgba(31, 45, 61, 0.05);
