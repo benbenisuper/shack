@@ -14,6 +14,7 @@ class BookingsController < ApplicationController
     amount = venue.price * ((end_date.to_date - start_date.to_date).to_i + 1)
     booking  = Booking.create!(venue: venue, amount: amount, start_date: start_date, end_date: end_date, venue_sku: venue.sku, status: 'pending', user: current_user)
     authorize booking
+    ChatBox.create!(booking: booking)
     session = Stripe::Checkout::Session.create(
       payment_method_types: ['card'],
       line_items: [{
