@@ -169,7 +169,7 @@
       <%= simple_form_for [ @chat_box, Message.new ], remote: true, html: { autocomplete: "off" } do |f| %>
         <div class="d-flex">
           <%= f.input :content, as: :text, label: false %>
-          <%= f.submit "submit", class: "btn btn-secondary ml-2", id: "submit-btn" %>
+          <%= f.submit "Send", class: "btn btn-secondary ml-2", id: "submit-btn" %>
         </div>
       <% end %>
     </div>
