@@ -19,6 +19,7 @@ const initChatbox = () => {
 	if (textArea) {
 		$('#message_content').keypress(function(e){
 			if(e.which == 13){
+				e.preventDefault();
 				submitBtn.click();
 			}
 		});

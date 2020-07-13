@@ -7,12 +7,14 @@
 }
 
 #chat-content {
+  display: none !important;
 	height: 0px;
 	width: 350px;
 	transition: height 0.2s ease;
 
 	&.active {
 		height: 500px;
+    display: flex !important;
 	}
 }
 
