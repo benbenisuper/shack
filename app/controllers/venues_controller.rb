@@ -13,7 +13,11 @@ class VenuesController < ApplicationController
 
   def create
     @venue = Venue.new(venue_params)
-    @venue.perks = params.require(:venue)[:perks][0..-1].join(', ')
+    if params.require(:venue)[:perks].nil?
+      @venue.perks = []
+    else
+      @venue.perks = params.require(:venue)[:perks][0..-1].join(', ')
+    end
     authorize @venue
 
     @venue.build_venue_spec(venue_spec_params)

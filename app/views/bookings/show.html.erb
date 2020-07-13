@@ -24,7 +24,7 @@
         <div class="perks mt-3">
           <% @perks.each do |perk| %>
           <div class="d-flex perk-container">
-            <i class="fas fa-<%= Venue.perk_icon(perk) %> mr-3 my-auto"></i>
+            <i class="<%= Venue.perk_icon(perk) %> mr-3 my-auto"></i>
             <strong><%= perk %></strong><br>
           </div>
           <% end %>
