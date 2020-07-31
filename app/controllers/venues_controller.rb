@@ -25,6 +25,7 @@ class VenuesController < ApplicationController
     @user = current_user
     @venue.user = @user
     @venue.sku = @venue.name
+    
 
     if @venue.save
       redirect_to dashboard_path
@@ -63,10 +64,20 @@ class VenuesController < ApplicationController
   end
 
   def show
+
     @venue = Venue.find(params[:id])
     @booking = @venue.bookings.build
     @perks = @venue.perks.split(", ")
     authorize @venue
+
+    @weekdays = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"]
+    @months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
+    init_month = Date.today.month
+    init_year = Date.today.year
+    @calendar = @venue.calendar
+    @calendar_days = @calendar.calendar_days_for_month(init_year, init_month)
+    @day_colors = @calendar.days_of_this_month(init_year, init_month)
+
     @bookings = Booking.where(venue_id: @venue.id.to_i)
     @reviews = []
     @bookings.each do |booking|
@@ -99,14 +110,62 @@ class VenuesController < ApplicationController
   def update
     @venue = Venue.find(params[:id])
     authorize @venue
-    @venue.perks = params.require(:venue)[:perks][1..-1].join(', ')
-    @venue.venue_spec.update(venue_spec_params)
-    
-    if @venue.update(venue_params)
-      redirect_to venue_path(@venue)
+    if params[:day].present?
+      calendar = Calendar.find(params[:day][:calendar])
+      option = JSON.parse(params[:day][:option])
+      day_price = params[:day][:day_price]
+      hour_price = params[:day][:hour_price]
+      month = params[:day][:month]
+      year = params[:day][:year]
+      type = option["type"]
+      value = option["value"]
+      case type
+      when "day"
+        unless day_price == ""
+          calendar.update_day_price_for_date(value, day_price.to_i)
+        end
+        unless hour_price == ""
+          calendar.update_hour_price_for_date(value, hour_price.to_i)
+        end
+      when "weekday"
+        unless day_price == ""
+          calendar.update_day_price_for_wday_of_month(month, value, day_price.to_i)
+        end
+        unless hour_price == ""
+          calendar.update_hour_price_for_wday_of_month(month, value, hour_price.to_i)
+        end
+      when "weeknum"
+        unless day_price == ""
+          calendar.update_day_price_for_wnum_of_year(year, value, day_price.to_i)
+        end
+        unless hour_price == ""
+          calendar.update_hour_price_for_wnum_of_year(year, value, hour_price.to_i)
+        end
+      when "month"
+        unless day_price == ""
+          calendar.update_day_price_for_month(value, day_price.to_i)
+        end
+        unless hour_price == ""
+          calendar.update_hour_price_for_month(value, hour_price.to_i)
+        end
+      end
     else
-      render :new
+      @venue.perks = params.require(:venue)[:perks][1..-1].join(', ')
+      @venue.venue_spec.update(venue_spec_params)
     end
+
+    respond_to do |format|
+      if params[:day].present?
+        format.html { redirect_to venue_path(@venue) }
+      else
+        if @venue.update(venue_params)
+          format.html { redirect_to venue_path(@venue) }
+        else
+          format.html { redirect_to :new }
+        end
+      end
+    end
+
   end
 
   private

@@ -1,0 +1,97 @@
+#venue-calendar {
+	display: grid;
+	grid-template-rows: 1fr 1fr 1fr 1fr 1fr 1fr;
+	grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+	grid-gap: 1px;
+}
+
+#venue-times {
+	display: none;
+
+	&.active {
+		display: grid;
+		grid-template-rows: 1fr 1fr 1fr 1fr;
+		grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
+		grid-row-gap: 10px;
+		grid-column-gap: 5px;
+	}
+	
+}
+
+.hour {
+	border: 1px orange solid;
+	color: rgba(0,0,0,1);
+	background-color: rgba(0,0,0,0.15);
+	cursor: pointer;
+
+	&:not(.disabled):hover {
+		box-shadow: 0 0 5px rgba(0,0,0,0.3);
+		background-color: rgba(255,255,255,1);
+	}
+
+	&.disabled {
+		border: 1px rgba(0,0,0,0.1) solid;
+		color: rgba(0,0,0,0.2);
+		background-color: rgba(0,0,0,0);
+		cursor: not-allowed;
+	}
+
+	&.active {
+		box-shadow: 0 0 5px rgba(0,0,0,0.3);
+		background-color: rgba(255,255,255,1);
+	}
+}
+
+#next-month, #previous-month {
+	cursor: pointer;
+}
+
+.day {
+
+	border: 1px orange solid;
+	color: rgba(0,0,0,1);
+	background-color: rgba(0,0,0,0.15);
+	cursor: pointer;
+	transition-duration: 0.01s;
+  	transition-property: transform;
+
+	&:not(.disabled):hover {
+		// box-shadow: 0 0 5px rgba(255,0,0,1);
+		box-shadow: 0 0 5px rgba(0,0,0,1);
+		background-color: rgba(255,255,255,1);
+		transform: scale(1.1);
+	}
+
+	&.disabled {
+		border: 1px rgba(0,0,0,0.1) solid;
+		color: rgba(0,0,0,0.2);
+		background-color: rgba(0,0,0,0);
+		cursor: not-allowed;
+	}
+
+	&.active {
+		box-shadow: 0 0 5px rgba(0,0,0,1);
+		background-color: rgba(255,255,255,1);
+		transform: scale(1.1);
+	}
+}
+
+#day-form {
+	display: none;
+	position: sticky;
+	top: calc(101.19px + 433.66px + 16px);
+
+	&.active {
+		display: block;
+	}
+}
+
+#booking-form {
+	display: none;
+	position: sticky;
+	top: calc(101.19px + 433.66px + 60px);
+
+	&.active {
+		display: flex;
+	}
+}

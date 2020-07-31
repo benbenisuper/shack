@@ -12,6 +12,53 @@ object-fit: cover;
 #start {
   display: none;
 }
+#end {
+  display: none;
+}
+
+.booking_start_date {
+	opacity: 1;
+	transition: opacity 0.5s linear;
+	&.hide {
+		display: none;
+	}
+
+	&.transition {
+		opacity: 0;
+
+	}
+}
+
+#to_calendar_start {
+	display: none;
+	&.active {
+		display: block;
+	}
+}
+
+#to_calendar_end {
+	display: none;
+	&.active {
+		display: block;
+	}
+}
+
+.calendar-btn {
+	cursor: pointer;
+}
+
+.booking_end_date {
+	opacity: 0;
+	transition: opacity 0.5s linear;
+	&.active {
+		display: block;
+	}
+	&.transition {
+		opacity: 1;
+
+	}
+	display: none;
+}
 
 .perks {
 	display: grid;
@@ -80,4 +127,9 @@ object-fit: cover;
 	width: 100% !important;
 }
 
-
+.only-rounded-left {
+	border-top-right-radius: 0 !important;
+    border-bottom-right-radius: 0 !important;
+	border-top-left-radius: 0.375rem !important;
+    border-bottom-left-radius: 0.375rem !important;
+}

@@ -15,6 +15,8 @@
         <%= render "show_map" %>
       </div>
 
+      <div class="shadow p-3 mb-3 bg-white rounded" id="venue-times" data-stage="0"></div>
+
       <div class="col shadow p-3 bg-white rounded">
         <div class="title-container border-bottom d-flex justify-content-between">
           <h4 class="text-align-center">Venue Details</h4>
@@ -32,7 +34,14 @@
         
         <div class="d-flex justify-content-between">
           <h5 class="mt-4">Description</h5>
-          <div class="d-flex mt-4"><div class="perk-svg mr-2 py-auto"><%= cl_image_tag "coin" %></div><strong class="mr-2">Price: </strong><span class="font-weight-bolder"><%= humanized_money_with_symbol(@venue.price) %> / day</span></div>
+          <div class="d-flex mt-4">
+            <div class="perk-svg mr-2 py-auto"><%= cl_image_tag "coin" %></div>
+            <strong class="mr-2">Price: </strong>
+            <span class="d-flex flex-column">
+              <span class="font-weight-bolder"><%= humanized_money_with_symbol(@venue.calendar.average_day_price_cents / 100) %> / day</span>
+              <span class="font-weight-bolder"><%= humanized_money_with_symbol(@venue.calendar.average_hour_price_cents / 100) %> / hour</span>
+            </span>
+        </div>
         </div>
         <%= @venue.description %>
         <h5 class="mt-4">Additional information</h5>
@@ -59,7 +68,7 @@
       <% end %>
 
 
-      <div class="col shadow p-3 mt-3 bg-white rounded">
+      <div class="col shadow p-3 mt-3 bg-white rounded mb-3">
         <h4 class="border-bottom">Reviews</h4>
 
         <% if @venue.reviews.empty? %>
@@ -88,13 +97,48 @@
           <h4>Reserved Dates</h4>
           <% else %>
           <h4>Reserve now!</h4>
-          <p>Make your reservation today</p>
+          <p id="calendar-message">When will the event start?</p>
           <% end %>
-          <div class="d-flex justify-content-center">
-           <%= render "bookings/form", venue: @venue %>
-          </div>
+          <div id="to_calendar_start" class="calendar-btn ml-1 mb-2"><i class="fas fa-undo"></i> start date</div>
+          <% if current_user == @venue.user %>
+            <div id="calendar-wrapper">
+              <%= render "calendar", type: "host", calendar: @calendar, day_colors: @day_colors, days: @calendar_days, weekdays: @weekdays %>
+            </div>
+          <% else %>
+            <div id="calendar-wrapper">
+              <%= render "calendar", type: "guest", calendar: @calendar, day_colors: @day_colors, days: @calendar_days, weekdays: @weekdays %>
+            </div><!-- 
+            <div class="d-flex justify-content-center">
+              <%#= render "bookings/form", venue: @venue %>
+            </div> -->
+          <% end %>
+
         </div>
       </div>
+      <% if @venue.user == current_user %>
+        <div id="day-form" class="col shadow p-3 bg-white rounded mt-3"></div>
+      <% else %>
+        <div id="booking-form" class="col shadow p-3 bg-white rounded mt-3 flex-column">
+          <div id="start-date" class="mb-2"></div>
+          <div id="end-date" class="mb-2"></div>
+          <div id="total-hours" class="mb-2"></div>
+          <div class="d-flex justify-content-between border-top pt-3">
+            <span>Total Price:</span>
+            <span id="total-price" class=""></span>
+          </div>
+          <%= simple_form_for @booking do |f| %>
+            <%= f.input :venue_id, as: :hidden, input_html: { value: @booking.venue.nil? ? 0 : @booking.venue.id } %>
+            <%= f.input :start_date, as: :hidden %>
+            <%= f.input :end_date, as: :hidden %>
+            <%= simple_fields_for :price do |p| %>
+              <%= f.input :amount, as: :hidden %>
+            <% end %>
+            <div class="d-flex">
+              <%= f.submit "Book", class: "btn btn-secondary ml-auto" %>
+            </div>
+          <% end %>
+        </div>
+      <% end %>
     </div>
 
   </div>

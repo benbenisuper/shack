@@ -10,8 +10,14 @@
 
 puts("Destroying all Reviews")
 Review.delete_all
+puts("Destroying all ChatBoxes")
+ChatBox.delete_all
 puts("Destroying all Bookings")
 Booking.delete_all
+puts("Destroying all Days")
+Day.delete_all
+puts("Destroying all Calendars")
+Calendar.delete_all
 puts("Destroying all Venue Specs")
 VenueSpec.delete_all
 puts("Destroying all Venues")
@@ -71,3 +77,26 @@ booking_1.save
 # Venue.all.each do |venue|
 # 	spec = VenueSpec.create!(venue: venue) unless venue.venue_spec
 # end
+
+# Venue.all.each do |venue|
+# 	venue.photos.attach(io: URI.open("https://res.cloudinary.com/mhoare/image/upload/v1582654608/defaultEventImage.jpg"),
+# 	filename: "defaultEventImage.jpg",
+# 	content_type: "image/jpg") if venue.photos.count.zero?
+# end
+
+# CEATE CALENDARS FOR VENUES
+
+# Venue.all.select{|venue| venue.calendar == nil }.each do |venue|
+# 	Calendar.create!(
+# 		venue: venue, 
+#       hour_price_cents: venue.price_cents / 24, 
+#       day_price_cents: venue.price_cents, 
+#       min_time: "00:00",
+#       max_time: "23:59",
+#       day_discount: "0.2")
+# end
+
+# Venue.all.each do |venue|
+# 	timezone = Timezone.lookup(venue.latitude, venue.longitude)
+# 	venue.update(zone: timezone.name)
+# 	end
