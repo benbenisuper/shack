@@ -319,11 +319,11 @@ const initCalendar = () => {
 							const amount = totalHours * Number(venueTimes.dataset.hourPrice)
 
 
-							document.getElementById('end-date').insertAdjacentHTML('afterbegin', `<span> To: ${endDate}</span>`)
+							document.getElementById('end-date').insertAdjacentHTML('beforeend', `<span>${endDate}</span>`)
 							document.getElementById('booking_end_date').value = endDate
 							document.getElementById('booking_amount').value = amount
-							document.getElementById('total-hours').insertAdjacentHTML('afterbegin', `<span> Total Hours:  ${totalHours} hs</span>`)
-							document.getElementById('total-price').insertAdjacentHTML('afterbegin', `<span>CHF ${amount}</span>`)
+							document.getElementById('total-hours').insertAdjacentHTML('beforeend', `<span>${totalHours} hs</span>`)
+							document.getElementById('total-price').insertAdjacentHTML('beforeend', `<span>CHF ${amount}</span>`)
 							
 						}
 					}
@@ -352,7 +352,7 @@ const initCalendar = () => {
 							const startDate = `${venueTimes.dataset.day}/${venueTimes.dataset.month}/${venueTimes.dataset.year} at ${div.innerText} hs`
 							const startValue = `${venueTimes.dataset.month}/${venueTimes.dataset.day}/${venueTimes.dataset.year} ${div.innerText}`
 							
-							document.getElementById('start-date').insertAdjacentHTML('afterbegin', `<span> From: ${startDate}</span>`)
+							document.getElementById('start-date').insertAdjacentHTML('beforeend', `<span>${startDate}</span>`)
 							document.getElementById('booking_start_date').value = startDate
 							bookingForm.dataset.startValue = startValue
 

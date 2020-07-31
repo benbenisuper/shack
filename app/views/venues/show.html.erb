@@ -119,9 +119,9 @@
         <div id="day-form" class="col shadow p-3 bg-white rounded mt-3" data-venue-id="<%= @venue.id %>"></div>
       <% else %>
         <div id="booking-form" class="col shadow p-3 bg-white rounded mt-3 flex-column">
-          <div id="start-date" class="mb-2"></div>
-          <div id="end-date" class="mb-2"></div>
-          <div id="total-hours" class="mb-2"></div>
+          <div id="start-date" class="mb-2 d-flex justify-content-between"><span>From: </span></div>
+          <div id="end-date" class="mb-2 d-flex justify-content-between"><span>To: </span></div>
+          <div id="total-hours" class="mb-2 d-flex justify-content-between"><span>N° of Hours: </span></div>
           <div class="d-flex justify-content-between border-top pt-3">
             <span>Total Price:</span>
             <span id="total-price" class=""></span>
