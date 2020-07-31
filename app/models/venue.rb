@@ -1,10 +1,13 @@
+require 'open-uri'
+
 class Venue < ApplicationRecord
   CATEGORIES = ["All Categories", "Private House", "Restaurant", "Bar", "Theatre", "Outdoor", "Castle", "Workshop"]
   ACTIVITIES = ["All Activities", "Wedding", "Dinner", "Work Meeting", "Show", "Music", "Art Display", "Workshop"]
   PERKS = ["Internet", "Parking", "Air Conditioning", "Heating", "Security", "Kitchen", "Catering", "Handicap Friendly"]
   geocoded_by :location
   belongs_to :user
-  has_one :venue_spec, :dependent => :destroy
+  has_one :venue_spec, dependent: :destroy
+  has_one :calendar, dependent: :destroy
   accepts_nested_attributes_for :venue_spec
   has_many :bookings, dependent: :nullify
   has_many :reviews, through: :bookings
@@ -20,6 +23,28 @@ class Venue < ApplicationRecord
   validates :price, presence: :true
 
   after_validation :geocode, if: :will_save_change_to_location?
+  after_create :attach_default_photo, :update_zone, :create_calendar
+
+  def create_calendar
+    calendar = Calendar.create!(
+      venue: self, 
+      hour_price_cents: self.price_cents / 24, 
+      day_price_cents: self.price_cents, 
+      min_time: "00:00",
+      max_time: "23:59",
+      day_discount: "0.2")
+  end
+
+  def update_zone
+    timezone = Timezone.lookup(self.latitude, self.longitude)
+    self.update(zone: timezone.name)
+  end
+
+  def attach_default_photo
+    self.photos.attach(io: URI.open("https://res.cloudinary.com/mhoare/image/upload/v1582654608/defaultEventImage.jpg"),
+      filename: "defaultEventImage.jpg",
+      content_type: "image/jpg") if self.photos.count.zero?
+  end
 
   def average_rating
     sum = 0
@@ -37,7 +62,7 @@ class Venue < ApplicationRecord
 
   def unavailable_dates
 
-      bookings.pluck(:start_date, :end_date).map do |range|
+      bookings.where(status: "approved").pluck(:start_date, :end_date).map do |range|
         { from: range[0], to: range[1] }
 
     end

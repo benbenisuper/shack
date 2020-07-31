@@ -9,12 +9,12 @@ class BookingsController < ApplicationController
 
   def create
     venue = Venue.find(params[:booking][:venue_id])
-    start_date = params[:booking][:start_date]
-    end_date = params[:booking][:end_date]
-    amount = venue.price * ((end_date.to_date - start_date.to_date).to_i + 1)
+    start_date = ActiveSupport::TimeZone[venue.zone].parse(params[:booking][:start_date])
+    end_date = ActiveSupport::TimeZone[venue.zone].parse(params[:booking][:end_date])
+    amount = params[:booking][:amount].to_f
+    hours = (end_date - start_date) / 3600
     booking  = Booking.create!(venue: venue, amount: amount, start_date: start_date, end_date: end_date, venue_sku: venue.sku, status: 'pending', user: current_user)
     authorize booking
-    ChatBox.create!(booking: booking)
     session = Stripe::Checkout::Session.create(
       payment_method_types: ['card'],
       line_items: [{
@@ -66,7 +66,6 @@ class BookingsController < ApplicationController
     @booking = Booking.find(params[:id])
     @perks = @booking.venue.perks.split(", ")
     authorize @booking
-    @booking.amount = @booking.venue.price * ((@booking.end_date.day() - @booking.start_date.day()).to_i + 1)
     @chat_box = @booking.chat_box
     session[:previous_request_url] = session[:current_request_url]
     if current_user == @booking.user
@@ -115,7 +114,7 @@ class BookingsController < ApplicationController
     if session[:return_to].nil?
       redirect_to dashboard_path
     else
-      redirect_to session.delete(:return_to)
+      redirect_to venue_path(@booking.venue)
     end
   end
 

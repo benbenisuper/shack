@@ -18,6 +18,7 @@ gem 'webpacker'
 gem 'cloudinary', '~> 1.12.0'
 gem 'pundit'
 gem 'geocoder'
+gem 'timezone', '~> 1.0'
 gem 'activeadmin'
 gem "activesupport", ">= 6.0.3.1"
 gem "actionpack", ">= 6.0.3.1"

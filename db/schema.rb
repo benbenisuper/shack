@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_07_10_175024) do
+ActiveRecord::Schema.define(version: 2020_07_30_224803) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -77,12 +77,45 @@ ActiveRecord::Schema.define(version: 2020_07_10_175024) do
     t.index ["venue_id"], name: "index_bookings_on_venue_id"
   end
 
+  create_table "calendars", force: :cascade do |t|
+    t.bigint "venue_id", null: false
+    t.integer "hour_price_cents", default: 0, null: false
+    t.string "hour_price_currency", default: "CHF", null: false
+    t.integer "day_price_cents", default: 0, null: false
+    t.string "day_price_currency", default: "CHF", null: false
+    t.string "min_time"
+    t.string "max_time"
+    t.string "day_discount"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["venue_id"], name: "index_calendars_on_venue_id"
+  end
+
   create_table "chat_boxes", force: :cascade do |t|
     t.string "name"
     t.bigint "booking_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["booking_id"], name: "index_chat_boxes_on_booking_id"
+  end
+
+  create_table "days", force: :cascade do |t|
+    t.bigint "calendar_id", null: false
+    t.integer "month"
+    t.integer "year"
+    t.integer "wday"
+    t.integer "hour_price_cents", default: 0, null: false
+    t.string "hour_price_currency", default: "CHF", null: false
+    t.integer "day_price_cents", default: 0, null: false
+    t.string "day_price_currency", default: "CHF", null: false
+    t.string "min_time"
+    t.string "max_time"
+    t.datetime "date"
+    t.integer "day"
+    t.integer "wnum"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["calendar_id"], name: "index_days_on_calendar_id"
   end
 
   create_table "messages", force: :cascade do |t|
@@ -161,13 +194,16 @@ ActiveRecord::Schema.define(version: 2020_07_10_175024) do
     t.string "perks"
     t.integer "price_cents", default: 0, null: false
     t.string "sku"
+    t.string "zone"
     t.index ["user_id"], name: "index_venues_on_user_id"
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "bookings", "users"
   add_foreign_key "bookings", "venues"
+  add_foreign_key "calendars", "venues"
   add_foreign_key "chat_boxes", "bookings"
+  add_foreign_key "days", "calendars"
   add_foreign_key "messages", "chat_boxes"
   add_foreign_key "messages", "users"
   add_foreign_key "reviews", "bookings"

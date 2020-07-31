@@ -11,6 +11,8 @@ class Booking < ApplicationRecord
 
   enum status: [:pending, :cancelled, :approved, :ongoing, :finished, :deleted]
 
+  after_create :create_chat_box
+
   def is_completed?
     (Date.today - 3) > self.end_date
   end
@@ -45,8 +47,29 @@ class Booking < ApplicationRecord
     return text
   end
 
+  def hours
+    hours = (self.end_date - self.start_date) / 3600
+    return hours.to_i
+  end
+
+  def local_start_date
+    timezone = ActiveSupport::TimeZone[self.venue.zone]
+    return timezone.parse("#{self.start_date}")
+  end
+
+  def local_end_date
+    timezone = ActiveSupport::TimeZone[self.venue.zone]
+    return timezone.parse("#{self.end_date}")
+  end
+
   def update_status
     self.status = "finished" if is_completed?
     self.save
+  end
+
+  private
+
+  def create_chat_box
+    ChatBox.create!(booking: self)
   end
 end

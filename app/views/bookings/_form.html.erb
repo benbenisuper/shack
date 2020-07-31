@@ -1,15 +1,13 @@
-<% if @booking.venue.nil? %>
 
-<% else %>
-  <div id='venue-booking-dates' class="form-wrapper" data-unavailable="<%= @venue&.unavailable_dates.to_json %>" style="margin: 0 auto;">
-    <%= simple_form_for [@booking] do |f| %>
-    <%= f.input :start_date, as: :hidden, input_html: {id:"start", class: "datepicker"} %>
-    <%= f.input :end_date, as: :hidden, input_html: {id:"end", class: "datepicker"} %>
-    <%= f.input :venue_id, as: :hidden, input_html: { value: @booking.venue.nil? ? 0 : @booking.venue.id } %>
-    <% if @venue.user != current_user %>
-	    <%= f.submit "Start Booking", class: "btn btn-secondary", style: "width: 100%", id: "booking-start-btn", disabled: true%>
-    <% end %>
+    <% unless @booking.venue.nil? %>
+      <div id='venue-booking-dates' class="form-wrapper" data-unavailable="<%= @venue&.unavailable_dates.to_json %>" style="margin: 0 auto;">
+        <%= simple_form_for [@booking] do |f| %>
+        <%= f.input :start_date, as: :hidden, input_html: {id:"start", class: "datepicker"} %>
+        <%= f.input :end_date, as: :hidden, input_html: {id:"end", class: "datepicker"} %>
+        <%= f.input :venue_id, as: :hidden, input_html: { value: @booking.venue.nil? ? 0 : @booking.venue.id } %>
+        <div id="to_calendar_end" class="calendar-btn text-right mb-3">pick end date <i class="fas fa-arrow-right"></i></div>
+    	    <%= f.submit "Start Booking", class: "btn btn-secondary", style: "width: 100%", id: "booking-start-btn", disabled: true%>
 
+        <% end %>
+      </div>
     <% end %>
-  </div>
-<% end %>

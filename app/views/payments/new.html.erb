@@ -9,12 +9,12 @@
         <div class="col">
           <h1>Checkout summary</h1>
           <p>Booking of <strong><%= @booking.venue.name %></strong></p>
-          <p>From: <strong class="mr-4"><%= @booking.start_date.to_datetime.strftime("%B %d, %Y") %></strong>To: <strong><%= @booking.end_date.to_datetime.strftime("%B %d, %Y") %></strong></p>
+          <p>From: <strong class="mr-4"><%= @booking.local_start_date.strftime("%B %d, %Y at %k:%M") %></strong>To: <strong><%= @booking.local_end_date.strftime("%B %d, %Y at %k:%M") %></strong></p>
           <% if @booking.venue.nil? %>
-            <p class='text-left'>Price per day: <strong> Data is no longer available.</strong></p>
+            <p class='text-left'>Price per hour: <strong> Data is no longer available.</strong></p>
             <p class='text-left'>Total price:  <strong> N/A </strong></p>
           <% else %>
-            <p class='text-left'>Price per day: <strong><%= humanized_money_with_symbol @booking.venue.price %></strong></p>
+            <p class='text-left'>Price per hour: <strong><%= humanized_money_with_symbol @booking.venue.price / 24 %></strong></p>
             <p class='text-left'>Total price:  <strong><%= humanized_money_with_symbol @booking.amount %></strong></p>
           <% end %>
           <div class="d-flex justify-content-between">
