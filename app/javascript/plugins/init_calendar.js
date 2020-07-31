@@ -174,7 +174,7 @@ const initCalendar = () => {
 						if (dayForm) {
 							dayForm.innerHTML = `
 						<div class="wrapper">
-							<form novalidate="novalidate" class="simple_form /venues/30" action="/venues/30" accept-charset="UTF-8" data-remote="true" method="post" id="calendar-form">
+							<form novalidate="novalidate" class="simple_form /venues/${dayForm.dataset.venueId}" action="/venues/${dayForm.dataset.venueId}" accept-charset="UTF-8" data-remote="true" method="post" id="calendar-form">
 								<input type="hidden" name="_method" value="patch">
 								<input type="hidden" name="authenticity_token" value="${csrfToken}">
 		              

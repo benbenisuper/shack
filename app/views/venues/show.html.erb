@@ -116,7 +116,7 @@
         </div>
       </div>
       <% if @venue.user == current_user %>
-        <div id="day-form" class="col shadow p-3 bg-white rounded mt-3"></div>
+        <div id="day-form" class="col shadow p-3 bg-white rounded mt-3" data-venue-id="<%= @venue.id %>"></div>
       <% else %>
         <div id="booking-form" class="col shadow p-3 bg-white rounded mt-3 flex-column">
           <div id="start-date" class="mb-2"></div>
