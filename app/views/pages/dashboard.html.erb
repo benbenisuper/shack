@@ -61,7 +61,7 @@
                       <td class="p-0 rounded-left image-container-y" style="">
                         <%= cl_image_tag booking.venue&.venue_image, class: "rounded-left image-centered-y" %>
                       </td>
-                      <td><%= booking.venue.location %></td>
+                      <td ><span class="text-wrap"><%= booking.venue.location %></span></td>
                       <td><%= booking.status %></td>
                       <td><%= booking.start_date.strftime("%B %d, %Y") %></td>
                       <td><%= booking.end_date.strftime("%B %d, %Y") %></td>
