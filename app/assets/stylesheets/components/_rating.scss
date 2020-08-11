@@ -1,0 +1,10 @@
+#rating {
+	display: grid;
+	grid-template-columns: repeat( auto-fill, minmax(20px, 1fr) );
+	grid-gap: 10px;
+	width: 150px;
+
+	.star {
+		z-index: 1000;
+	}
+}
