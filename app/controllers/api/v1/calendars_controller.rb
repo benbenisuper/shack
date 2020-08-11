@@ -1,4 +1,4 @@
-class Api::V1::CalendarsController < ApplicationController
+class Api::V1::CalendarsController < Api::V1::BaseController
   before_action :get_calendar
   skip_before_action :authenticate_user!, only: [:show]
 
