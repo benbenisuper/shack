@@ -1,4 +1,4 @@
-class Api::V1::DaysController < ApplicationController
+class Api::V1::DaysController < Api::V1::BaseController
 	skip_before_action :authenticate_user!, only: [:show]
 	def show
 		@hours = []
