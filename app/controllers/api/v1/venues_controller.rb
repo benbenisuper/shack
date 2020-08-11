@@ -1,5 +1,6 @@
 class Api::V1::VenuesController < Api::V1::BaseController
   before_action :set_venue, only: [ :show ]
+  skip_before_action :authenticate_user!, only: [:index, :show]
 
   def index
     @category = params[:category]

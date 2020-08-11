@@ -1,5 +1,6 @@
 class Api::V1::CalendarsController < ApplicationController
   before_action :get_calendar
+  skip_before_action :authenticate_user!, only: [:show]
 
   def show
   	if params[:year].present? && params[:month].present?
