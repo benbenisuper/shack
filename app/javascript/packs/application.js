@@ -15,6 +15,7 @@ import { initAutocompleteCity } from "../plugins/init_autocomplete";
 import { initChatbox } from "../plugins/init_chatbox";
 import { initCalendar } from "../plugins/init_calendar";
 import { initVenueForm } from "../plugins/init_venue_form";
+import { initStarRating } from "../plugins/init_star_rating";
 import { scrollLastMessageIntoView } from '../components/scroll';
 import "../plugins/input-spinner";
 
@@ -26,6 +27,7 @@ initMapbox();
 initChatbox();
 initCalendar();
 initVenueForm();
+initStarRating();
 
 
   $('[data-toggle="popper"]').popover({

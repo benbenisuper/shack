@@ -2,7 +2,13 @@
   <%= simple_form_for Review.new do |f| %>
   <%= f.input :booking_id, as: :hidden, input_html: { value: @booking.id } %>
   <%= f.input :title, as: :string, required: true %>
-  <%= f.input :rating, as: :integer, required: true %>
+  <span class="">Rating <abbr title="required">*</abbr></span>
+  <div id="rating" class="mt-2">
+  	<% 5.times do |star| %>
+  		<i class="far fa-star star" style="font-size: 20px;" data-stars="<%= star + 1 %>"></i>
+  	<% end %>
+  </div>
+  <%= f.input :rating, as: :hidden, required: true %>
   <%= f.input :comment, as: :text, required: true %>
   <%= f.submit "Submit Review", class: "btn btn-secondary", style: "width: 100%" %>
   <% end %>

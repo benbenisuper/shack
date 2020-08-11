@@ -4,7 +4,7 @@ class Booking < ApplicationRecord
   monetize :amount_cents
 
   has_many :reviews, as: :reviewable
-  has_one :chat_box
+  has_one :chat_box, dependent: :destroy
 
   validates :start_date, presence: true
   validates :end_date, presence: true
@@ -65,6 +65,23 @@ class Booking < ApplicationRecord
   def update_status
     self.status = "finished" if is_completed?
     self.save
+  end
+
+  def booking_status_icon
+    case self.status
+    when "pending"
+      "far fa-credit-card"
+    when "approved"
+      "far fa-thumbs-up"
+    when "cancelled"
+      "fas fa-ban"
+    when "ongoing"
+      "fas fa-ban"
+    when "finished"
+      "far fa-calendar-check"
+    when "deleted"
+      "fas fa-trash-alt"
+    end
   end
 
   private

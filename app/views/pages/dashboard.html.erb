@@ -49,9 +49,10 @@
                       <th></th>
                       <th>Address</th>
                       <th>Status</th>
-                      <th>Start Date</th>
-                      <th>End Date</th>
-                      <th scope="col">Acciones</th>
+                      <th>Date</th>
+                      <th>From</th>
+                      <th>To</th>
+                      <th scope="col">Actions</th>
                     </tr>
                   </thead>
 
@@ -62,9 +63,10 @@
                         <%= cl_image_tag booking.venue&.venue_image, class: "rounded-left image-centered-y" %>
                       </td>
                       <td ><span class="text-wrap"><%= booking.venue.location %></span></td>
-                      <td><%= booking.status %></td>
+                      <td><i class="<%= booking.booking_status_icon %>" style="font-size: 20px;"></i></td>
                       <td><%= booking.start_date.strftime("%B %d, %Y") %></td>
-                      <td><%= booking.end_date.strftime("%B %d, %Y") %></td>
+                      <td><%= booking.start_date.strftime("%H:%M") %></td>
+                      <td><%= booking.end_date.strftime("%H:%M") %></td>
           
                       <td class="w-10">
                         <%= link_to booking_path(booking), class: 'btn' do %>
