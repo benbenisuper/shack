@@ -97,6 +97,14 @@ class User < ApplicationRecord
   return answer
   end
 
+  def admin
+    answer = false
+    if self.role == "admin"
+      answer = true
+    end
+    return answer
+  end
+
   def full_name
     return "#{first_name.capitalize} #{last_name.capitalize}"
   end
