@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  require "sidekiq/web"
 
   devise_for :admin_users, ActiveAdmin::Devise.config
   ActiveAdmin.routes(self)
@@ -42,6 +43,10 @@ Rails.application.routes.draw do
   resources :membership
 
   get 'dashboard', to: 'pages#dashboard', as: 'dashboard'
+
+  authenticate :user, lambda { |u| u.admin } do
+    mount Sidekiq::Web => '/sidekiq'
+  end
 
   mount ActionCable.server => "/cable"
 end

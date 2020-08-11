@@ -11,7 +11,7 @@ class Booking < ApplicationRecord
 
   enum status: [:pending, :cancelled, :approved, :ongoing, :finished, :deleted]
 
-  after_create :create_chat_box
+  after_create :create_chat_box, :async_cancel
 
   def is_completed?
     (Date.today - 3) > self.end_date
@@ -85,6 +85,10 @@ class Booking < ApplicationRecord
   end
 
   private
+
+  def async_cancel
+    CancelBookingJob.set(wait: 48.hour).perform_later(self.id)
+  end
 
   def create_chat_box
     ChatBox.create!(booking: self)
