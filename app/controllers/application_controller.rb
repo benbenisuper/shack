@@ -1,5 +1,6 @@
 class ApplicationController < ActionController::Base
 	include Pundit
+	before_action :store_user_location!, if: :storable_location?
 	before_action :authenticate_user!
 	protect_from_forgery with: :exception
 	
@@ -24,7 +25,20 @@ class ApplicationController < ActionController::Base
 		redirect_to root_path
 	end
 
+	def after_sign_in_path_for(resource)
+		stored_location_for(resource) || super
+	end
+
 	private
+
+	def storable_location?
+      request.get? && is_navigational_format? && !devise_controller? && !request.xhr? 
+    end
+
+    def store_user_location!
+      # :user is the scope we are authenticating
+      store_location_for(:user, request.fullpath)
+    end
 
 	def skip_pundit?
 		devise_controller? || params[:controller] =~ /(^(rails_)?admin)|(^pages$)/
