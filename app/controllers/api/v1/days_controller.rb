@@ -1,5 +1,5 @@
 class Api::V1::DaysController < Api::V1::BaseController
-	skip_before_action :authenticate_user!, only: [:show]
+	# skip_before_action :authenticate_user!, only: [:show]
 	def show
 		@hours = []
 		@day = Day.find(params[:id])

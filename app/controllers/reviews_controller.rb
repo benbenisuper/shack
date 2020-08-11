@@ -1,6 +1,6 @@
 class ReviewsController < ApplicationController
 	before_action :authenticate_user!
-	skip_before_action :authenticate_user!, only: [:index, :show]
+	# skip_before_action :authenticate_user!, only: [:index, :show]
 
 	def new
 		@review = Review.new
