@@ -96,6 +96,20 @@ const initCalendar = () => {
 				</div>`
 		})
 	}
+	const clearCalendar = (bookingForm, venueTimes, days) => {
+		days.forEach((day) => {
+			day.classList.remove('active')
+		})
+		if (venueTimes) { 
+			venueTimes.classList.remove('active')
+			venueTimes.dataset.stage = 'start'
+		}
+		document.getElementById('start-date').innerHTML = ``
+		document.getElementById('end-date').innerHTML = ``
+		document.getElementById('total-hours').innerHTML = ``
+		document.getElementById('total-price').innerHTML = ``
+		bookingForm.classList.remove('active')
+	}
 
 	const handleMouseover = (event) => {
 		const ableHours = document.querySelectorAll('.hour:not(.disabled)')
@@ -285,9 +299,9 @@ const initCalendar = () => {
 				if (div.classList.contains('day') && !div.classList.contains('disabled') || (event.target.closest('#venue-times') == venueTimes && venueTimes) || (event.target.closest('#booking-form') == bookingForm && bookingForm)) {
 
 					if (div.classList.contains('day')) {
-						days.forEach((day) => {
-							day.classList.remove('active')
-						})
+
+						clearCalendar(bookingForm, venueTimes, days);
+						
 						const csrfToken = document.querySelector('meta[name="csrf-token"]').attributes.content.value;
 						fetchDay(div.id)
 						div.classList.toggle('active')
@@ -360,18 +374,7 @@ const initCalendar = () => {
 					}
 
 				} else {
-					days.forEach((day) => {
-						day.classList.remove('active')
-					})
-					if (venueTimes) { 
-						venueTimes.classList.remove('active')
-						venueTimes.dataset.stage = 'start'
-					}
-					document.getElementById('start-date').innerHTML = ``
-					document.getElementById('end-date').innerHTML = ``
-					document.getElementById('total-hours').innerHTML = ``
-					document.getElementById('total-price').innerHTML = ``
-					bookingForm.classList.remove('active')
+					clearCalendar(bookingForm, venueTimes, days);
 				}
 			}
 		})	
