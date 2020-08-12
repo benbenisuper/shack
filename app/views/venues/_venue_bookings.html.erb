@@ -1,6 +1,6 @@
 <div class="col shadow p-3 bg-white rounded mt-3">
-  <div class="title-container border-bottom d-flex justify-content-between flex-column">
-    <h4 class="">Bookings</h4>
+  <div class="title-container d-flex justify-content-between flex-column">
+    <h4 class="border-bottom">Bookings</h4>
     <% if @venue.bookings.where.not(status: "pending").size < 1 %>
       <p class="text-center">Your venue has no bookings yet</p>
     <% else %>
@@ -19,7 +19,7 @@
         </thead>
 
         <tbody>
-          <% @venue.bookings.where.not(status: "pending").each do |booking| %>
+          <% @venue.upcoming_bookings.each do |booking| %>
             <% if booking.id %>
               <tr class="hover-shadow-lg hover-translate-y-n3">
                 <td>
@@ -33,12 +33,6 @@
                   <%= link_to booking do %>
                     <%= show_svg("icons/external.svg") %>
                     Info
-                  <% end %>
-                </td>
-                <td class="w-10">
-                  <%= link_to booking, method: :patch, remote: true do %>
-                    <%= show_svg("icons/external.svg") %>
-                    Approve
                   <% end %>
                 </td>
               </tr>

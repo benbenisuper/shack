@@ -111,15 +111,23 @@ class Venue < ApplicationRecord
     return lng && lat
   end
 
+  def upcoming_bookings
+    bookings = self.bookings.where(status: "approved").select do |booking| 
+      ActiveSupport::TimeZone[self.zone].parse("#{booking.start_date}") > ActiveSupport::TimeZone[self.zone].parse("#{Time.now}")
+    end
+    return bookings
+  end
+
   def upcoming_checkin_date
     answer = ''
-    bookings = self.bookings.where(status: "approved")
+    bookings = self.upcoming_bookings
     if bookings.empty?
       answer = {string: 'none', date: 'none', booking: 'none'}
     else
-      answer = {string: bookings.order(start_date: :asc).first.start_date.strftime("%B %d, %Y at %H:%M"),
-      date: bookings.order(start_date: :asc).first.start_date,
-      booking: bookings.order(start_date: :asc).first }
+      booking = bookings.sort_by{|b| b.start_date}.first
+      answer = { string: booking.start_date.strftime("%B %d, %Y at %H:%M"),
+      date: booking.start_date,
+      booking: booking }
     end
     return answer
   end
@@ -130,9 +138,10 @@ class Venue < ApplicationRecord
     if bookings.empty?
       answer = {string: 'none', date: 'none', booking: 'none'}
     else
-      answer = {string: bookings.order(end_date: :asc).first.end_date.strftime("%B %d, %Y at %H:%M"),
-      date: bookings.order(end_date: :asc).first.end_date,
-      booking: bookings.order(end_date: :asc).first }
+      booking = bookings.sort_by{|b| b.end_date}.first
+      answer = {string: booking.end_date.strftime("%B %d, %Y at %H:%M"),
+      date: booking.end_date,
+      booking: booking }
     end
     return answer
   end

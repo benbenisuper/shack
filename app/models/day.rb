@@ -19,4 +19,18 @@ class Day < ApplicationRecord
       end
     return available	
   end
+
+  def has_booking
+    venue = self.calendar.venue
+    date = ActiveSupport::TimeZone[venue.zone].parse("#{self.day}/#{self.month}/#{self.year}")
+    bookings = venue.bookings.where(status: ["approved", "ongoing"])
+    has_booking = "no_booking"
+    bookings.each do |booking|
+      if (booking.start_date.to_date == date.to_date) 
+        has_booking = "has_booking"
+      end
+    end
+    return has_booking
+  end
+
 end

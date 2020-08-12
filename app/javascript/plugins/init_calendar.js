@@ -53,7 +53,8 @@ const initCalendar = () => {
 			})
 			let DOMdays = ``
 			data.days.forEach((day, index) => {
-				DOMdays = DOMdays + `<div 
+				DOMdays = DOMdays + `
+						<div 
 						class="day d-flex flex-column justify-content-center align-items-center ${ data.day_colors[index] }"
 						id="${ day.id }"
 						data-year="${ day.year }"
@@ -66,14 +67,8 @@ const initCalendar = () => {
 						>
 						
 							<span class="text-center">${ day.day }</span>
-							<span class="d-flex">
-								<span class="text-center" style="font-size: 10px; color: rgba(255,0,0, 0.5);">
-									${ Math.round(Number(day.day_price_cents)/100) }
-								</span>
-								<span class="text-center ml-2" style="font-size: 10px; color: rgba(0,0,255, 0.5);">
-									[${ Math.round(Number(day.hour_price_cents)/100) }]
-								</span>
-							</span>
+							<span style="font-size: 72px;" class="${ day.has_booking } text-danger">.</span>
+							
 						</div>`
 			})
 			let prevMonth = `<div id="previous-month" class="col-3 text-center"><<</div>`
@@ -130,6 +125,7 @@ const initCalendar = () => {
 			}
 		})
 	}
+
 						
 	if (calendar) {
 		window.addEventListener('click', (event) => {
@@ -378,6 +374,7 @@ const initCalendar = () => {
 				}
 			}
 		})	
+	fetchCalendar(new Date().getFullYear(), new Date().getMonth() + 1)
 	}
 }
 
