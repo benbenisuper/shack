@@ -47,13 +47,14 @@
 }
 
 .day {
-
+	position: relative;
 	border: 1px orange solid;
 	color: rgba(0,0,0,1);
 	background-color: rgba(0,0,0,0.15);
 	cursor: pointer;
 	transition-duration: 0.01s;
   	transition-property: transform;
+  	height: 38px;
 
 	&:not(.disabled):hover {
 		// box-shadow: 0 0 5px rgba(255,0,0,1);
@@ -79,7 +80,7 @@
 #day-form {
 	display: none;
 	position: sticky;
-	top: calc(101.19px + 433.66px + 16px);
+	top: calc(101.19px + 381.66px + 16px);
 
 	&.active {
 		display: block;
@@ -94,4 +95,16 @@
 	&.active {
 		display: flex;
 	}
+}
+
+.has_booking {
+	display: flex;
+	text-align: right;
+	position: absolute;
+	bottom: -35px;
+	right: -2px;
+}
+
+.no_booking {
+	display: none;
 }

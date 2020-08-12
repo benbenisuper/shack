@@ -1,11 +1,10 @@
 Rails.application.routes.draw do
-  require "sidekiq/web"
+  root to: 'pages#home', as: 'root'
 
   devise_for :admin_users, ActiveAdmin::Devise.config
   ActiveAdmin.routes(self)
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 
-  root to: 'pages#home', as: 'root'
 
   mount StripeEvent::Engine, at: '/stripe-webhooks'
 
@@ -44,6 +43,7 @@ Rails.application.routes.draw do
 
   get 'dashboard', to: 'pages#dashboard', as: 'dashboard'
 
+  require "sidekiq/web"
   authenticate :user, lambda { |u| u.admin } do
     mount Sidekiq::Web => '/sidekiq'
   end
