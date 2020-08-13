@@ -41,6 +41,7 @@ class Booking < ApplicationRecord
     is_completed? && user_is_commented?
   end
 
+
   def days
     number = (self.end_date.day() - self.start_date.day()).to_i + 1
     number == 1 ? text = "#{number} day" : text = "#{number} days"
@@ -60,6 +61,15 @@ class Booking < ApplicationRecord
   def local_end_date
     timezone = ActiveSupport::TimeZone[self.venue.zone]
     return timezone.parse("#{self.end_date}")
+  end
+
+  def is_passed?
+    answer = false
+    local_time_now = ActiveSupport::TimeZone[self.venue.zone].parse("#{Time.now}")
+    if local_time_now > local_end_date
+      answer = true
+    end
+    return answer
   end
 
   def update_status

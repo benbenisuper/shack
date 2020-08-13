@@ -9,12 +9,8 @@ const initCalendar = () => {
 	const bookingForm = document.getElementById('booking-form')
 	const calendarWrapper = document.getElementById('calendar-wrapper')
 
-	function fetchDay(id) {
-		fetch(`/api/v1/days/${id}`)
-		.then(response => response.json())
-		.then((data) => {
-
-			let DOMhours = ``
+	function handleDayGuest(data) {
+		let DOMhours = ``
 			data.hours.forEach((hour, index) => {
 				let disabled = `disabled`
 				if (hour.available) {
@@ -36,6 +32,32 @@ const initCalendar = () => {
 			venueTimes.dataset.month = data.day.month
 			venueTimes.dataset.day = data.day.day
 			venueTimes.classList.add('active')
+			document.getElementById('times-container').classList.add('show')
+			document.getElementById('guest-day-prices').innerHTML = `CHF ${Number(data.day.hour_price_cents) / 100 } / hour`
+	}
+
+	function handleDayHost(data) {
+		const bookings = data.day.bookings
+		document.querySelectorAll(".venue-booking").forEach((booking) => {
+			booking.classList.remove('active')
+		})
+		document.getElementById('table-message').classList.remove('show')
+		bookings.forEach((booking) => {
+			const bookingDOM = document.getElementById(`booking-${booking.id}`)
+			bookingDOM.classList.add('active')	
+		})
+		document.getElementById('host-day-prices').innerHTML = `CHF ${Number(data.day.hour_price_cents) / 100 } / hour`
+	}
+
+	function fetchDay(id) {
+		fetch(`/api/v1/days/${id}`)
+		.then(response => response.json())
+		.then((data) => {
+			if (calendar.dataset.type == "guest") {
+				handleDayGuest(data);
+			} else {
+				handleDayHost(data)
+			}
 		})
 	}
 	
@@ -43,7 +65,6 @@ const initCalendar = () => {
 		fetch(`/api/v1/calendars/${calendar.dataset.id}?year=${year}&month=${month}`)
 		.then(response => response.json())
 		.then((data) => {
-			console.log(data.days)
 			const calendar = document.getElementById('venue-calendar')
 			let DOMweekdays = ``
 			weekdays.forEach((weekday, index) => {
@@ -136,7 +157,6 @@ const initCalendar = () => {
 				const monthNum = Number(calendar.dataset.month)
 				const yearNum = Number(calendar.dataset.year)
 				const div = event.target.closest('div')
-				console.log(div)
 
 				if (event.target.id == 'calendar-form-submit') {
 					calendarForm.submit()
@@ -242,6 +262,7 @@ const initCalendar = () => {
 						`
 						}
 						
+						fetchDay(div.id)
 					}
 					
 					div.classList.toggle('active')
@@ -251,6 +272,11 @@ const initCalendar = () => {
 						day.classList.remove('active')
 					})
 					if (dayForm) { dayForm.classList.remove('active') }
+					document.querySelectorAll(".venue-booking").forEach((booking) => {
+						booking.classList.remove('active')
+					})
+					document.getElementById('table-message').classList.add('show')
+					document.getElementById('day-prices').innerHTML = ``
 				}
 			}
 

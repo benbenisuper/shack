@@ -1,8 +1,8 @@
 
 .carousel-inner img {
 
-height:350px;
-object-fit: cover;
+	height:350px;
+	object-fit: cover;
 
 }
 
@@ -10,10 +10,10 @@ object-fit: cover;
 }
 
 #start {
-  display: none;
+	display: none;
 }
 #end {
-  display: none;
+	display: none;
 }
 
 .booking_start_date {
@@ -129,7 +129,31 @@ object-fit: cover;
 
 .only-rounded-left {
 	border-top-right-radius: 0 !important;
-    border-bottom-right-radius: 0 !important;
+	border-bottom-right-radius: 0 !important;
 	border-top-left-radius: 0.375rem !important;
-    border-bottom-left-radius: 0.375rem !important;
+	border-bottom-left-radius: 0.375rem !important;
+}
+
+.venue-booking {
+	&.pending, &.deleted, &.is_passed {
+		display: none;
+	}
+
+	&.active {
+		display: table-row;
+	}
+
+}
+
+#table-message {
+	display: none;
+	
+}
+
+#times-container {
+	display: none;
+}
+
+.show {
+	display: block !important;
 }

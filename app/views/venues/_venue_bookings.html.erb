@@ -1,27 +1,35 @@
-<div class="col shadow p-3 bg-white rounded mt-3">
+<div class="col shadow p-3 bg-white rounded mt-3 mb-3">
   <div class="title-container d-flex justify-content-between flex-column">
-    <h4 class="border-bottom">Bookings</h4>
-    <% if @venue.bookings.where.not(status: "pending").size < 1 %>
+    <div class="d-flex justify-content-between border-bottom">
+      <h4 class="">Bookings</h4>
+      <span id="host-day-prices"></span>
+    </div>
+    <% if @venue.bookings.size < 1 %>
       <p class="text-center">Your venue has no bookings yet</p>
     <% else %>
-      <table class="table table-cards align-items-center">
-        <thead>
-          <tr>
-            <th>Guest</th>
-            <th>Status</th>
-            <th>Date</th>
-            <th>From</th>
-            <th>To</th>
-            <th scope="col">Actions</th>
-            <th></th>
-            <th></th>
-          </tr>
+    <table class="table table-cards align-items-center">
+        <thead id="table-header">
+          <% if @venue.upcoming_bookings.size < 1 %>
+            <p id="table-message" class="text-center show mt-2">Your venue has no upcoming bookings yet</p>
+          <% else %>
+            <tr>
+              <th>Guest</th>
+              <th>Status</th>
+              <th>Date</th>
+              <th>From</th>
+              <th>To</th>
+              <th scope="col">Actions</th>
+              <th></th>
+              <th></th>
+            </tr>
+          <% end %>
         </thead>
 
         <tbody>
-          <% @venue.upcoming_bookings.each do |booking| %>
+          <% @venue.bookings.each do |booking| %>
             <% if booking.id %>
-              <tr class="hover-shadow-lg hover-translate-y-n3">
+              <% is_passed = booking.is_passed? ? "is_passed" : "" %>
+              <tr class="hover-shadow-lg hover-translate-y-n3 venue-booking <%= booking.status %> <%= is_passed %>" id="booking-<%= booking.id %>">
                 <td>
                   <%= link_to "#{booking.user.full_name}", user_path(booking.user) %>
                 </td>

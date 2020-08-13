@@ -20,15 +20,23 @@ class Day < ApplicationRecord
     return available	
   end
 
-  def has_booking
+  def bookings
     venue = self.calendar.venue
-    date = ActiveSupport::TimeZone[venue.zone].parse("#{self.day}/#{self.month}/#{self.year}")
     bookings = venue.bookings.where(status: ["approved", "ongoing"])
-    has_booking = "no_booking"
+    date = ActiveSupport::TimeZone[venue.zone].parse("#{self.day}/#{self.month}/#{self.year}")
+    day_bookings = []
     bookings.each do |booking|
       if (booking.start_date.to_date == date.to_date) 
-        has_booking = "has_booking"
+        day_bookings << booking
       end
+    end
+    return day_bookings
+  end
+
+  def has_booking
+    has_booking = "no_booking"
+    if (self.bookings.count > 0) 
+      has_booking = "has_booking"
     end
     return has_booking
   end

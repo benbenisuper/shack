@@ -1,2 +1,2 @@
-json.day @day
+json.day @day, :id, :calendar_id, :month, :year, :wday, :hour_price_cents, :hour_price_currency, :day_price_cents, :day_price_currency, :min_time, :max_time, :date, :day, :wnum, :created_at, :updated_at, :has_booking, :bookings
 json.hours @hours
