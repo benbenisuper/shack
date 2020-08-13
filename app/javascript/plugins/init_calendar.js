@@ -128,6 +128,7 @@ const initCalendar = () => {
 		document.getElementById('total-hours').innerHTML = ``
 		document.getElementById('total-price').innerHTML = ``
 		bookingForm.classList.remove('active')
+
 	}
 
 	const handleMouseover = (event) => {
@@ -265,7 +266,8 @@ const initCalendar = () => {
 						`
 						}
 						
-						fetchDay(div.id)
+						fetchDay(div.id)			
+						document.getElementById('table-header').classList.remove('hide')			
 					}
 					
 					div.classList.toggle('active')
@@ -279,7 +281,8 @@ const initCalendar = () => {
 						booking.classList.remove('active')
 					})
 					document.getElementById('table-message').classList.add('show')
-					document.getElementById('day-prices').innerHTML = ``
+					document.getElementById('host-day-prices').innerHTML = ``		
+					document.getElementById('table-header').classList.add('hide')		
 				}
 			}
 
@@ -326,9 +329,9 @@ const initCalendar = () => {
 					if (div.classList.contains('day')) {
 
 						clearCalendar(bookingForm, venueTimes, days);
-						
 						const csrfToken = document.querySelector('meta[name="csrf-token"]').attributes.content.value;
 						fetchDay(div.id)
+
 						div.classList.toggle('active')
 						venueTimes.dataset.stage = 'start'
 						bookingMessage.innerHTML = `When will it <strong class="pl-1"> start</strong>?`

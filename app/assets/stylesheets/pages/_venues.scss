@@ -145,6 +145,12 @@
 
 }
 
+#table-header {
+	&.hide {
+		display: none;
+	}
+}
+
 #table-message {
 	display: none;
 	

@@ -7,11 +7,11 @@
     <% if @venue.bookings.size < 1 %>
       <p class="text-center">Your venue has no bookings yet</p>
     <% else %>
-    <table class="table table-cards align-items-center">
-        <thead id="table-header">
           <% if @venue.upcoming_bookings.size < 1 %>
             <p id="table-message" class="text-center show mt-2">Your venue has no upcoming bookings yet</p>
-          <% else %>
+          <% end %>
+    <table class="table table-cards align-items-center">
+        <thead id="table-header" class="hide">
             <tr>
               <th>Guest</th>
               <th>Status</th>
@@ -22,7 +22,6 @@
               <th></th>
               <th></th>
             </tr>
-          <% end %>
         </thead>
 
         <tbody>
