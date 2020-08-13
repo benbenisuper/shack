@@ -97,55 +97,58 @@
     </div>
 
     <div class="col-xs-12 col-lg-4">
-      <div class="col shadow p-3 bg-white rounded sticky-div">
-        <div class="wrapper">
+      <div class="sticky-div">
+        <div class="col shadow p-3 bg-white rounded">
+          <div class="wrapper">
 
-          <% if @venue.user == current_user %>
-          <h4>Reserved Dates</h4>
-          <% else %>
-          <h4>Reserve now!</h4>
-          <p id="calendar-message">When will the event start?</p>
-          <% end %>
-          <div id="to_calendar_start" class="calendar-btn ml-1 mb-2"><i class="fas fa-undo"></i> start date</div>
-          <% if current_user == @venue.user %>
-            <div id="calendar-wrapper">
-              <%= render "calendar", type: "host", calendar: @calendar, day_colors: @day_colors, days: @calendar_days, weekdays: @weekdays %>
-            </div>
-          <% else %>
-            <div id="calendar-wrapper">
-              <%= render "calendar", type: "guest", calendar: @calendar, day_colors: @day_colors, days: @calendar_days, weekdays: @weekdays %>
-            </div><!-- 
-            <div class="d-flex justify-content-center">
-              <%#= render "bookings/form", venue: @venue %>
-            </div> -->
-          <% end %>
-
-        </div>
-      </div>
-      <% if @venue.user == current_user %>
-        <div id="day-form" class="col shadow p-3 bg-white rounded mt-3" data-venue-id="<%= @venue.id %>"></div>
-      <% else %>
-        <div id="booking-form" class="col shadow p-3 bg-white rounded mt-3 flex-column">
-          <div class="mb-2 d-flex justify-content-between">From: <span id="start-date"></span></div>
-          <div class="mb-2 d-flex justify-content-between">To: <span id="end-date"></span></div>
-          <div class="mb-2 d-flex justify-content-between">N° of Hours: <span id="total-hours"></span></div>
-          <div class="d-flex justify-content-between border-top pt-3">
-            <span>Total Price:</span>
-            <span id="total-price" class=""></span>
-          </div>
-          <%= simple_form_for @booking do |f| %>
-            <%= f.input :venue_id, as: :hidden, input_html: { value: @booking.venue.nil? ? 0 : @booking.venue.id } %>
-            <%= f.input :start_date, as: :hidden %>
-            <%= f.input :end_date, as: :hidden %>
-            <%= simple_fields_for :price do |p| %>
-              <%= f.input :amount, as: :hidden %>
+            <% if @venue.user == current_user %>
+            <h4>Reserved Dates</h4>
+            <% else %>
+            <h4>Reserve now!</h4>
+            <p id="calendar-message">When will the event start?</p>
             <% end %>
-            <div class="d-flex">
-              <%= f.submit "Book", class: "btn btn-secondary ml-auto", id: "booking-form-submit" , disabled: "disabled" %>
-            </div>
-          <% end %>
+            <div id="to_calendar_start" class="calendar-btn ml-1 mb-2"><i class="fas fa-undo"></i> start date</div>
+            <% if current_user == @venue.user %>
+              <div id="calendar-wrapper">
+                <%= render "calendar", type: "host", calendar: @calendar, day_colors: @day_colors, days: @calendar_days, weekdays: @weekdays %>
+              </div>
+            <% else %>
+              <div id="calendar-wrapper">
+                <%= render "calendar", type: "guest", calendar: @calendar, day_colors: @day_colors, days: @calendar_days, weekdays: @weekdays %>
+              </div><!-- 
+              <div class="d-flex justify-content-center">
+                <%#= render "bookings/form", venue: @venue %>
+              </div> -->
+            <% end %>
+
+          </div>
         </div>
-      <% end %>
+        <% if @venue.user == current_user %>
+          <div id="day-form" class="col shadow p-3 bg-white rounded mt-3" data-venue-id="<%= @venue.id %>"></div>
+        <% else %>
+          <div id="booking-form" class="col shadow p-3 bg-white rounded mt-3 flex-column">
+            <div class="mb-2 d-flex justify-content-between">From: <span id="start-date"></span></div>
+            <div class="mb-2 d-flex justify-content-between">To: <span id="end-date"></span></div>
+            <div class="mb-2 d-flex justify-content-between">N° of Hours: <span id="total-hours"></span></div>
+            <div class="d-flex justify-content-between border-top pt-3">
+              <span>Total Price:</span>
+              <span id="total-price" class=""></span>
+            </div>
+            <%= simple_form_for @booking do |f| %>
+              <%= f.input :venue_id, as: :hidden, input_html: { value: @booking.venue.nil? ? 0 : @booking.venue.id } %>
+              <%= f.input :start_date, as: :hidden %>
+              <%= f.input :end_date, as: :hidden %>
+              <%= simple_fields_for :price do |p| %>
+                <%= f.input :amount, as: :hidden %>
+              <% end %>
+              <div class="d-flex">
+                <%= f.submit "Book", class: "btn btn-secondary ml-auto", id: "booking-form-submit" , disabled: "disabled" %>
+              </div>
+            <% end %>
+          </div>
+        <% end %>
+
+      </div>
     </div>
 
   </div>

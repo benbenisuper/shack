@@ -3,35 +3,4 @@
 	<div id="calendar-month" class="col-6 text-center"><strong><%= Date.today.strftime('%B  %Y') %></strong></div>
 	<div id="next-month" class="col-3 text-center">>></div>
 </div>
-<div id="venue-calendar" class="" data-id="<%= calendar.id %>" data-year="<%= Date.today.year %>" data-month="<%= Date.today.month %>" data-type="<%= type %>">
-	<% weekdays.each do |weekday| %>
-		<div class="weekday d-flex justify-content-center align-items-center">
-			<strong class="text-center"><%= weekday %></strong>
-		</div>
-	<% end %>
-	<% days.each_with_index do |day, index| %>
-		<div 
-		class="day d-flex flex-column justify-content-center align-items-center <%= day_colors[index] %>" 
-		id="<%= day.id %>"
-		data-date="<%= day.date %>"
-		data-year="<%= day.year %>"
-		data-month="<%= day.month %>"
-		data-day="<%= day.date.day %>"
-		data-wday="<%= day.date.wday %>"
-		data-wNum="<%= day.date.strftime('%U') %>"
-		data-day-price="<%= day.day_price_cents %>"
-		data-hour-price="<%= day.hour_price_cents %>"
-		>
-		
-			<span class="text-center"><%= day.date.day %></span>
-			<span class="d-flex">
-				<span class="text-center" style="font-size: 10px; color: rgba(255,0,0, 0.5);">
-					<%= day.day_price_cents/100 %>
-				</span>
-				<span class="text-center ml-2" style="font-size: 10px; color: rgba(0,0,255, 0.5);">
-					[<%= day.hour_price_cents/100 %>]
-				</span>
-			</span>
-		</div>
-	<% end %>
-</div>
+<div id="venue-calendar" class="" data-id="<%= calendar.id %>" data-year="<%= Date.today.year %>" data-month="<%= Date.today.month %>" data-type="<%= type %>"></div>

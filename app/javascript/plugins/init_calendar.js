@@ -120,6 +120,7 @@ const initCalendar = () => {
 			venueTimes.classList.remove('active')
 			venueTimes.dataset.stage = 'start'
 		}
+		document.getElementById('booking-form-submit').disabled = true
 		document.getElementById('start-date').innerHTML = ``
 		document.getElementById('end-date').innerHTML = ``
 		document.getElementById('total-hours').innerHTML = ``
