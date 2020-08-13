@@ -6,6 +6,7 @@ const initCalendar = () => {
 	const calendar = document.getElementById('venue-calendar')
 	const dayForm = document.getElementById('day-form')
 	const venueTimes = document.getElementById('venue-times')
+	const bookingMessage = document.getElementById('booking-message')
 	const bookingForm = document.getElementById('booking-form')
 	const calendarWrapper = document.getElementById('calendar-wrapper')
 
@@ -119,6 +120,7 @@ const initCalendar = () => {
 		if (venueTimes) { 
 			venueTimes.classList.remove('active')
 			venueTimes.dataset.stage = 'start'
+			bookingMessage.innerHTML = `When will it <strong class="pl-1"> start</strong>?`
 		}
 		document.getElementById('booking-form-submit').disabled = true
 		document.getElementById('start-date').innerHTML = ``
@@ -329,6 +331,7 @@ const initCalendar = () => {
 						fetchDay(div.id)
 						div.classList.toggle('active')
 						venueTimes.dataset.stage = 'start'
+						bookingMessage.innerHTML = `When will it <strong class="pl-1"> start</strong>?`
 					}
 
 					const hours = document.querySelectorAll('.hour')
@@ -349,6 +352,7 @@ const initCalendar = () => {
 								hour.removeEventListener('mouseout', handleMouseout)
 							})
 							venueTimes.dataset.stage = 'submit'
+							bookingMessage.innerHTML = `You can book now!`
 							const endDate = `${venueTimes.dataset.day}/${venueTimes.dataset.month}/${venueTimes.dataset.year} at ${Number(div.dataset.hour) + 1}:00 hs`
 							const endValue = `${venueTimes.dataset.month}/${venueTimes.dataset.day}/${venueTimes.dataset.year} ${Number(div.dataset.hour) + 1}:00`
 							const startDate = document.getElementById('booking_start_date').value
@@ -382,6 +386,7 @@ const initCalendar = () => {
 							}
 							div.classList.toggle('active')
 							venueTimes.dataset.stage = "end"
+							bookingMessage.innerHTML = `When will it <strong class="pl-1"> end</strong>?`
 							const ableHours = document.querySelectorAll('.hour:not(.disabled)')
 							ableHours.forEach((hour) => {
 								hour.addEventListener('mouseover', handleMouseover )
