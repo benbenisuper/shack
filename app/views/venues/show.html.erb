@@ -141,7 +141,7 @@
               <%= f.input :amount, as: :hidden %>
             <% end %>
             <div class="d-flex">
-              <%= f.submit "Book", class: "btn btn-secondary ml-auto" %>
+              <%= f.submit "Book", class: "btn btn-secondary ml-auto", id: "booking-form-submit" , disabled: "disabled" %>
             </div>
           <% end %>
         </div>

@@ -360,6 +360,8 @@ const initCalendar = () => {
 							document.getElementById('booking_amount').value = amount
 							document.getElementById('total-hours').insertAdjacentHTML('beforeend', `<span>${totalHours} hs</span>`)
 							document.getElementById('total-price').insertAdjacentHTML('beforeend', `<span>CHF ${amount}</span>`)
+
+							document.getElementById('booking-form-submit').disabled = false
 							
 						}
 					}
