@@ -25,9 +25,14 @@
           <div class="col-lg-6 d-flex justify-content-center flex-column">
             <span class="h5 text-center">OR</span>
             <%= link_to user_facebook_omniauth_authorize_path, class: "omniauth-login-btn mt-3 row ml-0" do %>
-            <div class="col-2 p-0"><i class="fab fa-facebook mr-3 my-auto"></i></div>
-            <div class="col-8 p-0 text-center">Sign in with Facebook</div>
-            <div class="col-2 p-0"></div>
+              <div class="col-2 p-0"><i class="fab fa-facebook mr-3 my-auto"></i></div>
+              <div class="col-8 p-0 text-center">Sign in with Facebook</div>
+              <div class="col-2 p-0"></div>
+            <% end %>
+            <%= link_to user_stripe_connect_omniauth_authorize_path, class: "omniauth-login-btn mt-3 row ml-0" do %>
+              <div class="col-2 p-0"><i class="fab fa-stripe mr-3 my-auto"></i></div>
+              <div class="col-8 p-0 text-center">Sign in with Stripe</div>
+              <div class="col-2 p-0"></div>
             <% end %>
         </div>
       </div>

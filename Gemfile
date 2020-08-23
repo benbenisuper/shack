@@ -28,6 +28,7 @@ gem "stripe"
 gem 'stripe_event'
 gem 'omniauth'
 gem 'omniauth-facebook'
+gem 'omniauth-stripe-connect'
 gem 'sidekiq'
 gem 'sidekiq-failures', '~> 1.0'
 

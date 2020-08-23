@@ -3,8 +3,8 @@ class User < ApplicationRecord
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
-  :recoverable, :rememberable, :validatable,
-  :omniauthable, omniauth_providers: [:facebook]
+         :recoverable, :rememberable, :validatable,
+         :omniauthable, omniauth_providers: %i[facebook stripe_connect]
   has_many :bookings, dependent: :nullify
   has_many :reviews
   has_many :reviews, as: :reviewable
@@ -13,6 +13,10 @@ class User < ApplicationRecord
 
   has_one_attached :avatar
   enum role: { guest: 0, host: 1, manager: 2, admin: 3 }
+
+  def can_receive_payments?
+    uid? && provider? && access_code? && publishable_key?
+  end
 
   def self.find_for_facebook_oauth(auth)
     user_params = auth.slice("provider", "uid")
@@ -30,13 +34,13 @@ class User < ApplicationRecord
       user.update(user_params)
     else
       user = User.new(user_params)
-      user.password = Devise.friendly_token[0,20]  # Fake password for validation
+      user.password = Devise.friendly_token[0, 20] # Fake password for validation
       user.save
     end
 
     return user
   end
-  
+
   def avatar_url
     if self.avatar.attached?
       self.avatar.service_url
@@ -46,7 +50,7 @@ class User < ApplicationRecord
   end
 
   def user_avatar
-   if self.avatar.attached?
+    if self.avatar.attached?
       self.avatar.key
     else
       "avatar"
@@ -66,15 +70,14 @@ class User < ApplicationRecord
       end
     end
     unless venue_dates.empty?
-      bookings = venue_dates.sort_by{ |booking| booking[:date] }
-      answer = { date: bookings.first[:date], 
-       string: bookings.first[:date].strftime("%B %d, %Y at %H:%M"),
-       url: "/bookings/#{bookings.first[:booking].id}"
-     }
-   else
-    answer = { date: 'none', string: 'none', url: '/dashboard' }
-  end
-  return answer
+      bookings = venue_dates.sort_by { |booking| booking[:date] }
+      answer = { date: bookings.first[:date],
+                 string: bookings.first[:date].strftime("%B %d, %Y at %H:%M"),
+                 url: "/bookings/#{bookings.first[:booking].id}" }
+    else
+      answer = { date: 'none', string: 'none', url: '/dashboard' }
+    end
+    return answer
   end
 
   def next_checkout
@@ -88,20 +91,16 @@ class User < ApplicationRecord
     unless venue_dates.empty?
       bookings = venue_dates.sort_by{ |booking| booking[:date] }
       answer = { date: bookings.first[:date], 
-       string: bookings.first[:date].strftime("%B %d, %Y at %H:%M"),
-       url: "/bookings/#{bookings.first[:booking].id}"
-     }
-   else
-    answer = { date: 'none', string: 'none', url: '/dashboard' }
-  end
-  return answer
+                 string: bookings.first[:date].strftime("%B %d, %Y at %H:%M"),
+                 url: "/bookings/#{bookings.first[:booking].id}" }
+    else
+      answer = { date: 'none', string: 'none', url: '/dashboard' }
+    end
+    return answer
   end
 
   def admin
-    answer = false
-    if self.role == "admin"
-      answer = true
-    end
+    answer = self.role == "admin" ? true : false
     return answer
   end
 

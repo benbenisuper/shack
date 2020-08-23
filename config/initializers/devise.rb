@@ -8,6 +8,10 @@ Devise.setup do |config|
     info_fields: 'email, first_name, last_name',
     image_size: 'square',  # 50x50, guaranteed ratio
     secure_image_url: true
+
+  config.omniauth :stripe_connect, ENV["STRIPE_CONNECT_CLIENT_ID"], ENV["STRIPE_SECRET_KEY"],
+    scope: 'read-write',
+    stripe_landing: 'login'
   # The secret key used by Devise. Devise uses this key to generate
   # random tokens. Changing this key will render invalid all existing
   # confirmation, reset password and unlock tokens in the database.
