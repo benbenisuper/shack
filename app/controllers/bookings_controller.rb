@@ -24,6 +24,7 @@ class BookingsController < ApplicationController
         currency: 'chf',
         quantity: 1,
       }],
+      mode: 'payment',
       payment_intent_data: {
         application_fee_amount: (booking.amount_cents * 0.1).to_i,
       },

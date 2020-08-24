@@ -27,7 +27,6 @@
             const paymentButton = document.getElementById('pay');
             paymentButton.addEventListener('click', () => {
               const stripe = Stripe('<%= ENV["STRIPE_PUBLISHABLE_KEY"] %>', { stripeAccount: "<%= @booking.venue.user.uid %>" } );
-              // const stripe = Stripe('<%= ENV["STRIPE_PUBLISHABLE_KEY"] %>');
               stripe.redirectToCheckout({
                 sessionId: '<%= @booking.checkout_session_id %>'
               });
