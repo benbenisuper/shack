@@ -70,12 +70,12 @@ class Calendar < ApplicationRecord
   	end
   end
 
-  def update_hour_price_for_date(date, new_price)
-  	self.days.find_by(date: date.to_time).update(hour_price_cents: new_price * 100)
+  def update_hour_price_for_date(id, new_price)
+  	self.days.find(id).update(hour_price_cents: new_price * 100)
   end
 
-  def update_day_price_for_date(date, new_price)
-  	self.days.find_by(date: date.to_time).update(day_price_cents: new_price * 100)
+  def update_day_price_for_date(id, new_price)
+  	self.days.find(id).update(day_price_cents: new_price * 100)
   end
 
   def today

@@ -198,7 +198,7 @@ const initCalendar = () => {
 						days.forEach((day) => {
 							day.classList.remove('active')
 						})
-						const dayString = `{"type":"day","value":"${div.dataset.day}/${div.dataset.month}/${div.dataset.year}"}`
+						const dayString = `{"type":"day","value":"${div.id}"}`
 						const wdayString = `{"type":"weekday","value":"${div.dataset.wday}"}`
 						const wdayStringValue = wdayFull[div.dataset.wday]
 						const wnumString = `{"type":"weeknum","value":"${div.dataset.wnum}"}`
