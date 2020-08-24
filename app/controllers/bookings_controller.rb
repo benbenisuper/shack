@@ -15,18 +15,21 @@ class BookingsController < ApplicationController
     hours = (end_date - start_date) / 3600
     booking  = Booking.create!(venue: venue, amount: amount, start_date: start_date, end_date: end_date, venue_sku: venue.sku, status: 'pending', user: current_user)
     authorize booking
-    session = Stripe::Checkout::Session.create(
+    session = Stripe::Checkout::Session.create({
       payment_method_types: ['card'],
       line_items: [{
         name: venue.sku,
         images: venue.photos.map{ |photo| photo.service_url },
         amount: booking.amount_cents,
         currency: 'chf',
-        quantity: 1
+        quantity: 1,
       }],
+      payment_intent_data: {
+        application_fee_amount: (booking.amount_cents * 0.1).to_i,
+      },
       success_url: booking_url(booking),
-      cancel_url: booking_url(booking)
-      )
+      cancel_url: booking_url(booking),
+    }, {stripe_account: "#{venue.user.uid}" })
 
     booking.update(checkout_session_id: session.id)
     redirect_to new_booking_payment_path(booking)

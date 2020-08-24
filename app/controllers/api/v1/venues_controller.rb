@@ -18,7 +18,7 @@ class Api::V1::VenuesController < Api::V1::BaseController
     if @category.nil? && @activity.nil?
       @venues = policy_scope(Venue)
     else
-      @venues = policy_scope(Venue).select do |venue| 
+      @venues = policy_scope(Venue).where(published: true).select do |venue| 
         venue.is_in_mapbox(@bounds) && (venue.category == @category || @category == "All Categories") && (venue.activity == @activity || @activity == "All Activities")
       end
     end

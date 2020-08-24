@@ -51,7 +51,7 @@ class VenuesController < ApplicationController
     #     @venues = @venues.where(["location like ?", "%#{@location}%"])
     #   end
     # end
-    @venues = policy_scope(Venue)
+    @venues = policy_scope(Venue).where(published: true)
     @venues_geocoded = @venues.geocoded #returns flats with coordinates
 
     @markers = @venues_geocoded.map do |venue|
