@@ -260,11 +260,17 @@ const initCalendar = () => {
 		                		</div>
 							</form>
 							<div class="d-flex pt-3 border-top">
-								<button class="btn btn-secondary ml-auto" id="calendar-form-submit">Modify</button>
+								<button class="btn btn-secondary ml-auto" id="calendar-form-submit" disabled>Modify</button>
 							</div>
 						</div>
 						`
 						}
+						const dayFormInputs = document.querySelectorAll('*[id^="day_option_"]')
+						dayFormInputs.forEach((input) => {
+							input.addEventListener('click', (event) => {
+								document.getElementById('calendar-form-submit').removeAttribute('disabled')
+							})
+						})
 						
 						fetchDay(div.id)			
 						document.getElementById('table-header').classList.remove('hide')			
