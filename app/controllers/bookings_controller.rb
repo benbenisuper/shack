@@ -37,36 +37,6 @@ class BookingsController < ApplicationController
 
     booking.update(checkout_session_id: session.id)
     redirect_to new_booking_payment_path(booking)
-
-
-
-
-    # @booking = Booking.new(booking_params)
-    # authorize @booking
-    # @booking.status = "pending"
-    # @user = current_user
-    # @booking.user = @user
-    # if @booking.amount.nil?
-    # @booking.amount = @booking.venue.price * ((@booking.end_date - @booking.start_date).to_i + 1)
-    # end
-    # if @booking.save
-    #   session = Stripe::Checkout::Session.create(
-    #     payment_method_types: ['card'],
-    #     line_items: [{
-    #       name: @venue.sku,
-    #       amount: @venue.price_cents,
-    #       currency: 'chf',
-    #       quantity: 1
-    #     }],
-    #     success_url: booking_url(booking),
-    #     cancel_url: booking_url(booking)
-    #     )
-    #   @booking.update(checkout_session_id: session.id)
-    #   session[:return_to] ||= request.referer
-    #   redirect_to edit_booking_path(@booking)
-    # else
-    #   render :new
-    # end
   end
 
   def show
@@ -84,7 +54,6 @@ class BookingsController < ApplicationController
         @review = Review.find_by(booking_id: @booking.id.to_i, reviewable_type: "User")
       end
     end
-    # @reviews = Review.where(booking_id: @booking.id.to_i)
     @status_message = @booking.status.to_i == 1 ? 'Payment Pending' : 'Confirmed'
     @markers = [
       {

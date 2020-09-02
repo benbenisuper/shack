@@ -106,7 +106,7 @@ class Calendar < ApplicationRecord
   def days_of_this_month(year, month)
     array = []
     self.calendar_days_for_month(year, month).each do |day|
-      if day.month == month.to_i
+      if day.month == month.to_i && day.date > Time.now
         array << ""
       else
         array << "disabled"
