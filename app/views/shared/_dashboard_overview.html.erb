@@ -61,7 +61,7 @@
 	</div> -->
 
 	<div class="col-lg-4 col-sm-6 px-2 d-flex justify-content-center">
-		<%= link_to booking_path(current_user.all_messages.first.chat_box.booking) do %>
+		<%= link_to @latest_message_booking do %>
 			<div class="card overview-card">
 				<div class="card-body d-flex flex-column justify-content-start text-center">
 					<div class="mb-3">
