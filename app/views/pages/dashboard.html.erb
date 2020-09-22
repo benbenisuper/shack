@@ -58,7 +58,7 @@
 
                   <tbody>
                     <% current_user.bookings.order(start_date: :desc).each do |booking| %>
-                    <tr class="hover-shadow-lg hover-translate-y-n3 dashboard-card">
+                    <tr class="hover-shadow-lg hover-translate-y-n3 dashboard-card <%= booking.is_passed? ? "passed" : "" %>">
                       <td class="p-0 rounded-left image-container-y" style="">
                         <%= cl_image_tag booking.venue&.venue_image, class: "rounded-left image-centered-y" %>
                       </td>
