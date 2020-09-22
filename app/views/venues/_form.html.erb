@@ -24,7 +24,8 @@
   <div class="d-flex justify-content-around">
   <span class="h5 my-3 d-block w-50 mr-2">
     <%= f.input :capacity, as: :numeric,
-                required: true %>
+                required: true,
+                input_html: { min: 0, oninput: "validity.valid||(value='');" } %>
   </span>
   <span class="h5 my-3 d-block w-50 ml-2">
     <%= f.input :price, as: :float, label: "Price / day",
@@ -44,18 +45,22 @@
   <%= f.fields_for :venue_spec do |h| %>
       <div class="d-flex justify-content-around">
           <span class="h5 my-3 d-block w-50 mr-2">
-             <%= h.input :spaces, as: :numeric, required: true %>
+             <%= h.input :spaces, as: :numeric, required: true,
+             input_html: { min: 0, oninput: "validity.valid||(value='');" } %>
           </span>
           <span class="h5 my-3 d-block w-50 ml-2">
-             <%= h.input :total_area, as: :numeric, required: true  %>
+             <%= h.input :total_area, as: :numeric, required: true,
+             input_html: { min: 0, oninput: "validity.valid||(value='');" }  %>
           </span>
       </div>
       <div class="d-flex justify-content-around">
           <span class="h5 my-3 d-block w-50 mr-2">
-             <%= h.input :bathrooms, as: :numeric, required: true  %>
+             <%= h.input :bathrooms, as: :numeric, required: true,
+             input_html: { min: 0, oninput: "validity.valid||(value='');" }  %>
           </span>
           <span class="h5 my-3 d-block w-50 ml-2">
-             <%= h.input :garage_spaces, as: :numeric, required: true %>
+             <%= h.input :garage_spaces, as: :numeric, required: true,
+             input_html: { min: 0, oninput: "validity.valid||(value='');" } %>
           </span>
       </div>
   <% end %>

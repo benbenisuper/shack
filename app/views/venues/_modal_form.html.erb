@@ -13,23 +13,29 @@
           <%= f.input :activity, collection: Venue::ACTIVITIES, input_html: { class: "w-100" }, wrapper_html: { class: 'w-100 pl-2' } %>
         </div>
         <div class="d-flex justify-content-between">
-          <%= f.input :capacity, as: :numeric, input_html: { class: "mx-auto w-100" }, wrapper_html: { class: 'w-100 pr-2' } %>
-          <%= f.input :price, as: :float, input_html: { class: "mx-auto w-100" }, wrapper_html: { class: 'w-100 pl-2' } %>
+          <%= f.input :capacity, as: :numeric, input_html: { class: "mx-auto w-100", min: 0, oninput: "validity.valid||(value='');" },
+                      wrapper_html: { class: 'w-100 pr-2' } %>
+          <%= f.input :price, as: :float, input_html: { class: "mx-auto w-100", min: 0, oninput: "validity.valid||(value='');" },
+                      wrapper_html: { class: 'w-100 pl-2' } %>
         </div>
         <%= f.input :description %>
         <%= f.input :perks, as: :check_boxes, 
-        collection: Venue::PERKS, 
-        checked: @venue.perks_array, 
-        collection_wrapper_tag: "perk-wrapper",
-        collection_wrapper_class: "perk-grid" %>
+                    collection: Venue::PERKS, 
+                    checked: @venue.perks_array, 
+                    collection_wrapper_tag: "perk-wrapper",
+                    collection_wrapper_class: "perk-grid" %>
         <%= f.fields_for :venue_spec do |h| %>
         <div class="d-flex justify-content-around">
-         <%= h.input :spaces, as: :numeric, class: "h5 my-3 d-block w-100 mr-4" %>
-         <%= h.input :total_area, as: :numeric, class: "h5 my-3 d-block w-100 ml-2", label: "Total Area [m2]:" %>
+         <%= h.input :spaces, as: :numeric, class: "h5 my-3 d-block w-100 mr-4",
+                     input_html: { min: 0, oninput: "validity.valid||(value='');" } %>
+         <%= h.input :total_area, as: :numeric, class: "h5 my-3 d-block w-100 ml-2", label: "Total Area [m2]:",
+                     input_html: { min: 0, oninput: "validity.valid||(value='');" } %>
        </div>
        <div class="d-flex justify-content-around">
-         <%= h.input :bathrooms, as: :numeric, class: "h5 my-3 d-block w-100 mr-2"  %>
-         <%= h.input :garage_spaces, as: :numeric, class: "h5 my-3 d-block w-100 ml-2" %>
+         <%= h.input :bathrooms, as: :numeric, class: "h5 my-3 d-block w-100 mr-2",
+                     input_html: { min: 0, oninput: "validity.valid||(value='');" }  %>
+         <%= h.input :garage_spaces, as: :numeric, class: "h5 my-3 d-block w-100 ml-2",
+                     input_html: { min: 0, oninput: "validity.valid||(value='');" } %>
        </div>
        <% end %>
         <%= f.input :photos, as: :file, input_html: { multiple: true } %>
