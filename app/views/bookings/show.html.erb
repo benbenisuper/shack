@@ -153,7 +153,11 @@
 <br>
 <div id="chatbox" class="fixed-bottom-right rounded-top" data-id="<%= @chat_box.id %>" data-user-id="<%= current_user.id %>">
   <div class="row chatbox-header justify-content-between align-items-center m-0" id="chat-toggle">
-    <div class="col-2"><i class="fas fa-comments"></i></div>
+    <div class="col-2" style="position: relative;"><i class="fas fa-comments"></i>
+      <div class="badge badge-dark rounded-circle messages-bubble">
+        <%= @chat_box.new_messages.count %>
+      </div>
+    </div>
     <div class="col-8 h6 m-0 text-center">
       <% if current_user == @booking.user %>
         Chat with <%= @booking.venue.user.full_name %>

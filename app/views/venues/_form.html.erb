@@ -29,7 +29,7 @@
   <span class="h5 my-3 d-block w-50 ml-2">
     <%= f.input :price, as: :float, label: "Price / day",
                 required: true,
-                input_html: { value: "CHF", placeholder: "CHF" } %>
+                input_html: { value: "CHF", placeholder: "CHF", min: 0, oninput: "validity.valid||(value='');" } %>
   </span>
   </div>
   <span class="h5 my-3 d-block">
@@ -73,7 +73,7 @@
     <%= f.input :photos, as: :file, input_html: { multiple: true } %>
   </span>
   <div class="d-flex justify-content-between mt-5">
-    <%= link_to 'Cancel', 'javascript:history.back()', class: "btn btn-danger" %>
+    <%= link_to 'Cancel', dashboard_path, class: "btn btn-danger" %>
     <%= f.submit "Submit", class: "btn btn-primary" %>
   </div>
 <% end %>

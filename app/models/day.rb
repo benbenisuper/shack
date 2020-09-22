@@ -1,6 +1,9 @@
 class Day < ApplicationRecord
   belongs_to :calendar
 
+  validates :day_price_cents, numericality: { greater_than_or_equal_to: 0 }
+  validates :hour_price_cents, numericality: { greater_than_or_equal_to: 0 }
+
   def available_for_hour(hour)
     venue = self.calendar.venue
   	date = self.date + hour.hour

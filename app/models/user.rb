@@ -107,4 +107,13 @@ class User < ApplicationRecord
   def full_name
     return "#{first_name.capitalize} #{last_name.capitalize}"
   end
+
+  def chatboxes
+    bookings_from_venues = Booking.where(venue_id: self.venues.pluck(:id)).pluck(:id)
+    ChatBox.where(booking_id: self.bookings.pluck(:id) + bookings_from_venues)
+  end
+
+  def all_messages
+    Message.where(chat_box_id: chatboxes.pluck(:id)).where.not(user: self).where("created_at > ?", Time.now - 10.day).order(created_at: :desc)
+  end
 end

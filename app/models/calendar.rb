@@ -1,8 +1,11 @@
 class Calendar < ApplicationRecord
+  after_create :create_days
+
   belongs_to :venue
   has_many :days, dependent: :destroy
 
-  after_create :create_days
+  validates :day_price_cents, numericality: { greater_than_or_equal_to: 0 }
+  validates :hour_price_cents, numericality: { greater_than_or_equal_to: 0 }
 
   def update_hour_price_for_wday(weekday, new_price)
   	self.days.where(wday: weekday.to_i).each do |day|
