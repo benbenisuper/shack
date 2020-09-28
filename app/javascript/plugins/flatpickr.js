@@ -153,9 +153,6 @@ if (calendarElement) {
   })
 
   startInput.addEventListener('change', (event)=> {
-    console.log(startCalendar.value)
-    console.log(startInput.value)
-
     if (event.target.value) {
       disableDateSubmit.disabled = false
       endInput.disabled = false
