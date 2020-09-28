@@ -24,7 +24,6 @@ const calendarElement = document.getElementById('disableModal')
 //       console.log("value update")
 //     },
 //     onChange: function(){
-//         console.log("on change")
 //        const bookingStartBtn = document.getElementById('booking-start-btn')
 //        if (bookingStartBtn) {
 // 			   bookingStartBtn.disabled = false

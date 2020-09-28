@@ -158,11 +158,8 @@ const initCalendar = () => {
 						
 	if (calendar) {
 		const disableDatesForm = document.querySelector("[id^=edit_calendar_]")
-		console.log("disableDatesForm")
-		console.log(disableDatesForm)
 		if (disableDatesForm) {
 			disableDatesForm.addEventListener('submit', (event) => {
-				console.log($('#disableModal'))
 				$('#disableModal').modal('hide');
 				setTimeout(() => {
 					fetchCalendar(new Date().getFullYear(), new Date().getMonth() + 1)
