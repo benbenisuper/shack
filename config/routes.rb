@@ -23,6 +23,7 @@ Rails.application.routes.draw do
       resources :days, only: [:show]
     end
   end
+  resources :calendars, only: :update
 
   resources :users, only: [:show]
 

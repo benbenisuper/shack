@@ -33,10 +33,10 @@
           <h4 class="text-align-center">Venue Details</h4>
           <% if @venue.user == current_user %>
             <div class="col-md-2">
-              <a href="#" class="btn btn-block mb-3" data-toggle="modal" data-target="#pagofacilModal">
+              <a href="#" class="btn btn-block mb-3" data-toggle="modal" data-target="#venueModal">
                 <div class="d-flex my-auto"><i class="far fa-edit text-dark my-auto"></i><span>Edit</span></div>
               </a>
-              <div class="modal hide fade" id="pagofacilModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+              <div class="modal hide fade" id="venueModal" tabindex="-1" role="dialog" aria-labelledby="venueModalLabel" aria-hidden="true">
                 <%= render('modal_form')%>
               </div>
             </div>
@@ -122,6 +122,7 @@
               <div id="calendar-wrapper">
                 <%= render "calendar", type: "host", calendar: @calendar, day_colors: @day_colors, days: @calendar_days, weekdays: @weekdays %>
               </div>
+              <%= link_to "Disable / Enable", "#", class: "btn btn-warning btn-sm mt-3", id: "disable-date", data: { toggle: "modal", target: "#disableModal"} %>
             <% else %>
               <div id="calendar-wrapper">
                 <%= render "calendar", type: "guest", calendar: @calendar, day_colors: @day_colors, days: @calendar_days, weekdays: @weekdays %>
@@ -130,7 +131,6 @@
                 <%#= render "bookings/form", venue: @venue %>
               </div> -->
             <% end %>
-
           </div>
         </div>
         <% if @venue.user == current_user %>
@@ -161,6 +161,38 @@
       </div>
     </div>
 
+  </div>
+</div>
+<div class="modal fade" id="disableModal" tabindex="-1" aria-labelledby="disableModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="disableModalLabel">Dates to Disable</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+        <%= simple_form_for @venue.calendar, method: :patch do |f| %>
+          <div class="modal-body">
+              <%= f.fields_for :disable do |h| %>
+                <%= h.input :from, as: :string, input_html: { id: 'disable_start' } %>
+                <%= h.input :to, as: :string, input_html: { id: 'disable_end', disabled: true } %>
+                <div class="d-flex">
+                  <span class="mr-2">Disable</span>
+                  <div class="custom-control custom-switch">
+                    <input type="checkbox" class="custom-control-input" id="customSwitch1" name="disable" checked>
+                    <label class="custom-control-label" for="customSwitch1"></label>
+                  </div>
+                  <span>Enable</span>
+                </div>
+              <% end %>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <button type="submit" class="btn btn-primary" id="disable-date-submit" disabled>Save changes</button>
+          </div>
+        <% end %>
+    </div>
   </div>
 </div>
 <br>

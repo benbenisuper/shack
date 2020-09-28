@@ -14,8 +14,14 @@ class Api::V1::CalendarsController < Api::V1::BaseController
     else
       @days = @calendar.days
     end
-
   end
+
+	def update
+		if params[:disable].present?
+			day = Day.find(params[:disable])
+			day.update(disabled: true)
+		end
+	end
 
   private
 

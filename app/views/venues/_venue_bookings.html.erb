@@ -11,7 +11,7 @@
             <p id="table-message" class="text-center show mt-2">Your venue has no upcoming bookings yet</p>
           <% end %>
     <table class="table table-cards align-items-center">
-        <thead id="table-header" class="hide">
+        <thead id="table-header" class="">
             <tr>
               <th>Guest</th>
               <th>Status</th>
@@ -28,7 +28,7 @@
           <% @venue.bookings.each do |booking| %>
             <% if booking.id %>
               <% is_passed = booking.is_passed? ? "is_passed" : "" %>
-              <tr class="hover-shadow-lg hover-translate-y-n3 venue-booking <%= booking.status %> <%= is_passed %>" id="booking-<%= booking.id %>">
+              <tr class="hover-shadow-lg hover-translate-y-n3 venue-booking hide <%= booking.status %> <%= is_passed %>" id="booking-<%= booking.id %>">
                 <td>
                   <%= link_to "#{booking.user.full_name}", user_path(booking.user) %>
                 </td>

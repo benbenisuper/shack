@@ -103,14 +103,18 @@ class Calendar < ApplicationRecord
     first_day = self.first_day_of_month(year, month)
     first_day_index = days.index(first_day)
     first_calendar_day_index = first_day_index - first_day.wday
-    first_calendar_day = days[first_calendar_day_index..(first_calendar_day_index + 41)]
+    calendar_days = days[first_calendar_day_index..(first_calendar_day_index + 41)]
   end
 
   def days_of_this_month(year, month)
     array = []
     self.calendar_days_for_month(year, month).each do |day|
-      if day.month == month.to_i && day.date > Time.now
-        array << ""
+      if (day.month == month.to_i && day.date > Time.now)
+        if day.disabled
+          array << "disabled"
+        else 
+          array << ""
+        end          
       else
         array << "disabled"
       end

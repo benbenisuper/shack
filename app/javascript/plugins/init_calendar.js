@@ -42,7 +42,8 @@ const initCalendar = () => {
 		document.querySelectorAll(".venue-booking").forEach((booking) => {
 			booking.classList.remove('active')
 		})
-		document.getElementById('table-message').classList.remove('show')
+		const tableMessage = document.getElementById('table-message')
+		if (tableMessage) { tableMessage.classList.remove('show')}
 		bookings.forEach((booking) => {
 			const bookingDOM = document.getElementById(`booking-${booking.id}`)
 			bookingDOM.classList.add('active')	
@@ -60,6 +61,9 @@ const initCalendar = () => {
 				handleDayHost(data)
 			}
 		})
+	}
+
+	function disableDay(id) {
 	}
 	
 	function fetchCalendar(year, month) {
@@ -153,6 +157,16 @@ const initCalendar = () => {
 
 						
 	if (calendar) {
+		const disableDatesForm = document.getElementById("edit_calendar_1")
+		if (disableDatesForm) {
+			disableDatesForm.addEventListener('submit', (event) => {
+				$('#disableModal').modal('hide');
+				setTimeout(() => {
+					fetchCalendar(new Date().getFullYear(), new Date().getMonth() + 1)
+				}, 500)
+			})
+		}
+
 		window.addEventListener('click', (event) => {
 			if (calendar.dataset.type == "host") {
 				const days = document.querySelectorAll('.day:not(.disabled)')
@@ -212,54 +226,55 @@ const initCalendar = () => {
 								<input type="hidden" name="_method" value="patch">
 								<input type="hidden" name="authenticity_token" value="${csrfToken}">
 		              
-		                		<input type="hidden" name="day[option]" value="">
-		                		<input type="hidden" name="day[calendar]" value="${calendar.dataset.id}">
-		                		<input type="hidden" name="day[month]" value="${div.dataset.month}">
-		                		<input type="hidden" name="day[year]" value="${div.dataset.year}">
-		                		<div class="row">
-		                			<div class="col-7 border-right">
-			                			<div class="form-group integer day_day_price">
-				                			<label class="integer" for="day_day_price">
-				                				Day price:
-				                			</label>
-				                			<div class="input-group input-group-merge">
-					                			<span class="input-group-text only-rounded-left" ><strong>CHF</strong></span>
-					                			<input class="form-control numeric integer form-control-prepend" type="number" min="0" oninput="validity.valid||(value='');" step="1" name="day[day_price]" id="day_day_price" value="${Number(div.dataset.dayPrice)/100}" style="font-size: 1rem;">
-				                			</div>
-			                			</div>
-			                			<div class="form-group integer day_hour_price active">
-				                			<label class="integer" for="day_hour_price">
-				                				Hour price:
-				                			</label>
-				                			<div class="input-group input-group-merge">
-					                			<span class="input-group-text only-rounded-left" ><strong>CHF</strong></span>
-					                			<input class="form-control numeric integer form-control-prepend" type="number" min="0" oninput="validity.valid||(value='');" step="1" name="day[hour_price]" id="day_hour_price" value="${Number(div.dataset.hourPrice)/100}" style="font-size: 1rem;">
-				                			</div>
-			                			</div>
-		                			</div>
-		                			<div class="col-5">
-				                		<div class="d-flex flex-column justify-content-between h-100">Apply on:
-					                		<span>
-						                		<input type="radio" value=${dayString} name="day[option]" id="day_option_day">
-						                		<label class="collection_radio_buttons" for="day_option_day">Selected day</label>
-					                		</span>
-					                		<span>
-						                		<input type="radio" value=${wdayString} name="day[option]" id="day_option_weekday">
-						                		<label class="collection_radio_buttons" for="day_option_weekday">${wdayStringValue}</label>
-					                		</span>
-					                		<span>
-						                		<input type="radio" value=${wnumString} name="day[option]" id="day_option_week">
-						                		<label class="collection_radio_buttons" for="day_option_week">Week</label>
-					                		</span>
-					                		<span>
-						                		<input type="radio" value=${monthString} name="day[option]" id="day_option_month">
-						                		<label class="collection_radio_buttons" for="day_option_month">${monthStringValue}</label>
-					                		</span>
-				                		</div>
-				                	</div>
-		                		</div>
+								<input type="hidden" name="day[option]" value="">
+								<input type="hidden" name="day[calendar]" value="${calendar.dataset.id}">
+								<input type="hidden" name="day[month]" value="${div.dataset.month}">
+								<input type="hidden" name="day[year]" value="${div.dataset.year}">
+								<div class="row">
+									<div class="col-7 border-right">
+										<div class="form-group integer day_day_price">
+											<label class="integer" for="day_day_price">
+												Day price:
+											</label>
+											<div class="input-group input-group-merge">
+												<span class="input-group-text only-rounded-left" ><strong>CHF</strong></span>
+												<input class="form-control numeric integer form-control-prepend" type="number" min="0" oninput="validity.valid||(value='');" step="1" name="day[day_price]" id="day_day_price" value="${Number(div.dataset.dayPrice)/100}" style="font-size: 1rem;">
+											</div>
+										</div>
+										<div class="form-group integer day_hour_price active">
+											<label class="integer" for="day_hour_price">
+												Hour price:
+											</label>
+											<div class="input-group input-group-merge">
+												<span class="input-group-text only-rounded-left" ><strong>CHF</strong></span>
+												<input class="form-control numeric integer form-control-prepend" type="number" min="0" oninput="validity.valid||(value='');" step="1" name="day[hour_price]" id="day_hour_price" value="${Number(div.dataset.hourPrice)/100}" style="font-size: 1rem;">
+											</div>
+										</div>
+									</div>
+									<div class="col-5">
+										<div class="d-flex flex-column justify-content-between h-100">Apply on:
+											<span>
+												<input type="radio" value=${dayString} name="day[option]" id="day_option_day">
+												<label class="collection_radio_buttons" for="day_option_day">Selected day</label>
+											</span>
+											<span>
+												<input type="radio" value=${wdayString} name="day[option]" id="day_option_weekday">
+												<label class="collection_radio_buttons" for="day_option_weekday">${wdayStringValue}</label>
+											</span>
+											<span>
+												<input type="radio" value=${wnumString} name="day[option]" id="day_option_week">
+												<label class="collection_radio_buttons" for="day_option_week">Week</label>
+											</span>
+											<span>
+												<input type="radio" value=${monthString} name="day[option]" id="day_option_month">
+												<label class="collection_radio_buttons" for="day_option_month">${monthStringValue}</label>
+											</span>
+										</div>
+									</div>
+								</div>
 							</form>
 							<div class="d-flex pt-3 border-top">
+
 								<button class="btn btn-secondary ml-auto" id="calendar-form-submit" disabled>Modify</button>
 							</div>
 						</div>
@@ -286,9 +301,10 @@ const initCalendar = () => {
 					document.querySelectorAll(".venue-booking").forEach((booking) => {
 						booking.classList.remove('active')
 					})
-					document.getElementById('table-message').classList.add('show')
+					const tableMessage = document.getElementById('table-message')
+					if (tableMessage) { tableMessage.classList.add('show')}
 					document.getElementById('host-day-prices').innerHTML = ``		
-					document.getElementById('table-header').classList.add('hide')		
+					// document.getElementById('table-header').classList.add('hide')		
 				}
 			}
 

@@ -8,4 +8,8 @@ class CalendarPolicy < ApplicationPolicy
   def show?
   	true
   end
+
+  def update?
+    user.admin? || user.manager? || record.venue.user == user
+  end
 end
