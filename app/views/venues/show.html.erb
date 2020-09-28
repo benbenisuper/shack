@@ -111,18 +111,20 @@
         <% end %>
         <div class="col shadow p-3 bg-white rounded">
           <div class="wrapper">
-
-            <% if @venue.user == current_user %>
-            <h4>Reserved Dates</h4>
-            <% else %>
-            <h4>Reserve now!</h4>
-            <% end %>
+            <div class="d-flex justify-content-between align-items-center">
+              <% if @venue.user == current_user %>
+              <h4>Reserved Dates</h4>
+              <% else %>
+              <h4>Reserve now!</h4>
+              <% end %>
+              <%= link_to "Disable / Enable", "#", class: "btn btn-warning btn-sm p-2", style: "height: 35px;", id: "disable-date", data: { toggle: "modal", target: "#disableModal"} %>
+            </div>
             <div id="to_calendar_start" class="calendar-btn ml-1 mb-2"><i class="fas fa-undo"></i> start date</div>
             <% if current_user == @venue.user %>
               <div id="calendar-wrapper">
                 <%= render "calendar", type: "host", calendar: @calendar, day_colors: @day_colors, days: @calendar_days, weekdays: @weekdays %>
               </div>
-              <%= link_to "Disable / Enable", "#", class: "btn btn-warning btn-sm mt-3", id: "disable-date", data: { toggle: "modal", target: "#disableModal"} %>
+              
             <% else %>
               <div id="calendar-wrapper">
                 <%= render "calendar", type: "guest", calendar: @calendar, day_colors: @day_colors, days: @calendar_days, weekdays: @weekdays %>

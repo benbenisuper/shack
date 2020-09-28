@@ -240,8 +240,8 @@ const initCalendar = () => {
 												Day price:
 											</label>
 											<div class="input-group input-group-merge">
-												<span class="input-group-text only-rounded-left" ><strong>CHF</strong></span>
-												<input class="form-control numeric integer form-control-prepend" type="number" min="0" oninput="validity.valid||(value='');" step="1" name="day[day_price]" id="day_day_price" value="${Number(div.dataset.dayPrice)/100}" style="font-size: 1rem;">
+												<span class="input-group-text only-rounded-left" style="height: 30px;" ><strong>CHF</strong></span>
+												<input class="form-control numeric integer form-control-prepend" style="height: 30px;" type="number" min="0" oninput="validity.valid||(value='');" step="1" name="day[day_price]" id="day_day_price" value="${Number(div.dataset.dayPrice)/100}" style="font-size: 1rem;">
 											</div>
 										</div>
 										<div class="form-group integer day_hour_price active">
@@ -249,8 +249,8 @@ const initCalendar = () => {
 												Hour price:
 											</label>
 											<div class="input-group input-group-merge">
-												<span class="input-group-text only-rounded-left" ><strong>CHF</strong></span>
-												<input class="form-control numeric integer form-control-prepend" type="number" min="0" oninput="validity.valid||(value='');" step="1" name="day[hour_price]" id="day_hour_price" value="${Number(div.dataset.hourPrice)/100}" style="font-size: 1rem;">
+												<span class="input-group-text only-rounded-left" style="height: 30px;" ><strong>CHF</strong></span>
+												<input class="form-control numeric integer form-control-prepend" style="height: 30px;" type="number" min="0" oninput="validity.valid||(value='');" step="1" name="day[hour_price]" id="day_hour_price" value="${Number(div.dataset.hourPrice)/100}" style="font-size: 1rem;">
 											</div>
 										</div>
 									</div>
