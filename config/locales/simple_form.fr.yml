@@ -37,6 +37,9 @@ fr:
         spaces: Pièce(s)
         bathrooms: Salle de bain 
         garage_spaces: Place de parking
+    placeholders:
+      venue:
+        location: Ville
           
     #       email: 'E-mail to sign in.'
     #     edit:

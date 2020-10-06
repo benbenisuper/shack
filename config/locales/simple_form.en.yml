@@ -37,6 +37,9 @@ en:
         spaces: Spaces
         bathrooms: Bathrooms
         garage_spaces: Garage Spaces
+    placeholders:
+      venue:
+        location: City
 
 
 
