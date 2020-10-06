@@ -9,8 +9,8 @@
         <%= f.input :name %>
         <%= f.input :location, input_html: { id: 'location' }  %>
         <div class="d-flex justify-content-between">
-          <%= f.input :category, collection: Venue::CATEGORIES, input_html: { class: "w-100" }, wrapper_html: { class: 'w-100 pr-2' }  %>
-          <%= f.input :activity, collection: Venue::ACTIVITIES, input_html: { class: "w-100" }, wrapper_html: { class: 'w-100 pl-2' } %>
+          <%= f.input :category, collection: venue_category_for_select, input_html: { class: "w-100" }, wrapper_html: { class: 'w-100 pr-2' }  %>
+          <%= f.input :activity, collection: venue_activity_for_select, input_html: { class: "w-100" }, wrapper_html: { class: 'w-100 pl-2' } %>
         </div>
         <div class="d-flex justify-content-between">
           <%= f.input :capacity, as: :numeric, input_html: { class: "mx-auto w-100", min: 0, oninput: "validity.valid||(value='');" },

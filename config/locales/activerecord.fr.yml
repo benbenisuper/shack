@@ -29,6 +29,24 @@ fr:
         name: Name
         location: Localisation 
         category: Catégorie
+        categories:
+          "All Categories": "Tous les Spots"
+          "Private House": "Logement privé"
+          "Restaurant": "Restaurant"
+          "Bar": "Bar"
+          "Theatre": "Théâtre"
+          "Outdoor": "Espace extérieur"
+          "Castle": "Châteaux"
+          "Workshop": "Atelier"
+        activities:
+          "All Activities": "Toutes les activités"
+          "Wedding": "Mariage"
+          "Dinner": "Dîner"
+          "Work Meeting": "Réunion d'entreprise"
+          "Show": "Spectacle"
+          "Music": "Évènement musical"
+          "Art Display": "Exposition d'art "
+          "Workshop": "Atelier"
         description: Description
         capacity: Capacité
         activity: Activité

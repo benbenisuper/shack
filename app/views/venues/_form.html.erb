@@ -12,12 +12,12 @@
   </span>
   <div class="d-flex justify-content-around">
     <span class="h5 my-3 d-block w-50 mr-2">
-      <%= f.input :category, collection: Venue::CATEGORIES[1..-1],
+      <%= f.input :category, collection: venue_category_for_select[1..-1],
                   required: true %>
     </span>
     <span class="h5 my-3 d-block w-50 ml-2">
       <%= f.input :activity, 
-                  collection: Venue::ACTIVITIES[1..-1],
+                  collection: venue_activity_for_select[1..-1],
                   required: true %>
     </span>
   </div>
