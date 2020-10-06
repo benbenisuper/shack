@@ -1,0 +1,71 @@
+fr:
+  activerecord:
+    models:
+      venue:
+        one: Spot
+        other: Spots
+      booking:
+        one: Réservation
+        other: Réservations
+      calendar:
+        one: Calendar
+        other: Calendars
+      message:
+        one: Message
+        other: Messages
+      review:
+        one: Avis
+        other: Avis
+      user:
+        one: User
+        other: Users
+    attributes:
+      booking:
+        start_date: Start Date
+        end_date: End Date
+        amount_cents: Price
+        status: Statuts
+      venue:
+        name: Name
+        location: Localisation 
+        category: Catégorie
+        description: Description
+        capacity: Capacité
+        activity: Activité
+        perks: Avantages
+        price_cents: Prix
+      venue_spec:
+        total_area: Surface totale
+        spaces: Pièce(s)
+        bathrooms: Salle de bain 
+        garage_spaces: Place de parking
+      user:
+        email: Email
+        password: Mot de passe
+        password_confirmation: Confirmation du Mot de passe
+        first_name: Prénom
+        last_name: Nom de famille
+        phone: Numéro de téléphone
+        rating: Rating
+        remember_me: souviens-toi de moi
+
+      review:
+        title: Title
+        rating: Rating
+        comment: Comment
+    errors:
+      messages:
+        taken: "is already taken"
+        blank: "can't be blank."
+        too_short: "is too short."
+        wrong_length: "doesn't meet the required length."
+        greater_than: "has to be greater than 0"
+        required: 'must be present'
+        taken: "can't be repeated."
+        invalid: "has invalid format."
+        inclusion: "can't be empty"
+        not_a_number: "only accepts numbers"
+        too_long: "is too long."
+      models:
+        user:
+          email_domain_known_errors: "domain contains errors"

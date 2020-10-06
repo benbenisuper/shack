@@ -8,6 +8,8 @@ Bundler.require(*Rails.groups)
 
 module Shack
   class Application < Rails::Application
+    config.i18n.default_locale = :fr
+    config.i18n.available_locales = [:fr, :en]
     config.action_view.embed_authenticity_token_in_remote_forms = true
     config.generators do |generate|
       generate.assets false

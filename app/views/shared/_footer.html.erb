@@ -14,23 +14,23 @@
         </div>
         <div class="col-md-2 col-6 col-sm-4 ml-lg-auto mb-5 mb-lg-0">
           <% if user_signed_in? %>
-            <h6 class="heading mb-3">Account</h6>
+            <h6 class="heading mb-3"><%= t("footer.account") %></h6>
             <ul class="list-unstyled">
-              <li><a href="#">Profile</a></li>
-              <li><a href="#">Settings</a></li>
-              <li><a href="#">Notifications</a></li>
+              <li><a href="#"><%= t("footer.profile") %></a></li>
+              <li><a href="#"><%= t("footer.settings") %></a></li>
+              <li><a href="#"><%= t("footer.notifications") %></a></li>
             </ul>
           <% end %>
         </div>
         <div class="col-md-2 col-6 col-sm-4 mb-5 mb-lg-0">
-          <h6 class="heading mb-3">Documentation</h6>
+          <h6 class="heading mb-3"><%= t("footer.documentation") %></h6>
           <ul class="list-unstyled">
-            <li><a href="#">How it works</a></li>
-            <li><a href="#">Frequently asked questions</a></li>
+            <li><a href="#"><%= t("footer.how_it_works") %></a></li>
+            <li><a href="#"><%= t("footer.faqs") %></a></li>
           </ul>
         </div>
         <div class="col-md-2 col-6 col-sm-4 mb-5 mb-lg-0">
-          <h6 class="heading mb-3">Contact</h6>
+          <h6 class="heading mb-3"><%= t("footer.contact") %></h6>
           <ul class="list-unstyled">
             <li><a href="#">+54 911 6297-4940</a></li>
             <li><a href="#">Av. 9 de Julio, Caba, Argentina</a></li>
@@ -45,8 +45,13 @@
         </div>
         <div class="col-md-6">
           <ul class="nav justify-content-center justify-content-md-end mt-3 mt-md-0">
-            <li class="nav-item"><a class="nav-link" href="#">Terms and Conditions</a></li>
-            <li class="nav-item"><a class="nav-link" href="#">Privacy</a></li>
+            <li>
+              <div>
+                <%= link_to 'EN', root_path(locale: :en) %> | <%= link_to 'FR', root_path(locale: :fr) %>
+              </div>
+            </li>  
+            <li class="nav-item"><a class="nav-link" href="#"><%= t("footer.terms") %></a></li>
+            <li class="nav-item"><a class="nav-link" href="#"><%= t("footer.privacy") %></a></li>
           </ul>
         </div>
       </div>

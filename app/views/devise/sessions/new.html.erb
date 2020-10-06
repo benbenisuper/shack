@@ -3,7 +3,7 @@
     <div class="col-12 col-lg-8">
       <div class="shadow-sm p-5 bg-white rounded mt-5">
 
-        <h1>Log in</h1>
+        <h1><%= t("actions.log_in") %></h1>
 
         <%= simple_form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
         <div class="form-inputs">
@@ -18,7 +18,7 @@
         </div>
 
         <div class="form-actions">
-          <%= f.button :submit, "Log in", class:"btn btn-primary" %>
+          <%= f.button :submit, t("actions.log_in"), class:"btn btn-primary" %>
         </div>
         <% end %>
         <%# <div class="row justify-content-center border-top pt-2 mt-2">

@@ -19,7 +19,7 @@
           </div>
           <div class="col-8 col-xs-8 col-sm-8 col-md-8 col-lg-10 col-xl-11">
             <div class="container pl-0" style="">
-              <h1 class="m-0 p-0 dashboard-greet">Hello <%= current_user.first_name %>!</h1>
+              <h1 class="m-0 p-0 dashboard-greet"><%= t("dashboard.hello") %> <%= current_user.first_name %>!</h1>
               
             </div>
           </div>
@@ -29,10 +29,10 @@
 
           <ul class="nav nav-tabs" id="myTab" role="tablist">
             <li class="nav-item">
-              <a class="nav-link active" id="bookings-tab" data-toggle="tab" href="#bookings" role="tab" aria-controls="bookings" aria-selected="true">Your Bookings</a>
+              <a class="nav-link active" id="bookings-tab" data-toggle="tab" href="#bookings" role="tab" aria-controls="bookings" aria-selected="true"><%= t("dashboard.bookings") %></a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" id="listings-tab" data-toggle="tab" href="#listings" role="tab" aria-controls="listings" aria-selected="false">Your Listings</a>
+              <a class="nav-link" id="listings-tab" data-toggle="tab" href="#listings" role="tab" aria-controls="listings" aria-selected="false"><%= t("dashboard.venues") %></a>
             </li>
           </ul>
 
@@ -41,18 +41,18 @@
             <div class="tab-pane fade show active" style="height: content;" id="bookings" role="tabpanel" aria-labelledby="bookings-tab">
 
               <% if current_user.bookings == [] %>
-              <h4 class="mt-4" style="text-align: center">Looks empty here. Book something!</h4>
+              <h4 class="mt-4" style="text-align: center">"><%= t("dashboard.empty_bookings") %></h4>
               <% end %>
               <table class="table table-cards align-items-center">
                   <thead>
                     <tr>
                       <th></th>
-                      <th>Address</th>
-                      <th>Status</th>
-                      <th>Date</th>
-                      <th>From</th>
-                      <th>To</th>
-                      <th scope="col">Actions</th>
+                      <th><%= t("dashboard.address") %></th>
+                      <th><%= t("dashboard.status") %></th>
+                      <th><%= t("dashboard.date") %></th>
+                      <th><%= t("dashboard.from") %></th>
+                      <th><%= t("dashboard.to") %></th>
+                      <th scope="col"><%= t("dashboard.actions") %></th>
                     </tr>
                   </thead>
 
@@ -69,15 +69,15 @@
                       <td><%= booking.local_end_date.strftime("%H:%M") %></td>
           
                       <td class="w-10">
-                        <%= link_to booking_path(booking), class: 'btn' do %>
+                        <%= link_to booking_path(id: booking), class: 'btn' do %>
                         <%= show_svg("icons/external.svg") %>
-                        Info
+                        <%= t("actions.info") %>
                         <% end %>
                       </td>
                       <td class="w-10">
-                        <%= link_to booking_path(booking), class: 'btn', method: :delete, data: { confirm: "Are you sure?" } do %>
+                        <%= link_to booking_path(id: booking), class: 'btn', method: :delete, data: { confirm: "Are you sure?" } do %>
                         <%= show_svg("icons/trash.svg") %>
-                        Cancel
+                        <%= t("actions.cancel") %>
                         <% end %>
                       </td>
                     </tr>
@@ -92,15 +92,15 @@
                 <%#= cl_image_tag booking.venue&.venue_image, class:"card-img-top" %>
 
                 <div class="card-dashboard-infos">
-                  <h2 class="card-title"><%#= link_to booking_path(booking) do %><%#= booking.venue&.name %><%# end %></h2>
+                  <h2 class="card-title"><%#= link_to booking_path(id: booking) do %><%#= booking.venue&.name %><%# end %></h2>
                   <p><%#= booking.start_date.to_formatted_s(:short) %> - <%#= booking.end_date.to_formatted_s(:short) %></p>
                 </div>
 
                 <div class="buttons">
-                  <%#= link_to edit_booking_path(booking), {class: 'btn', 'data-toggle': 'popper','data-trigger': 'hover','data-content': 'Edit', 'data-placement': 'top' } do %>
+                  <%#= link_to edit_booking_path(id: booking), {class: 'btn', 'data-toggle': 'popper','data-trigger': 'hover','data-content': 'Edit', 'data-placement': 'top' } do %>
                   <i class="far fa-edit"></i>
                   <%# end %>
-                  <%#= link_to booking_path(booking), class: 'btn', method: :delete, data: { confirm: "Are you sure?" } do %>
+                  <%#= link_to booking_path(id: booking), class: 'btn', method: :delete, data: { confirm: "Are you sure?" } do %>
                   <i class="far fa-trash-alt"></i>
                   <%# end %>
                 </div>
@@ -110,7 +110,7 @@
               <%# end %>
               </div> -->
 
-              <%= link_to "Book new venue", root_path, class:"btn mt-2", style:"width: 100%" %>
+              <%= link_to t("dashboard.new_booking"), root_path, class:"btn mt-2", style:"width: 100%" %>
 
             </div>
 
@@ -118,7 +118,7 @@
             <div class="tab-pane fade" id="listings" role="tabpanel" aria-labelledby="listings-tab">
 
               <% if @venues == [] %>
-              <h4 class="mt-4" style="text-align: center">Looks empty here. Book something!</h4>
+              <h4 class="mt-4" style="text-align: center"><%= t("dashboard.empty_bookings") %></h4>
               <% end %>
               <% if @venues == [] %>
               <% else %>
@@ -130,10 +130,10 @@
                   <thead>
                     <tr>
                       <th></th>
-                      <th>Venue</th>
-                      <th># of Bookings</th>
-                      <th>Next Booking</th>
-                      <th scope="col">Acciones</th>
+                      <th><%= t("dashboard.venue") %></th>
+                      <th><%= t("dashboard.number_bookings") %></th>
+                      <th><%= t("dashboard.next_booking") %></th>
+                      <th scope="col"><%= t("dashboard.actions") %></th>
                     </tr>
                   </thead>
 
@@ -148,15 +148,15 @@
                       <td><%= venue.upcoming_checkin_date[:string] %></td>
           
                       <td class="w-10">
-                        <%= link_to venue_path(venue), class: 'btn' do %>
+                        <%= link_to venue_path(id: venue), class: 'btn' do %>
                         <%= show_svg("icons/external.svg") %>
-                        Info
+                        <%= t("actions.info") %>
                         <% end %>
                       </td>
                       <td class="w-10">
-                        <%= link_to venue_path(venue), class: 'btn', method: :delete, data: { confirm: "Are you sure?" } do %>
+                        <%= link_to venue_path(id: venue), class: 'btn', method: :delete, data: { confirm: "Are you sure?" } do %>
                         <%= show_svg("icons/trash.svg") %>
-                        Delete
+                        <%= t("actions.delete") %>
                         <% end %>
                       </td>
                     </tr>
@@ -169,17 +169,17 @@
 
                   <%#= cl_image_tag venue.venue_image, class:"card-img-top" %>
                   <div class="card-dashboard-infos">
-                    <h2 class="card-title"><%#= link_to venue_path(venue) do %><%#= venue.name %><%# end %></h2>
+                    <h2 class="card-title"><%#= link_to venue_path(id: venue) do %><%#= venue.name %><%# end %></h2>
                     <p><%#= venue.description %></p>
                   </div>
                   <div class="buttons">
-                    <%#= link_to venue_path(venue), class: 'btn', data: { toggle: "popper", trigger: "hover", content: "Info", placement: "top" } do %>
+                    <%#= link_to venue_path(id: venue), class: 'btn', data: { toggle: "popper", trigger: "hover", content: "Info", placement: "top" } do %>
                     <i class="fas fa-info"></i>
                     <%# end %>
-                    <%#= link_to edit_venue_path(venue), class: 'btn', data: { confirm: "Are you sure?", toggle: "popper", trigger: "hover", content: "Edit", placement: "top" } do %>
+                    <%#= link_to edit_venue_path(id: venue), class: 'btn', data: { confirm: "Are you sure?", toggle: "popper", trigger: "hover", content: "Edit", placement: "top" } do %>
                     <i class="far fa-edit"></i>
                     <%# end %>
-                    <%#= link_to venue_path(venue), class: 'btn', method: :delete, data: { confirm: "Are you sure?", toggle: "popper", trigger: "hover", content: "Delete", placement: "top" } do %>
+                    <%#= link_to venue_path(id: venue), class: 'btn', method: :delete, data: { confirm: "Are you sure?", toggle: "popper", trigger: "hover", content: "Delete", placement: "top" } do %>
                     <i class="far fa-trash-alt"></i>
                     <%# end %>
 
@@ -191,7 +191,7 @@
                 <div class="modal-dialog modal-lg" role="document">
                   <div class="modal-content">
                     <div class="modal-header">
-                      <h5 class="modal-title" id="exampleModalLabel<%#= venue.id %>"><%#= link_to venue_path(venue) do %><%#= venue.name %><%# end %></h5>
+                      <h5 class="modal-title" id="exampleModalLabel<%#= venue.id %>"><%#= link_to venue_path(id: venue) do %><%#= venue.name %><%# end %></h5>
                       <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                       </button>
@@ -240,10 +240,10 @@
                       </table>
 
                       <h5 class="mt-4"></h5>
-                      <%#= link_to edit_venue_path(venue), class: 'btn btn-primary' do %>
+                      <%#= link_to edit_venue_path(id: venue), class: 'btn btn-primary' do %>
                       Edit Venue
                       <%# end %>
-                      <%#= link_to venue_path(venue), method: :delete, data: { confirm: "Are you sure?" }, class: 'btn btn-primary' do %>
+                      <%#= link_to venue_path(id: venue), method: :delete, data: { confirm: "Are you sure?" }, class: 'btn btn-primary' do %>
                       Delete Venue
                       <%# end %>
 
@@ -254,7 +254,7 @@
 
               <%# end %> -->
 
-              <%= link_to "Add new venue", new_venue_path, class:"btn mt-2", style:"width: 100%" %>
+              <%= link_to t("dashboard.new_venue"), new_venue_path, class:"btn mt-2", style:"width: 100%" %>
 
             </div>
           </div>

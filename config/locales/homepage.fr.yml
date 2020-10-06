@@ -1,0 +1,38 @@
+fr:
+  welcome_message_1: Bienvenue sur KeySpot! Réservez le lieu de votre choix dans toute la Suisse!
+  welcome_message_2: Le meilleur moyen pour reserver des salles en Suisse.
+  steps:
+    first:
+      header: Inscription
+      content: Créez votre compte et rejoignez la communauté KeySpot
+    second:
+      header: Ajoutez votre lieu
+      content: Commencez à mettre à profit votre lieu en seulement 3 étapes 
+    third:
+      header: Gérez vos réservations
+      content: Personnaliser votre lieu de location n'a jamais été aussi facile
+  register: 
+    link: S'inscrire!
+    message: Pour votre inscription, nous avons besoin de vos informations personnelles.
+  benefits:
+    first:
+      header: Centre d'appel disponible 24h/24
+      content: Nous portons de l'importance à l'expérience client, c'est pourquoi nous sommes toujours disponibles en cas de besoin
+    second:
+      header: Service Client
+      content: En cas de problèmes ou questions, n'hésitez pas à contacter notre équipe.
+    third:
+      header: Services disponibles à la location
+      content: Vous trouverez toujours quelqu'un chez Keyspot pour satisfaire vos besoins.
+  faq:
+    header: Questions fréquemment posées
+    content: Si vous ne trouvez pas la réponse à votre question, n'hésitez pas à nous contacter!
+  general:
+    header: Général
+    content: TODO
+  payments:
+    header: Paiements
+    content: TODO
+  insurrance:
+    header: À propos de l'assurance
+    content: TODO

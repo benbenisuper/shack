@@ -1,7 +1,7 @@
-en:
+fr:
   simple_form:
-    "yes": 'Yes'
-    "no": 'No'
+    "yes": 'Oui'
+    "no": 'Non'
     required:
       text: 'required'
       mark: '*'
@@ -13,34 +13,31 @@ en:
     # Examples
     labels:
       defaults:
-        password: 'Password'
-        remember_me: Remember me
+        password: Mot de passe
       user:
-        first_name: First Name
-        last_name: Last Name
-        phone: Phone
+        first_name: Prénom
+        last_name: Nom de famille
+        phone: Numéro de téléphone
         email: Email
-        password_confirmation: Password Confirmation
-        avatar: Your Avatar (optional)
+        password_confirmation: Confirmation du Mot de passe
+        avatar: Photo de profil (optionnel)
       venue:
-        name: Name
-        location: Location
-        category: Category
+        name: Nom
+        location: Localisation 
+        category: Catégorie
         description: Description
-        capacity: Capacity
-        activity: Activity
-        perks: Perks
+        capacity: Capacité
+        activity: Activité
         price: Price / day
         photos: Photos
+        perks: Avantages
+        price: Prix / jour
       venue_spec:
-        total_area: Total Area
-        spaces: Spaces
-        bathrooms: Bathrooms
-        garage_spaces: Garage Spaces
-
-
-
-
+        total_area: Surface totale
+        spaces: Pièce(s)
+        bathrooms: Salle de bain 
+        garage_spaces: Place de parking
+          
     #       email: 'E-mail to sign in.'
     #     edit:
     #       email: 'E-mail.'

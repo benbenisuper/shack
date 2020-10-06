@@ -1,0 +1,38 @@
+en:
+  welcome_message_1: Welcome to KeySpot! Book your venue now!
+  welcome_message_2: The fastest way to find and book a venue around the globe.
+  steps:
+    first:
+      header: Register
+      content: Create your account and join the KeySpot community
+    second:
+      header: List your new Venue
+      content: You can start making profit from your property in 3 easy steps
+    third:
+      header: Manage your bookings
+      content: Customizing your venue has never been as easy
+  register: 
+    link: Register!
+    message: To register we will need some information about you.
+  benefits:
+    first:
+      header: Call center available 24hs
+      content: User experience is of utmost importance, thats why we are always available to offer help.
+    second:
+      header: Customer Service
+      content: If you have any questions or trouble with our service, we are here.
+    third:
+      header: Services available for hire
+      content: Whatever you need, you will find someone here in keyspot that can make it happen.
+  faq:
+    header: Frequently Asked Questions
+    content: If you can't find the answer to the question you were looking for, you can contact us!
+  general:
+    header: General
+    content: TODO
+  payments:
+    header: Payments
+    content: TODO
+  insurrance:
+    header: About Insurrance
+    content: TODO

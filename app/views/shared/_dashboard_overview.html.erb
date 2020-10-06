@@ -13,7 +13,7 @@
 				</div>
 				<span class="text-sm font-weight-bolder mb-1"><%= @next_checkin[:string] %></span>
 				<span class="d-block text-sm text-muted font-weight-bold mt-auto">
-					Next Checkin	
+					<%= t("dashboard.next_checkin") %>	
 					<svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-up text-success"><polyline points="18 15 12 9 6 15"></polyline></svg>
 				</span>
 			</div>
@@ -33,7 +33,7 @@
 				</div>
 				<h5 class="text-sm font-weight-bolder mb-1"><%= @next_checkout[:string] %></h5>
 				<span class="d-block text-sm text-muted font-weight-bold mt-auto">
-					Next Checkout
+					<%= t("dashboard.next_checkout") %>	
 					<svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-down text-danger"><polyline points="6 9 12 15 18 9"></polyline></svg>
 				</span>
 			</div>
@@ -71,7 +71,7 @@
 					</div>
 					<h5 class="text-sm font-weight-bolder mb-1"><%= current_user.all_messages.count %></h5>
 					<span class="d-block text-sm text-muted font-weight-bold mt-auto">
-						Messages 
+						<%= t("dashboard.messages") %>	 
 						<svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-up text-success"><polyline points="18 15 12 9 6 15"></polyline></svg>
 					</span>
 				</div>

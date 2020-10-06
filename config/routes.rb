@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+
   root to: 'pages#home', as: 'root'
 
   devise_for :admin_users, ActiveAdmin::Devise.config
@@ -50,4 +51,5 @@ Rails.application.routes.draw do
   end
 
   mount ActionCable.server => "/cable"
+
 end

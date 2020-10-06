@@ -1,0 +1,78 @@
+fr:
+  navbar:
+    home: Menu
+    list_venue: Ajoutez votre spot 
+    dashboard: Espace personnel
+    hello: Bonjour
+    edit_profile: Editer le profil
+    delete_venue: Supprimer le spot
+    log_in: S'identifier
+    log_out: Se déconnecter
+    register: S'inscrire!
+    how_it_works: Comment ça marche?
+    faqs: FAQs
+  footer:
+    account: Compte
+    profile: Profil
+    settings: Paramètres
+    notifications: Notifications
+    documentation: Documentation
+    how_it_works: Comment ça marche?
+    faqs: Questions fréquentes
+    contact: Contact
+    terms: Conditions générales
+    privacy: Confidentialité
+  dashboard:
+    hello: Bonjour
+    bookings: Vos réservations
+    venues: Mes Spots
+    empty_bookings: Looks empty here. Book something!
+    address: Adresse
+    status: Statuts
+    date: Date
+    from: Du
+    to: À
+    actions: Action(s)
+    new_booking: Réserver un Spot 
+    new_venue: Ajouter un spot 
+    venue: Spot
+    number_bookings: Numéro de réservations
+    next_booking: Prochaine réservation 
+    next_checkin: Prochaine arrivée
+    next_checkout: Prochain départ
+    messages: Message(s)
+  venue:
+    booking_times: Booking Times
+    pick_html: pick a <strong class="px-1"> start</strong> time
+    details: Venue Details
+    description: Description
+    avg_monthly_prices: Average Monthly Prices
+    per_day: "/ Day"
+    por_hour: "/ Hour"
+    additional_info: Additional Information
+    reviews: Avis
+    reserved_dates: Dates réservées
+    selected_dates: Jour sélectionné
+  actions:
+    sign_up: S'inscrire
+    log_in: S'identifier
+    cancel: Annuler
+    submit: Continuer
+    delete: Supprimer
+    info: Info
+    edit: Éditer
+  perks: 
+    internet: Wifi
+    parking: Parking
+    air_conditioning: Air conditionné
+    heating: Chauffage
+    security: Sécurité 
+    kitchen: Cuisine
+    catering: Restauration
+    handicap_friendly: Assistance handicap
+    photos: Photo(s)
+  from: Du
+  to: À
+  number_of_hours: Nombre d'heures
+  total_price: Prix total
+

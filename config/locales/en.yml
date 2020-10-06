@@ -30,4 +30,80 @@
 # available at https://guides.rubyonrails.org/i18n.html.
 
 en:
-  hello: "Hello world"
+  navbar:
+    home: Home
+    list_venue: List your venue
+    dashboard: Dashboard
+    hello: Hello
+    edit_profile: Edit Profile
+    delete_venue: Delete Venue
+    log_in: Log In
+    log_out: Log Out
+    register: Register
+    how_it_works: How it works
+    faqs: FAQs
+  footer:
+    account: Account
+    profile: Profile
+    settings: Settings
+    notifications: Notifications
+    documentation: Documentation
+    how_it_works: How it works
+    faqs: Frequently asked questions
+    contact: Contact
+    terms: Terms and Conditions
+    privacy: Privacy
+  dashboard:
+    hello: Hello
+    bookings: Your Bookings
+    venues: Your Listings
+    empty_bookings: Looks empty here. Book something!
+    address: Address
+    status: Status
+    date: Date
+    from: From
+    to: To
+    actions: Actions
+    new_booking: Book new venue
+    new_venue: Add new venue
+    venue: Venue
+    number_bookings: "# of Bookings"
+    next_booking: Next Booking
+    next_checkin: Next Checkin
+    next_checkout: Next Checkout
+    messages: Messages
+  venue:
+    booking_times: Booking Times
+    pick_html: pick a <strong class="px-1"> start</strong> time
+    details: Venue Details
+    description: Description
+    avg_monthly_prices: Average Monthly Prices
+    per_day: "/ Day"
+    por_hour: "/ Hour"
+    additional_info: Additional Information
+    reviews: Reviews
+    reserved_dates: Reserved Dates
+    selected_dates: Jour sélectionné
+  actions:
+    sign_up: Sign up
+    log_in: Log in
+    cancel: Cancel
+    submit: Submit
+    delete: Delete
+    info: Info
+    edit: Edit
+  perks: 
+    internet: Internet
+    parking: Parking
+    air_conditioning: Air conditioning
+    heating: Heating
+    security: Security 
+    kitchen: Kitchen
+    catering: Catering
+    handicap_friendly: Handicap_friendly
+    photos: Photos
+  from: From
+  to: To
+  number_of_hours: N° of Hours
+  total_price: Total Price
+

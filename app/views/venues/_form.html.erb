@@ -28,7 +28,7 @@
                 input_html: { min: 0, oninput: "validity.valid||(value='');" } %>
   </span>
   <span class="h5 my-3 d-block w-50 ml-2">
-    <%= f.input :price, as: :float, label: "Price / day",
+    <%= f.input :price, as: :float,
                 required: true,
                 input_html: { value: "CHF", placeholder: "CHF", min: 0, oninput: "validity.valid||(value='');" } %>
   </span>
@@ -64,13 +64,13 @@
           </span>
       </div>
   <% end %>
-  <span class="h5 my-3 d-block">Perks</span>
+  <span class="h5 my-3 d-block"><%= t("activerecord.attributes.venue.perks") %></span>
   <div class="btn-group btn-group-toggle perk-grid mb-3" id="new-venue-perks">
-    <% Venue::PERKS.each do |perk| %>
+    <% Venue::PERKS.each_with_index do |perk, index| %>
       <label class="btn btn-secondary rounded d-flex justify-content-center align-items-center ">
           <input type="checkbox" name="venue[perks][]" id="<%= perk %>" autocomplete="off" value="<%= perk %>" class="toggle-catch">
           <i class="<%= Venue.perk_icon(perk) %> mr-3 my-auto " style="font-size: 21px;" ></i>
-          <strong class="text-start "><%= perk %></strong><br>
+          <strong class="text-start "><%= Venue::PERKS_LABEL[index] %></strong><br>
       </label>
     <% end %>
   </div>
@@ -78,7 +78,7 @@
     <%= f.input :photos, as: :file, input_html: { multiple: true } %>
   </span>
   <div class="d-flex justify-content-between mt-5">
-    <%= link_to 'Cancel', dashboard_path, class: "btn btn-danger" %>
-    <%= f.submit "Submit", class: "btn btn-primary" %>
+    <%= link_to t("actions.cancel"), dashboard_path, class: "btn btn-danger" %>
+    <%= f.submit t("actions.submit"), class: "btn btn-primary" %>
   </div>
 <% end %>

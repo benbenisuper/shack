@@ -17,8 +17,8 @@
 
       <div class="shadow p-3 mb-3 bg-white rounded" id="times-container">
         <div class="d-flex justify-content-between ">
-          <h4 class="center-text">Booking Times</h4>
-          <span id="booking-message" class="center-text">pick a <strong class="px-1"> start</strong> time</span>
+          <h4 class="center-text"><%= t("venue.booking_times") %></h4>
+          <span id="booking-message" class="center-text"><%= t("venue.pick_html") %></span>
           <span id="guest-day-prices" class="center-text"></span>
         </div>
         <div id="venue-times" data-stage="0"></div>
@@ -34,7 +34,7 @@
           <% if @venue.user == current_user %>
             <div class="col-md-2">
               <a href="#" class="btn btn-block mb-3" data-toggle="modal" data-target="#venueModal">
-                <div class="d-flex my-auto"><i class="far fa-edit text-dark my-auto"></i><span>Edit</span></div>
+                <div class="d-flex my-auto"><i class="far fa-edit text-dark my-auto"></i><span><%= t("actions.edit") %></span></div>
               </a>
               <div class="modal hide fade" id="venueModal" tabindex="-1" role="dialog" aria-labelledby="venueModalLabel" aria-hidden="true">
                 <%= render('modal_form')%>
@@ -44,10 +44,10 @@
         </div>
         
         <div class="d-flex justify-content-between">
-          <h5 class="mt-4">Description</h5>
+          <h5 class="mt-4"><%= t("venue.description") %></h5>
           <div class="d-flex mt-4">
             <div class="d-flex justify-content-center perk-svg mr-2 py-auto" style="height: 20px;"><%= cl_image_tag "coin" %></div>
-            <strong class="mr-2">Average Monthly Prices: </strong>
+            <strong class="mr-2"><%= t("venue.avg_monthly_prices") %>: </strong>
             <span class="d-flex flex-column">
               <span class="font-weight-bolder"><%= humanized_money_with_symbol(@venue.calendar.average_day_price_cents / 100) %> / day</span>
               <span class="font-weight-bolder"><%= humanized_money_with_symbol(@venue.calendar.average_hour_price_cents / 100) %> / hour</span>
@@ -57,19 +57,19 @@
         <%= @venue.description %>
         <h5 class="mt-4">Additional information</h5>
         <div class="perks">
-          <div class="d-flex"><div class="perk-svg mr-2 py-auto"><%= cl_image_tag "group" %></div><strong class="mr-2">Capacity: </strong><%= @venue.capacity %><%= (@venue.capacity == "1" ? ' guest' : ' guests') %></div>
-          <div class="d-flex"><div class="perk-svg mr-2 py-auto"><%= cl_image_tag "blueprint" %></div><strong class="mr-2">Spaces: </strong><%= @venue.venue_spec.spaces %></div>
-          <div class="d-flex"><div class="perk-svg mr-2 py-auto"><%= cl_image_tag "measure" %></div><strong class="mr-2">Total Area: </strong><%= @venue.venue_spec.total_area %> m2</div>
-          <div class="d-flex"><div class="perk-svg mr-2 py-auto"><%= cl_image_tag "bathtub" %></div><strong class="mr-2">Bathrooms: </strong><%= @venue.venue_spec.bathrooms %></div>
-          <div class="d-flex"><div class="perk-svg mr-2 py-auto"><%= cl_image_tag "garage" %></div><strong class="mr-2">Garage Spaces: </strong><%= @venue.venue_spec.garage_spaces %></div>
+          <div class="d-flex"><div class="perk-svg mr-2 py-auto"><%= cl_image_tag "group" %></div><strong class="mr-2"><%= t("activerecord.attributes.venue.capacity") %>: </strong><%= @venue.capacity %><%= (@venue.capacity == "1" ? ' guest' : ' guests') %></div>
+          <div class="d-flex"><div class="perk-svg mr-2 py-auto"><%= cl_image_tag "blueprint" %></div><strong class="mr-2"><%= t("activerecord.attributes.venue_spec.spaces") %>: </strong><%= @venue.venue_spec.spaces %></div>
+          <div class="d-flex"><div class="perk-svg mr-2 py-auto"><%= cl_image_tag "measure" %></div><strong class="mr-2"><%= t("activerecord.attributes.venue_spec.total_area") %>: </strong><%= @venue.venue_spec.total_area %> m2</div>
+          <div class="d-flex"><div class="perk-svg mr-2 py-auto"><%= cl_image_tag "bathtub" %></div><strong class="mr-2"><%= t("activerecord.attributes.venue_spec.bathrooms") %>: </strong><%= @venue.venue_spec.bathrooms %></div>
+          <div class="d-flex"><div class="perk-svg mr-2 py-auto"><%= cl_image_tag "garage" %></div><strong class="mr-2"><%= t("activerecord.attributes.venue_spec.garage_spaces") %>: </strong><%= @venue.venue_spec.garage_spaces %></div>
           
         </div>
         <h5 class="mt-4">Perks</h5>
         <div class="perks mt-3">
-          <% @perks.each do |perk| %>
+          <% @perks.each_with_index do |perk, index| %>
             <div class="d-flex perk-container">
               <i class="<%= Venue.perk_icon(perk) %> mr-3 my-auto" style="font-size: 21px;"></i>
-              <strong><%= perk %></strong><br>
+              <strong><%= Venue::PERKS_LABEL[index] %></strong><br>
             </div>
           <% end %>
         </div>
@@ -77,7 +77,7 @@
 
 
       <div class="col shadow p-3 mt-3 bg-white rounded mb-3">
-        <h4 class="border-bottom">Reviews</h4>
+        <h4 class="border-bottom"><%= t("venue.reviews") %></h4>
 
         <% if @venue.reviews.empty? %>
           There are no ratings for this venue, yet
@@ -139,11 +139,11 @@
           <div id="day-form" class="col shadow p-3 bg-white rounded mt-3" data-venue-id="<%= @venue.id %>"></div>
         <% else %>
           <div id="booking-form" class="col shadow p-3 bg-white rounded mt-3 flex-column">
-            <div class="mb-2 d-flex justify-content-between">From: <span id="start-date"></span></div>
-            <div class="mb-2 d-flex justify-content-between">To: <span id="end-date"></span></div>
-            <div class="mb-2 d-flex justify-content-between">N° of Hours: <span id="total-hours"></span></div>
+            <div class="mb-2 d-flex justify-content-between"><%= t("from") %>: <span id="start-date"></span></div>
+            <div class="mb-2 d-flex justify-content-between"><%= t("to") %>: <span id="end-date"></span></div>
+            <div class="mb-2 d-flex justify-content-between"><%= t("number_of_hours") %>: <span id="total-hours"></span></div>
             <div class="d-flex justify-content-between border-top pt-3">
-              <span>Total Price:</span>
+              <span><%= t("total_price") %>:</span>
               <span id="total-price" class=""></span>
             </div>
             <%= simple_form_for @booking do |f| %>

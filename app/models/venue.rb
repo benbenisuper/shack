@@ -4,6 +4,15 @@ class Venue < ApplicationRecord
   CATEGORIES = ["All Categories", "Private House", "Restaurant", "Bar", "Theatre", "Outdoor", "Castle", "Workshop"]
   ACTIVITIES = ["All Activities", "Wedding", "Dinner", "Work Meeting", "Show", "Music", "Art Display", "Workshop"]
   PERKS = ["Internet", "Parking", "Air Conditioning", "Heating", "Security", "Kitchen", "Catering", "Handicap Friendly"]
+  PERKS_LABEL = [
+    I18n.t("perks.internet"),
+    I18n.t("perks.parking"),
+    I18n.t("perks.air_conditioning"),
+    I18n.t("perks.heating"),
+    I18n.t("perks.security"),
+    I18n.t("perks.kitchen"),
+    I18n.t("perks.catering"),
+    I18n.t("perks.handicap_friendly")]
   geocoded_by :location
   belongs_to :user
   has_one :venue_spec, dependent: :destroy
