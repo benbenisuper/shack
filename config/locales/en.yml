@@ -87,6 +87,7 @@ en:
     sign_up: Sign up
     log_in: Log in
     cancel: Cancel
+    pay: Payer
     submit: Submit
     delete: Delete
     info: Info
@@ -107,12 +108,6 @@ en:
     catering: Catering
     handicap_friendly: Handicap_friendly
     photos: Photos
-  from: From
-  to: To
-  number_of_hours: N° of Hours
-  total_price: Total Price
-  start_date: Date de début
-  end_date: Date de fin
   dates:
     months:
       "January": "January"
@@ -146,3 +141,14 @@ en:
   stripe:
     not_connected: You wont be able list your venue until you register with Stripe!
     connected: Successfully connected to Stripe
+    checkout:
+      summary: Checkout summary
+      booking_of: Pour la réservation de
+      price_per_hour: Prix par heure
+      total_price: Prix total
+  from: From
+  to: To
+  number_of_hours: N° of Hours
+  total_price: Total Price
+  start_date: Date de début
+  end_date: Date de fin

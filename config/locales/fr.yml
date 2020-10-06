@@ -88,6 +88,7 @@ fr:
     sign_up: S'inscrire
     log_in: S'identifier
     cancel: Annuler
+    pay: Payer
     submit: Continuer
     delete: Supprimer
     info: Info
@@ -108,12 +109,6 @@ fr:
     catering: Restauration
     handicap_friendly: Assistance handicap
     photos: Photo(s)
-  from: Du
-  to: À
-  number_of_hours: Nombre d'heures
-  total_price: Prix total
-  start_date: Date de début
-  end_date: Date de fin
   dates:
     months:
       "January": "Janvier"
@@ -147,3 +142,15 @@ fr:
   stripe:
     not_connected: Vous ne pourrez pas lister votre spot tant que vous ne vous serez pas inscrit sur Stripe!
     connected: Connexion réussie à Stripe
+    checkout:
+      summary: Résumé de la réservation 
+      booking_of: Pour la réservation de
+      price_per_hour: Prix par heure
+      total_price: Prix total
+  from: Du
+  to: À
+  number_of_hours: Nombre d'heures
+  total_price: Prix total
+  start_date: Date de début
+  end_date: Date de fin
+      

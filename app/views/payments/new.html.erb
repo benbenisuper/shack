@@ -6,21 +6,21 @@
         	<%= render "/bookings/slides" %>
         <% end %>
         <div class="col">
-          <h1>Checkout summary</h1>
-          <p>Booking of <strong><%= @booking.venue.name %></strong></p>
-          <p>From: <strong class="mr-4"><%= @booking.local_start_date.strftime("%B %d, %Y at %k:%M") %></strong>To: <strong><%= @booking.local_end_date.strftime("%B %d, %Y at %k:%M") %></strong></p>
+          <h1><%= t("stripe.checkout.summary") %></h1>
+          <p><%= t("stripe.checkout.booking_of") %> <strong><%= @booking.venue.name %></strong></p>
+          <p><%= t("from") %>: <strong class="mr-4"><%= @booking.local_start_date.strftime("%B %d, %Y at %k:%M") %></strong><%= t("to") %>: <strong><%= @booking.local_end_date.strftime("%B %d, %Y at %k:%M") %></strong></p>
           <% if @booking.venue.nil? %>
-            <p class='text-left'>Price per hour: <strong> Data is no longer available.</strong></p>
-            <p class='text-left'>Total price:  <strong> N/A </strong></p>
+            <p class='text-left'><%= t("stripe.checkout.price_per_hour") %>: <strong> Data is no longer available.</strong></p>
+            <p class='text-left'><%= t("stripe.checkout.total_price") %>:  <strong> N/A </strong></p>
           <% else %>
-            <p class='text-left'>Price per hour: <strong><%= humanized_money_with_symbol @booking.venue.price / 24 %></strong></p>
-            <p class='text-left'>Total price:  <strong><%= humanized_money_with_symbol @booking.amount %></strong></p>
+            <p class='text-left'><%= t("stripe.checkout.price_per_hour") %>: <strong><%= humanized_money_with_symbol @booking.venue.price / 24 %></strong></p>
+            <p class='text-left'><%= t("stripe.checkout.total_price") %>:  <strong><%= humanized_money_with_symbol @booking.amount %></strong></p>
           <% end %>
           <div class="d-flex justify-content-between">
             <%= link_to booking_path(@booking), class: 'btn btn-warning mr-1' do %>
-            Cancel
+            <%= t("actions.cancel") %>
             <% end %>
-            <button id="pay" class="btn btn-primary">Pay</button>
+            <button id="pay" class="btn btn-primary"><%= t("actions.pay") %></button>
           </div>
           <script src="https://js.stripe.com/v3/"></script>
           <script>
