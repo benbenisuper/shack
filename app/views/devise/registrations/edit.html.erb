@@ -3,7 +3,7 @@
     <div class="col-12 col-lg-8">
       <div class="">
 
-        <h1>Edit <%= resource_name.to_s.humanize %></h1>
+        <h1><%= t("actions.edit") %> <%= resource_name.to_s.humanize %></h1>
 
         <%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
           <%= f.error_notification %>
@@ -50,9 +50,9 @@
           </div>
         <% end %>
 
-        <h3 class="mt-4">Cancel my account</h3>
+        <h3 class="mt-4"><%= t("actions.cancel_account") %></h3>
 
-        <%= link_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete, class:"btn btn-warning" %>
+        <%= link_to t("actions.cancel_account"), registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete, class:"btn btn-warning" %>
         
 
       </div>
@@ -61,10 +61,10 @@
       <div class="w-full text-left lg:pl-16 lg:w-1/2">
         <div class=" text-gray-900 bg-white rounded">
           <% unless resource.can_receive_payments? %>
-            <h4 class="mb-6 text-xl font-semibold leading-none text-gray-900">You wont be able list your venue until you register with Stripe!</h4>
+            <h4 class="mb-6 text-xl font-semibold leading-none text-gray-900"><%= t("stripe.not_connected") %></h4>
             <%= stripe_connect_button %>
           <% else %>
-            <h4 class="mb-6 text-xl font-semibold leading-none text-gray-900">Successfully connected to Stripe  ✅</h4>
+            <h4 class="mb-6 text-xl font-semibold leading-none text-gray-900"><%= t("stripe.connected") %>  ✅</h4>
           <% end %>
         </div>
       </div>

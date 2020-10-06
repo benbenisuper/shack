@@ -29,6 +29,24 @@ en:
         name: Name
         location: Location
         category: Category
+        categories:
+          "All Categories": "All Categories"
+          "Private House": "Private House"
+          "Restaurant": "Restaurant"
+          "Bar": "Bar"
+          "Theatre": "Theatre"
+          "Outdoor": "Outdoor"
+          "Castle": "Castle"
+          "Workshop": "Workshop"
+        activities:
+          "All Activities": "All Activities"
+          "Wedding": "Wedding"
+          "Dinner": "Dinner"
+          "Work Meeting": "Work Meeting"
+          "Show": "Show"
+          "Music": "Music"
+          "Art Display": "Art Display"
+          "Workshop": "Workshop"
         description: Description
         capacity: Capacity
         activity: Activity

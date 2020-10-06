@@ -30,7 +30,7 @@
 
       <div class="col shadow p-3 bg-white rounded">
         <div class="title-container border-bottom d-flex justify-content-between">
-          <h4 class="text-align-center">Venue Details</h4>
+          <h4 class="text-align-center"><%= t("venue.details") %></h4>
           <% if @venue.user == current_user %>
             <div class="col-md-2">
               <a href="#" class="btn btn-block mb-3" data-toggle="modal" data-target="#venueModal">
@@ -55,7 +55,7 @@
         </div>
         </div>
         <%= @venue.description %>
-        <h5 class="mt-4">Additional information</h5>
+        <h5 class="mt-4"><%= t("venue.additional_info") %></h5>
         <div class="perks">
           <div class="d-flex"><div class="perk-svg mr-2 py-auto"><%= cl_image_tag "group" %></div><strong class="mr-2"><%= t("activerecord.attributes.venue.capacity") %>: </strong><%= @venue.capacity %><%= (@venue.capacity == "1" ? ' guest' : ' guests') %></div>
           <div class="d-flex"><div class="perk-svg mr-2 py-auto"><%= cl_image_tag "blueprint" %></div><strong class="mr-2"><%= t("activerecord.attributes.venue_spec.spaces") %>: </strong><%= @venue.venue_spec.spaces %></div>
@@ -64,7 +64,7 @@
           <div class="d-flex"><div class="perk-svg mr-2 py-auto"><%= cl_image_tag "garage" %></div><strong class="mr-2"><%= t("activerecord.attributes.venue_spec.garage_spaces") %>: </strong><%= @venue.venue_spec.garage_spaces %></div>
           
         </div>
-        <h5 class="mt-4">Perks</h5>
+        <h5 class="mt-4"><%= t("venue.perks") %></h5>
         <div class="perks mt-3">
           <% @perks.each_with_index do |perk, index| %>
             <div class="d-flex perk-container">
@@ -80,7 +80,7 @@
         <h4 class="border-bottom"><%= t("venue.reviews") %></h4>
 
         <% if @venue.reviews.empty? %>
-          There are no ratings for this venue, yet
+          <%= t("venue.no_rating") %>
         <% else %>
           <% @venue.reviews.each do |review| %>
             <% unless review.nil? %>
@@ -113,25 +113,26 @@
           <div class="wrapper">
             <div class="d-flex justify-content-between align-items-center">
               <% if @venue.user == current_user %>
-              <h4>Reserved Dates</h4>
+              <h4><%= t("venue.reserved_dates") %></h4>
               <%= link_to "Disable / Enable", "#", class: "btn btn-warning btn-sm p-2", style: "height: 35px;", id: "disable-date", data: { toggle: "modal", target: "#disableModal"} %>
               <% else %>
-              <h4>Reserve now!</h4>
+              <h4><%= t("venue.reserve_now") %></h4>
               <% end %>
             </div>
-            <div id="to_calendar_start" class="calendar-btn ml-1 mb-2"><i class="fas fa-undo"></i> start date</div>
+            <div id="to_calendar_start" class="calendar-btn ml-1 mb-2"><i class="fas fa-undo"></i> <%= t("start_date") %></div>
             <% if current_user == @venue.user %>
-              <div id="calendar-wrapper">
+              <div id="calendar-wrapper" data-months="<%= @months %>">
                 <%= render "calendar", type: "host", calendar: @calendar, day_colors: @day_colors, days: @calendar_days, weekdays: @weekdays %>
               </div>
               
             <% else %>
-              <div id="calendar-wrapper">
+              <div 
+              id="calendar-wrapper"
+              data-months="<%= @months %>"
+              data-wday="<%= @weekdays %>"
+              data-wdayFull="<%= @weekdays_full %>">
                 <%= render "calendar", type: "guest", calendar: @calendar, day_colors: @day_colors, days: @calendar_days, weekdays: @weekdays %>
-              </div><!-- 
-              <div class="d-flex justify-content-center">
-                <%#= render "bookings/form", venue: @venue %>
-              </div> -->
+              </div>
             <% end %>
           </div>
         </div>
@@ -169,7 +170,7 @@
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="disableModalLabel">Dates to Disable</h5>
+        <h5 class="modal-title" id="disableModalLabel"><%= t("venue.dates_to_disable") %></h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -180,18 +181,18 @@
                 <%= h.input :from, as: :string, input_html: { id: 'disable_start' } %>
                 <%= h.input :to, as: :string, input_html: { id: 'disable_end', disabled: true } %>
                 <div class="d-flex">
-                  <span class="mr-2">Disable</span>
+                  <span class="mr-2"><%= t("actions.disable") %></span>
                   <div class="custom-control custom-switch">
                     <input type="checkbox" class="custom-control-input" id="customSwitch1" name="disable" checked>
                     <label class="custom-control-label" for="customSwitch1"></label>
                   </div>
-                  <span>Enable</span>
+                  <span><%= t("actions.enable") %></span>
                 </div>
               <% end %>
           </div>
           <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-            <button type="submit" class="btn btn-primary" id="disable-date-submit" disabled>Save changes</button>
+            <button type="button" class="btn btn-secondary" data-dismiss="modal"><%= t("actions.close") %></button>
+            <button type="submit" class="btn btn-primary" id="disable-date-submit" disabled><%= t("actions.save_changes") %></button>
           </div>
         <% end %>
     </div>

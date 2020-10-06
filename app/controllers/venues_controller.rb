@@ -70,8 +70,9 @@ class VenuesController < ApplicationController
     @perks = @venue.perks.split(", ")
     authorize @venue
 
-    @weekdays = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"]
-    @months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
+    @weekdays = Calendar::WEEKDAYS.map{|wday| t("dates.week.#{wday}")}
+    @weekdays_full = Calendar::WDAYFULL.map{|wday| t("dates.week.full.#{wday}")}
+    @months = Calendar::MONTHS.map{|month| t("dates.months.#{month}")}
     init_month = Date.today.month
     init_year = Date.today.year
     @calendar = @venue.calendar

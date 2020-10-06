@@ -1,14 +1,14 @@
 const initCalendar = () => {
 
-	const weekdays = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"]
-	const wdayFull = ["Sundays", "Mondays", "Tuesdays", "Wednesdays", "Thursdays", "Fridays", "Saturdays"]
-	const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
 	const calendar = document.getElementById('venue-calendar')
 	const dayForm = document.getElementById('day-form')
 	const venueTimes = document.getElementById('venue-times')
 	const bookingMessage = document.getElementById('booking-message')
 	const bookingForm = document.getElementById('booking-form')
 	const calendarWrapper = document.getElementById('calendar-wrapper')
+	const months = JSON.parse(calendarWrapper.dataset.months)
+	const weekdays = JSON.parse(calendarWrapper.dataset.wday)
+	const wdayFull = JSON.parse(calendarWrapper.dataset.wdayfull)
 
 	function handleDayGuest(data) {
 		let DOMhours = ``

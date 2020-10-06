@@ -1,9 +1,12 @@
 class Calendar < ApplicationRecord
   after_create :create_days
-
+  
   belongs_to :venue
   has_many :days, dependent: :destroy
-
+  
+  MONTHS = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
+  WEEKDAYS = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"]
+  WDAYFULL = ["Sundays", "Mondays", "Tuesdays", "Wednesdays", "Thursdays", "Fridays", "Saturdays"]
   validates :day_price_cents, numericality: { greater_than_or_equal_to: 0 }
   validates :hour_price_cents, numericality: { greater_than_or_equal_to: 0 }
 

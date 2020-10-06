@@ -42,17 +42,48 @@ fr:
     next_checkout: Prochain départ
     messages: Message(s)
   venue:
-    booking_times: Booking Times
-    pick_html: pick a <strong class="px-1"> start</strong> time
-    details: Venue Details
+    booking_times: Heure de réservation 
+    pick_html: choisissez une heure de <strong class="px-1">début</strong>
+    details: Détail(s) du Spot
     description: Description
-    avg_monthly_prices: Average Monthly Prices
-    per_day: "/ Day"
-    por_hour: "/ Hour"
-    additional_info: Additional Information
+    avg_monthly_prices: Prix moyen mensuel 
+    per_day: "/ Jour"
+    por_hour: "/ Heure"
+    additional_info: Information(s) supplémentaire(s)
     reviews: Avis
     reserved_dates: Dates réservées
     selected_dates: Jour sélectionné
+    reserve_now: Réserver maintenant!
+    not_available: Ce spot n'est plus disponible
+    host: Propriétaire
+    perks: Avantages
+    no_rating: There are no ratings for this venue, yet
+    dates_to_disable: Dates to Disable
+  booking:
+    header: Confirmation de réservation 
+    information: Booking Information
+    description: Description
+    additional_information: Information(s) supplémentaire(s)
+    description: Description
+    capacity: Capacité
+    start_date: Date de début
+    end_date: Date de fin
+    start_date_time: Date et heure de début 
+    end_date_time: Date et heure de fin
+    amount_cents: Prix
+    status: Statuts
+    your_review: Votre avis
+    cant_review: Indisponible à la réservation
+    user: User
+    price_per_hour: Prix par heure
+    not_available: No longer available
+    total_paid: Total paid
+    total_price: Prix total
+    pay: "Payer votre réservation"
+    guest: 
+      one: guest
+      other: guests
+    chat_with: Discuter avec
   actions:
     sign_up: S'inscrire
     log_in: S'identifier
@@ -62,6 +93,11 @@ fr:
     info: Info
     edit: Éditer
     filter: Filtre
+    disable: Disable
+    enable: Enable
+    close: Close
+    save_changes: Save changes
+    cancel_account: Annuler mon compte
   perks: 
     internet: Wifi
     parking: Parking
@@ -76,4 +112,38 @@ fr:
   to: À
   number_of_hours: Nombre d'heures
   total_price: Prix total
-
+  start_date: Date de début
+  end_date: Date de fin
+  dates:
+    months:
+      "January": "Janvier"
+      "February": "Février"
+      "March": "Mars"
+      "April": "Avril"
+      "May": "Mai"
+      "June": "Juin"
+      "July": "Juillet"
+      "August": "Août"
+      "September": "Septembre"
+      "October": "Octobre"
+      "November": "Novembre"
+      "December": "Décembre "
+    week:
+      "Sun": "Dim"
+      "Mon": "Lun"
+      "Tue": "Mar"
+      "Wed": "Mer"
+      "Thu": "Jeu"
+      "Fri": "Ven"
+      "Sat": "Sam"
+      full:
+        "Sundays": "Dimanche"
+        "Mondays": "Lundi"
+        "Tuesdays": "Mardi"
+        "Wednesdays": "Mercredi"
+        "Thursdays": "Jeudi"
+        "Fridays": "Vendredi"
+        "Saturdays": "Samedi"
+  stripe:
+    not_connected: Vous ne pourrez pas lister votre spot tant que vous ne vous serez pas inscrit sur Stripe!
+    connected: Connexion réussie à Stripe

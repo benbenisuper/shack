@@ -1,6 +1,6 @@
 <div class="container">
 
-  <h1 class="mt-3" style="font-weight: 900">Booking Confirmation</h1>
+  <h1 class="mt-3" style="font-weight: 900"><%= t("booking.header") %></h1>
   <p><%= @booking.venue.name %> - <%= @booking.venue.location %></p>
 
   <div class="row">
@@ -13,19 +13,22 @@
 
       <div class="col shadow p-3 bg-white rounded">
         <div class="title-container border-bottom d-flex justify-content-between">
-          <h4 class="">Venue Details</h4>
+          <h4 class=""><%= t("venue.details") %></h4>
         </div>
         
-        <h5 class="mt-4">Description</h5>
+        <h5 class="mt-4"><%= t("booking.description") %></h5>
         <%= @booking.venue.description %>
-        <h5 class="mt-4">Additional information</h5>
-        <strong>Capacity: </strong><%= @booking.venue.capacity %><%= (@booking.venue.capacity == "1" ? ' guest' : ' guests') %><br>
+        <h5 class="mt-4"><%= t("booking.additional_information") %></h5>
+        <strong><%= t("booking.capacity") %>: </strong>
+        <%= @booking.venue.capacity %>
+        <%= (@booking.venue.capacity == "1" ? " #{t("booking.guest.one")}" : " #{t("booking.guest.other")}") %>
+        <br>
         
         <div class="perks mt-3">
-          <% @perks.each do |perk| %>
+          <% @perks.each_with_index do |perk, index| %>
           <div class="d-flex perk-container">
             <i class="<%= Venue.perk_icon(perk) %> mr-3 my-auto"></i>
-            <strong><%= perk %></strong><br>
+            <strong><%= Venue::PERKS_LABEL[index] %></strong><br>
           </div>
           <% end %>
         </div>
@@ -42,7 +45,7 @@
         <h2 class=''><%= current_user == @booking.venue.user ? "Review the guest" : "Review the venue" %></h2>
         <%= render 'review_form' %>
         <% elsif @booking.host_show_comment? %>
-        <h2 class='border-bottom'>Your Review</h2>
+        <h2 class='border-bottom'><%= t("booking.your_review") %></h2>
 
         <div style="display: flex; justify-content: space-between">
           <h4><%= @review.title %></h4>
@@ -51,14 +54,14 @@
 
         <p><%= @review.comment %></p>
         <% else %>
-        <h3 class='text-center text-muted'>Can't Review Yet</h3>
+        <h3 class='text-center text-muted'><%= t("booking.cant_review") %></h3>
         <% end %>
         <% else %>
         <% if @booking.can_comment? %>
         <h2 class=''><%= current_user == @booking.venue.user ? "Review the guest" : "Review the venue" %></h2>
         <%= render 'review_form' %>
         <% elsif @booking.show_comment? %>
-        <h2 class='border-bottom'>Your Review</h2>
+        <h2 class='border-bottom'><%= t("booking.your_review") %></h2>
 
         <div style="display: flex; justify-content: space-between">
           <h4><%= @review.title %></h4>
@@ -67,7 +70,7 @@
 
         <p><%= @review.comment %></p>
         <% else %>
-        <h3 class='text-center text-muted'>Can't Review Yet</h3>
+        <h3 class='text-center text-muted'><%= t("booking.cant_review") %></h3>
         <% end %>
         <% end %>
       </div>
@@ -76,11 +79,11 @@
 
     <div class="col-xs-12 col-lg-5">
       <div class="col shadow p-3 bg-white rounded sticky-div">
-        <h2 class='border-bottom mb-3'><%= current_user == @booking.venue.user ? "Booking Information" : "Booking Confirmation" %></h2>
+        <h2 class='border-bottom mb-3'><%= current_user == @booking.venue.user ? t("booking.information") : t("booking.header") %></h2>
         <div class="d-flex justify-content-between mb-3 mt-3">
-          <p class="text-left">Venue:</p>
+          <p class="text-left"><%= t("activerecord.models.venue.one") %>:</p>
           <% if @booking.venue.nil? %>
-          <p>Venue: <strong>This venue is no longer available.</strong></p>
+          <p><%= t("activerecord.models.venue.one") %>: <strong><%= t("venue.not_available") %></strong></p>
           <% else %>
           <p><strong><%= link_to "#{@booking.venue.name}", venue_path(@booking.venue) %></strong></p>
           <% end %>
@@ -88,7 +91,7 @@
 
         <% if current_user == @booking.user %>
         <div class="d-flex justify-content-between mb-3 mt-3">
-          <p class="text-left">Host:</p>
+          <p class="text-left"><%= t("venue.host") %>:</p>
           <% if @booking.venue.user.nil? %>
           <p><strong>N/A</strong></p>
           <% else %>
@@ -97,7 +100,7 @@
         </div>
         <% else %>
         <div class="d-flex justify-content-between mb-3 mt-3">
-          <p class="text-left">User:</p>
+          <p class="text-left"><%= t("booking.user") %>:</p>
           <% if @booking.user.nil? %>
           <p><strong>N/A</strong></p>
           <% else %>
@@ -107,42 +110,42 @@
         <% end %>
         
         <div class="d-flex justify-content-between mb-3">
-          <p>Start Date and Time:</p>
+          <p><%= t("booking.start_date_time") %>:</p>
           <p><strong><%= @booking.local_start_date.strftime("%B %d, %Y at %H:%M") %></strong></p>
         </div>
         <div class="d-flex justify-content-between mb-3">
-          <p class="text-left">End Date and Time:</p>
+          <p class="text-left"><%= t("booking.end_date_time") %>:</p>
           <p><strong><%= @booking.local_end_date.strftime("%B %d, %Y at %H:%M") %></strong></p>
         </div>
 
         <div class="d-flex justify-content-between mb-3">
-          <p class="text-left">Status:</p>
+          <p class="text-left"><%= t("booking.status") %>:</p>
           <p><strong><%= @booking.status %></strong></p>
         </div>
 
         <div class="d-flex justify-content-between mb-3">
-          <p>Price per hour:</p>
+          <p><%= t("price_per_hour") %>:</p>
           <% if @booking.venue.nil? %>
-          <p><strong>No longer available.</strong></p>
+          <p><strong><%= t("booking.not_available") %>.</strong></p>
           <% else %>
           <p><strong><%= humanized_money_with_symbol(@booking.amount_cents / 100.0 / @booking.hours ) %>  / hr</strong></p>
           <% end %>
         </div>
         <div class="d-flex justify-content-between mb-3">
-          <p>N° of hours:</p>
+          <p><%= t("number_of_hours") %>:</p>
           <p><strong><%= @booking.hours %></strong></p>
         </div>
         <div class="d-flex justify-content-between mb-3 pt-3 border-top">
           <% if @booking.status == "approved" %>
-            <p>Total paid:</p>
+            <p><%= t("booking.total_paid") %>:</p>
           <% else %>
-            <p>Total price:</p>
+            <p><%= t("booking.total_price") %>:</p>
           <% end %>
           <p><strong><%= humanized_money_with_symbol(@booking.amount) %></strong></p>
         </div>
         <% if @booking.status == "pending" && @booking.venue.user != current_user %>
         <div class="d-flex justify-content-center mb-3">
-          <%= link_to "Pay your reservation", new_booking_payment_path(@booking), class:"btn btn-primary" %>
+          <%= link_to t("booking.pay"), new_booking_payment_path(@booking), class:"btn btn-primary" %>
         </div>
         <% end %>
       </div>
@@ -160,9 +163,9 @@
     </div>
     <div class="col-8 h6 m-0 text-center">
       <% if current_user == @booking.user %>
-        Chat with <%= @booking.venue.user.full_name %>
+        <%= t("booking.chat_with") %> <%= @booking.venue.user.full_name %>
         <% else %>
-        Chat with <%= @booking.user.full_name %>
+        <%= t("booking.chat_with") %> <%= @booking.user.full_name %>
       <% end %>
     </div>
     <div class="col-2" id="chatbox-status"><i class="fas fa-chevron-circle-up"></i></div>

@@ -1,34 +1,3 @@
-# Files in the config/locales directory are used for internationalization
-# and are automatically loaded by Rails. If you want to use locales other
-# than English, add the necessary files in this directory.
-#
-# To use the locales, use `I18n.t`:
-#
-#     I18n.t 'hello'
-#
-# In views, this is aliased to just `t`:
-#
-#     <%= t('hello') %>
-#
-# To use a different locale, set it with `I18n.locale`:
-#
-#     I18n.locale = :es
-#
-# This would use the information in config/locales/es.yml.
-#
-# The following keys must be escaped otherwise they will not be retrieved by
-# the default I18n backend:
-#
-# true, false, on, off, yes, no
-#
-# Instead, surround them with single quotes.
-#
-# en:
-#   'true': 'foo'
-#
-# To learn more, please read the Rails Internationalization guide
-# available at https://guides.rubyonrails.org/i18n.html.
-
 en:
   navbar:
     home: Home
@@ -83,7 +52,37 @@ en:
     additional_info: Additional Information
     reviews: Reviews
     reserved_dates: Reserved Dates
-    selected_dates: Jour sélectionné
+    selected_dates: Selected Dates
+    not_available: This venue is no longer available.
+    host: Host
+    perks: Perks
+    no_rating: There are no ratings for this venue, yet
+    dates_to_disable: Dates to Disable
+  booking:
+    header: Booking Confirmation
+    information: Booking Information
+    description: Description
+    additional_information: Additional Information
+    description: Description
+    capacity: Capacity
+    start_date: Start Date
+    end_date: End Date
+    start_date_time: Start Date and Time
+    end_date_time: End Date and Time
+    amount_cents: Price
+    status: Status
+    your_review: Your Review
+    cant_review: Can't Review Yet
+    user: User
+    price_per_hour: Prix par heure
+    not_available: No longer available
+    total_paid: Total paid
+    total_price: Total price
+    pay: "Pay your reservation"
+    guest: 
+      one: guest
+      other: guests
+    chat_with: Chat with
   actions:
     sign_up: Sign up
     log_in: Log in
@@ -92,6 +91,12 @@ en:
     delete: Delete
     info: Info
     edit: Edit
+    filter: Filtre
+    disable: Disable
+    enable: Enable
+    close: Close
+    save_changes: Save changes
+    cancel_account: Cancel my account
   perks: 
     internet: Internet
     parking: Parking
@@ -106,4 +111,38 @@ en:
   to: To
   number_of_hours: N° of Hours
   total_price: Total Price
-
+  start_date: Date de début
+  end_date: Date de fin
+  dates:
+    months:
+      "January": "January"
+      "February": "February"
+      "March": "March"
+      "April": "April"
+      "May": "May"
+      "June": "June"
+      "July": "July"
+      "August": "August"
+      "September": "September"
+      "October": "October"
+      "November": "November"
+      "December": "December"
+    week:
+      "Sun": "Sun"
+      "Mon": "Mon"
+      "Tue": "Tue"
+      "Wed": "Wed"
+      "Thu": "Thu"
+      "Fri": "Fri"
+      "Sat": "Sat"
+      full:
+        "Sundays": "Sundays"
+        "Mondays": "Mondays"
+        "Tuesdays": "Tuesdays"
+        "Wednesdays": "Wednesdays"
+        "Thursdays": "Thursdays"
+        "Fridays": "Fridays"
+        "Saturdays": "Saturdays"
+  stripe:
+    not_connected: You wont be able list your venue until you register with Stripe!
+    connected: Successfully connected to Stripe
