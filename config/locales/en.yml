@@ -143,12 +143,12 @@ en:
     connected: Successfully connected to Stripe
     checkout:
       summary: Checkout summary
-      booking_of: Pour la réservation de
-      price_per_hour: Prix par heure
-      total_price: Prix total
+      booking_of: Booking of
+      price_per_hour: Price per hour
+      total_price: Total Price
   from: From
   to: To
   number_of_hours: N° of Hours
   total_price: Total Price
-  start_date: Date de début
-  end_date: Date de fin
+  start_date: Start Date
+  end_date: End Date

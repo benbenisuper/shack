@@ -61,7 +61,7 @@ fr:
     dates_to_disable: Dates to Disable
   booking:
     header: Confirmation de réservation 
-    information: Booking Information
+    information: Réservation Information
     description: Description
     additional_information: Information(s) supplémentaire(s)
     description: Description
