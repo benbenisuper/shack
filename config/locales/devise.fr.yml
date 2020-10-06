@@ -16,6 +16,9 @@ fr:
       invalid_token: "Jeton d'authentification incorrect."
       timeout: "Votre session est expirée, veuillez vous reconnecter pour continuer."
       inactive: "Votre compte n'est pas encore activé."
+      already_authenticated: "Vous êtes déjà connecté."
+      last_attempt: "Vous avez encore une tentative avant que votre compte ne soit verrouillé."
+      not_found_in_database: "%{authentication_keys} ou mot de passe non valide."
     sessions:
       signed_in: "Connecté."
       signed_out: "Déconnecté."
