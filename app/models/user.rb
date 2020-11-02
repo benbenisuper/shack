@@ -9,7 +9,7 @@ class User < ApplicationRecord
   has_many :reviews
   has_many :reviews, as: :reviewable
   has_many :messages, dependent: :destroy
-  has_many :venues
+  has_many :venues, dependent: :destroy
 
   has_one_attached :avatar
   enum role: { guest: 0, host: 1, manager: 2, admin: 3 }

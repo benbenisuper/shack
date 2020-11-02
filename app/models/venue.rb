@@ -13,14 +13,21 @@ class Venue < ApplicationRecord
     I18n.t("perks.kitchen"),
     I18n.t("perks.catering"),
     I18n.t("perks.handicap_friendly")]
+    
   geocoded_by :location
+  
+  after_validation :geocode, if: :will_save_change_to_location?
+  after_create :attach_default_photo, :update_zone, :create_calendar
+
   belongs_to :user
   has_one :venue_spec, dependent: :destroy
   has_one :calendar, dependent: :destroy
-  accepts_nested_attributes_for :venue_spec
   has_many :bookings, dependent: :nullify
   has_many :reviews, through: :bookings
   has_many_attached :photos
+  
+  accepts_nested_attributes_for :venue_spec
+
   monetize :price_cents
 
   validates :name, presence: :true
@@ -31,8 +38,6 @@ class Venue < ApplicationRecord
   validates :capacity, presence: :true
   validates :price, presence: :true
 
-  after_validation :geocode, if: :will_save_change_to_location?
-  after_create :attach_default_photo, :update_zone, :create_calendar
 
   def create_calendar
     calendar = Calendar.create!(
