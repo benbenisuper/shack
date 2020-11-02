@@ -5,9 +5,9 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable,
          :omniauthable, omniauth_providers: %i[facebook stripe_connect]
-  has_many :bookings, dependent: :nullify
-  has_many :reviews
-  has_many :reviews, as: :reviewable
+  has_many :bookings, dependent: :destroy
+  has_many :reviews, dependent: :destroy
+  has_many :reviews, as: :reviewable, dependent: :destroy
   has_many :messages, dependent: :destroy
   has_many :venues, dependent: :destroy
 
