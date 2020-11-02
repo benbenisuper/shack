@@ -12,7 +12,7 @@ gem 'redis'
 
 gem 'autoprefixer-rails'
 gem 'font-awesome-sass', '~> 5.12.0'
-gem 'sassc-rails'
+gem 'sass-rails'
 gem 'simple_form'
 gem 'uglifier'
 gem 'webpacker'
