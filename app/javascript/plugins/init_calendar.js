@@ -6,9 +6,11 @@ const initCalendar = () => {
 	const bookingMessage = document.getElementById('booking-message')
 	const bookingForm = document.getElementById('booking-form')
 	const calendarWrapper = document.getElementById('calendar-wrapper')
-	const months = JSON.parse(calendarWrapper.dataset.months)
-	const weekdays = JSON.parse(calendarWrapper.dataset.wday)
-	const wdayFull = JSON.parse(calendarWrapper.dataset.wdayfull)
+	if (calendarWrapper) {
+		const months = JSON.parse(calendarWrapper.dataset.months)
+		const weekdays = JSON.parse(calendarWrapper.dataset.wday)
+		const wdayFull = JSON.parse(calendarWrapper.dataset.wdayfull)
+	}
 
 	function handleDayGuest(data) {
 		let DOMhours = ``
