@@ -72,6 +72,9 @@ const initCalendar = () => {
 		fetch(`/api/v1/calendars/${calendar.dataset.id}?year=${year}&month=${month}`)
 		.then(response => response.json())
 		.then((data) => {
+			const months = JSON.parse(calendarWrapper.dataset.months)
+			const weekdays = JSON.parse(calendarWrapper.dataset.wday)
+			const wdayFull = JSON.parse(calendarWrapper.dataset.wdayfull)
 			const calendar = document.getElementById('venue-calendar')
 			let DOMweekdays = ``
 			weekdays.forEach((weekday, index) => {
@@ -160,6 +163,10 @@ const initCalendar = () => {
 						
 	if (calendar) {
 		const disableDatesForm = document.querySelector("[id^=edit_calendar_]")
+		const months = JSON.parse(calendarWrapper.dataset.months)
+		const weekdays = JSON.parse(calendarWrapper.dataset.wday)
+		const wdayFull = JSON.parse(calendarWrapper.dataset.wdayfull)
+
 		if (disableDatesForm) {
 			disableDatesForm.addEventListener('submit', (event) => {
 				$('#disableModal').modal('hide');
