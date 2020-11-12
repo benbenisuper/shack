@@ -25,6 +25,7 @@ class VenuesController < ApplicationController
     @user = current_user
     @venue.user = @user
     @venue.sku = @venue.name
+    @venue.published = true if @venue.user.publishable_key.present?
     
 
     if @venue.save
