@@ -26,7 +26,7 @@ class BookingsController < ApplicationController
         quantity: 1,
       }],
       payment_intent_data: {
-        application_fee_amount: (booking.amount_cents * 0.1).to_i,
+        application_fee_amount: (booking.amount_cents * 0.08).to_i,
         transfer_data: {
           destination: "#{venue.user.uid}",
         },
